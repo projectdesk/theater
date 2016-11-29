@@ -1,0 +1,60 @@
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-size: 10px;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.watching_number{
+  width: 500px;
+  margin: 0 auto;
+}
+
+.watching_number a{  
+  display: inline-block;
+  border: 1px solid red;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  line-height: 18px;
+  
+}
+.active{
+  background-color: white;
+}
+.no_active{
+  background-color: red;
+}
+
+.select_bar{
+  margin: 0 auto;
+  width: 500;
+  border:1px solid red;
+  
+}
+.row{
+  clear: both;
+}
+.row a{
+      cursor: pointer;
+}
+span{
+  border: 1px solid black;
+}
+.no{
+  display: inline-block;
+  width: 20px;
+  text-align: center;
+  float: left;
+}
+.no:hover{
+  background-color: #808080;
+}
+.seat_gap{
+  float: left;
+  position: relative;
+  border: 1px solid blue;
+}

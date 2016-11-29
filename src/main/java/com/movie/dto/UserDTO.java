@@ -1,5 +1,5 @@
 package com.movie.dto;
 
-public class BoardDTO {
-	
+public class UserDTO {
+
 }
