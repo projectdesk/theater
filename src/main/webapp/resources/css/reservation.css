@@ -8,6 +8,28 @@ a{
   text-decoration: none;
   color: black;
 }
+.theater{
+  border: 1px solid red;
+}
+.theater a{
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+  border: 1px solid red;
+  text-align: center;
+  line-height: 35px;
+}
+.theater_room{
+  border: 1px solid red;
+}
+.theater_room a{
+  border: 1px solid red;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 25px;
+}
 .watching_number{
   width: 500px;
   margin: 0 auto;

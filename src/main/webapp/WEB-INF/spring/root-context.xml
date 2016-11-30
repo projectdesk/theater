@@ -26,6 +26,6 @@
  <bean id="BoardService" class="com.movie.dao.BoardService">
   <property name="sqlSession" ref="sqlSession"></property>
  </bean>
-
+ 
 </beans>
 

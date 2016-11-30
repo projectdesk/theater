@@ -6,5 +6,11 @@
 <!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
 <!--     select * from table -->
 <!--   </select> -->
+<insert id="insertSeat" parameterType="String">
+	insert into reservation_seat values(1,'guest',#{seat});
+</insert>
+<select id="selectRoom" parameterType="String" resultType="String">
+	select theater_room_no from theater,theater_room where theater.no=theater_room.theater_no and theater.theater_name=#{theater} order by theater_room.theater_room_no asc;
+</select>
 </mapper>
 
