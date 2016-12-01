@@ -6,11 +6,20 @@
 <!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
 <!--     select * from table -->
 <!--   </select> -->
-<insert id="insertSeat" parameterType="String">
-	insert into reservation_seat values(1,'guest',#{seat});
-</insert>
-<select id="selectRoom" parameterType="String" resultType="String">
-	select theater_room_no from theater,theater_room where theater.no=theater_room.theater_no and theater.theater_name=#{theater} order by theater_room.theater_room_no asc;
+<select id="selectMovie" parameterType="int" resultType="com.movie.dto.ViewingTimeDTO">
+	select * from viewing_time where room_idx=#{room_idx}
 </select>
+<select id="selectRoom" parameterType="String" resultType="com.movie.dto.TheaterRoomDTO">
+	select * from theater,theater_room where theater.no=theater_room.theater_no and theater.theater_name=#{theater} order by theater_room.theater_room_no asc;
+</select>
+<select id="selectSeat" resultType="int" parameterType="com.movie.dto.ReservationDTO">
+	select count(*) from (select * from reservation_seat where viewing_id=#{viewing_id})a where a.seat_no=#{seat}
+</select>
+<select id="selectAreadySeat" resultType="Object" parameterType="int">
+	select seat_no from reservation_seat where viewing_id=#{viewing_id}
+</select>
+<insert id="insertSeat" parameterType="com.movie.dto.ReservationDTO">
+	insert into reservation_seat values(#{viewing_id},'user',#{seat})
+</insert>
 </mapper>
 

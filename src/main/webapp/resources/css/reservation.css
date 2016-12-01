@@ -30,6 +30,17 @@ a{
   text-align: center;
   line-height: 25px;
 }
+
+.movie > a{
+	display:inline-block;
+	border:1px solid green;
+	width: 80px;
+	height: 50px;
+	font-size: 10px;
+	text-align: center;
+	line-height: 45px;
+}
+
 .watching_number{
   width: 500px;
   margin: 0 auto;
@@ -44,6 +55,7 @@ a{
   line-height: 18px;
   
 }
+
 .active{
   background-color: white;
 }

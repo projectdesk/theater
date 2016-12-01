@@ -1,70 +1,199 @@
-//»ó¿µ°ü¼±ÅÃ
-function setRoom(){
-//	var st; 
-//$.each(window.event,function(index,value){
-//	 st+=index+":"+value+"\n";
-// });
-// alert(st);
-	var source = window.event.target || window.event.srcElement;
-	$('input[name="room"]').val(source.text);
-}
-$(document).ready(function(){
-	//¿µÈ­°ü¼±ÅÃ
-		$(".theater>a").click(function(){
-			var val=this;
-			  $.ajax({
-		            url : "getroom.do",
-		            type: "get",
-		            data : { "theater" : $(this).attr('value')},
-		            success : function(data){
-		                if(data){
-		                	$('input[name="theater"]').val($(val).attr("value"));
-		                	$('.theater_room').html("");
-		                	$.each( data, function( key, value ) {
-		                		  $('.theater_room').append("<a onclick='setRoom()' href='#'>"+value+"</a>");
-		                		});
-		                }//if
-		            }//success
-		        });//ajax
-		});//click
-		//
-				
-		$(".seat_gap").each(function () { 
-		  $(this).css("width",$(this).attr("gap_data"));
-		  console.log($(this).attr("gap_data"));
-		});
-		
-		//¼±ÅÃ ÃÊ±âÈ­¹× ¼±ÅÃ
-		$('.watching_number a').click(function(){
-		  $(".watching_number>a").css("background-color", "white");
-		  $("span").removeClass("no_active");
-		  $("span").addClass("active");
-		  $("input[name='seat']").val("");
-		  $("input[name='nownum']").val(0);
-		  $(this).css("background-color", "#227799");
-		  $("input[name='howmany']").val($(this).attr("value"));
-		});
+$(document)
+		.ready(
+				function() {
+				//ë””í´íŠ¸ì´ë²¤íŠ¸ ì œê±°
+				$('input[type="submit"]').click(function(){return false;});
+				//í¼ê°’ ê²€ì‚¬
+				$('input[type="submit"]').click(function(){
+					if($('input[name="theater"]').val()==""||$('input[name="theater"]').val()==0||$('input[name="theater"]').val()==null){
+						alert("ì˜í™”ê´€ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					if($('input[name="room"]').val()==""||$('input[name="room"]').val()==0||$('input[name="room"]').val()==null){
+						alert("ìƒì˜ê´€ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					if($('input[name="viewing_id"]').val()==""||$('input[name="viewing_id"]').val()==0||$('input[name="viewing_id"]').val()==null){
+						alert("ì˜í™”ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					if($('input[name="howmany"]').val()==""||$('input[name="howmany"]').val()==0||$('input[name="howmany"]').val()==null){
+						alert("ì¸ì›ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					if($('input[name="seat"]').val()==""||$('input[name="seat"]').val()==0||$('input[name="seat"]').val()==null){
+						alert("ì¢Œì„ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					
+					if($('input[name="nownum"]').val()==""||$('input[name="nownum"]').val()==0||$('input[name="nownum"]').val()==null||$('input[name="nownum"]').val()<$('input[name="howmany"]').val()){
+						alert("ì„ íƒìˆ«ìê°€ ë¶€ì¡±í•©ë‹ˆë‹¤.");
+						return;
+					}
+					if($('input[name="room_idx"]').val()==""||$('input[name="room_idx"]').val()==0||$('input[name="room_idx"]').val()==null){
+						alert("ìƒì˜ê´€ì„ ì„ íƒí•˜ì„¸ìš”");
+						return;
+					}
+					$('form[name="reservation"]').submit();
+					
+				;});
+					$(".theater>a").click(
+							function() {
+								var val=this;//ì´ë²¤íŠ¸ ê°ì²´ ìœ ì§€
+								var room_idx;
+								var viewing_id;
+								var movie_name='ï¿½ï¿½ï¿½ï¿½';
+								$.ajax({
+									url : "getroom.do",
+									type : "get",
+									data : {
+										"theater" : $(this).attr('value')
+									},
+								success : function(data) {
+									if (data) {
+											$('input[name="theater"]').val(
+											$(val).attr("value"));
+											$('.theater_room').html("");
+											$.each(data,function(key,value){
+												$.each(value,function(key,value){
+													
+													if(key=="room_idx"){
+														room_idx=value;
+													}
+													if(key=="theater_room_no"){
+													$('.theater_room').append(
+																"<a room_idx="+room_idx+" href='#'>"
+																+ value
+																+ "</a>");
+													}
+												});//bean
+											});//list
+										
+										}// if
+										$('.theater_room a').click(
+												function(){
+													val=this;												
+													$('input[name="room"]').val($(this).text());
+													$('input[name="room_idx"]').val($(this).attr("room_idx"));
+													$.ajax({
+														url : "getmovie.do",
+														type : "get",
+														data : {
+														"room_idx" : $(val).attr('room_idx')
+														}, success : function(data){
+														if(data==""){
+															alert("no movie");
+														}
+														else{
+															$.each(data,function(index,value){
+																$('.movie').html("");
+																$.each(value,function(index,value){
+																	if(index=="viewing_id")
+																	viewing_id=value;
+																	if(index=="room_idx")
+																	room_idx=value;
+																	if(index=="movie_name"){
+																	movie_name=value;
+																	$('.movie').append("<a viewing_id="+viewing_id+" href='#'>"+movie_name+"</a>");
+																	}
+																});
+															});
+															$('.movie > a').click(function(){
+																val=this;//ì´ë²¤íŠ¸ê°ì²´ìœ ì§€
+																$('input[name="viewing_id"]').val($(this).attr("viewing_id"));
+																	$.ajax({
+																		url : "getseat.do",
+																		type : "get",
+																		data : {
+																		"viewing_id" : $(val).attr('viewing_id')
+																	}, success : function(data){
+																		$.each(data,function(key,value){
+																			$('.row>a[seat='+value+']').removeAttr('href').css("cursor","Default").children().css("background-color","#999999");
+																		});
+																	}
+																	});
 
-		 //ÁÂ¼®¸¸µé±â
-		for(var i=0;i<10;i++){
-		  $(".select_bar").append('<div class="row" row_num='+i+'>');
-		 	 for(var j=0;j<10;j++){
-		       if(i==0){
-		         $("div[row_num="+i+"]").append('<a href="#" seat='+i+j+'><span class="no">'+j+'</span></a>');
-		       }
-		       else{
-		  		$("div[row_num="+i+"]").append('<a href="#" seat='+i+j+'><span class="no">'+i+j+'</span></a>');
-			}
-		  $(".select_bar").append('</div>');
-		       }
-		}
-		//¿¹¸ÅÇÒÀÎ¿ø, ¼±ÅÃÀÎ¿ø Ç¥½Ã¹× Å¬·¡½ºÃß°¡
-		$('.row a').click(function(){
-		  if(parseInt($("input[name='nownum']").val())<parseInt($("input[name='howmany']").val())&&!$(this).find("span").hasClass("no_active")){
-		   $("input[name='seat']").val($("input[name='seat']").val()+$(this).attr("seat")+',');
-		   $(this).find("span").removeClass("active").addClass("no_active");
-		   $("input[name='nownum']").val(parseInt($("input[name='nownum']").val())+1);
-		    }
-		});
-		
-});
+
+															});
+														}
+														}//success
+													});
+												});//.theater_room>a click
+									}// success
+								});// ajax
+							});// click
+					//
+
+					$(".seat_gap").each(function() {
+						$(this).css("width", $(this).attr("gap_data"));
+						console.log($(this).attr("gap_data"));
+					});
+
+					// ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+					$('.watching_number a').click(
+							function() {
+								$(".watching_number>a").css("background-color",
+										"white");
+								$("span").removeClass("no_active");
+								$("span").addClass("active");
+								$("input[name='seat']").val("");
+								$("input[name='nownum']").val(0);
+								$(this).css("background-color", "#227799");
+								$("input[name='howmany']").val(
+										$(this).attr("value"));
+								false;
+							});
+					
+							
+
+					// ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					for ( var i = 0; i < 10; i++) {
+						$(".select_bar").append(
+								'<div class="row" row_num=' + i + '>');
+						for ( var j = 0; j < 10; j++) {
+							if (i == 0) {
+								$("div[row_num=" + i + "]").append(
+										'<a href="#" seat=' + i + j
+												+ '><span class="no">' + j
+												+ '</span></a>');
+							} else {
+								$("div[row_num=" + i + "]").append(
+										'<a href="#" seat=' + i + j
+												+ '><span class="no">' + i + j
+												+ '</span></a>');
+							}
+							$(".select_bar").append('</div>');
+						}
+					}
+					
+						
+					
+							
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ Ç¥ï¿½Ã¹ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ß°ï¿½
+					$('.row a')
+							.click(
+									function() {
+										if (parseInt($("input[name='nownum']")
+												.val()) < parseInt($(
+												"input[name='howmany']").val())
+												&& !$(this).find("span")
+														.hasClass("no_active")) {
+											$("input[name='seat']").val(
+													$("input[name='seat']")
+															.val()
+															+ $(this).attr(
+																	"seat")
+															+ ',');
+											$(this).find("span").removeClass(
+													"active").addClass(
+													"no_active");
+											$("input[name='nownum']")
+													.val(
+															parseInt($(
+																	"input[name='nownum']")
+																	.val()) + 1);
+										}
+										return false;
+									});
+
+				});
