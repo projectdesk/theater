@@ -6,11 +6,12 @@
 <!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
 <!--     select * from table -->
 <!--   </select> -->
-<select id="selectMovie" parameterType="int" resultType="com.movie.dto.ViewingTimeDTO">
-	select * from viewing_time where room_idx=#{room_idx}
+<select id="selectMovie" parameterType="String" resultType="com.movie.dto.MovieName">
+	select movie_in_theater.* from theater,movie_in_theater 
+	where theater.idx=movie_in_theater.idx and theater_name=#{theater};
 </select>
-<select id="selectRoom" parameterType="String" resultType="com.movie.dto.TheaterRoomDTO">
-	select * from theater,theater_room where theater.no=theater_room.theater_no and theater.theater_name=#{theater} order by theater_room.theater_room_no asc;
+<select id="selectRoom" parameterType="com.movie.dto.MovieName" resultType="com.movie.dto.TheaterRoomDTO">
+	select distinct room_name,theater_room_idx from theater_room, movie_in_gwan where theater_room_idx=idx and movie=#{movie}
 </select>
 <select id="selectSeat" resultType="int" parameterType="com.movie.dto.ReservationDTO">
 	select count(*) from (select * from reservation_seat where viewing_id=#{viewing_id})a where a.seat_no=#{seat}

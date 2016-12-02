@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.BoardService;
 import com.movie.dto.ReservationDTO;
-import com.movie.dto.ViewingTimeDTO;
+import com.movie.dto.MovieName;
 
 /**
  * Handles requests for the application home page.
@@ -47,22 +47,22 @@ public class ReservationController {
 		return "reservation";
 	}
 	@ResponseBody
-	@RequestMapping(value = "/getroom.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/getmovie.do", method = RequestMethod.GET)
 	public  Object getRoom(@Param("theater")String theater , Model model) {
 		System.out.println(theater);
-		List room=BoardService.selectRoom(theater);
-		System.out.println(room);
-		return room;
+		List movie=BoardService.selectMovie(theater);
+		System.out.println(movie);
+		return movie;
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getmovie.do", method = RequestMethod.GET)
-	public  Object getMovie(@Param("room_idx")String room_idx,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+	@RequestMapping(value = "/getroom.do", method = RequestMethod.GET)
+	public  Object getMovie(MovieName dto,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
 		System.out.println("test");
-		System.out.println(room_idx);
-		List movie=BoardService.selectMovie(Integer.parseInt(room_idx));
-		System.out.println(((ViewingTimeDTO)movie.get(0)).getMovie_name());
-		return movie;
+		System.out.println(dto.getIdx());
+		System.out.println(dto.getMovie());
+		List room=BoardService.selectRoom(dto);
+		return room;
 	}
 	@ResponseBody
 	@RequestMapping(value = "/getseat.do", method = RequestMethod.GET)

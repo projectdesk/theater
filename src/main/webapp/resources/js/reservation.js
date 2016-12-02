@@ -40,11 +40,12 @@ $(document)
 					$(".theater>a").click(
 							function() {
 								var val=this;//이벤트 객체 유지
-								var room_idx;
-								var viewing_id;
+								var room_name;
+								var idx;
+								var theater_room_idx;
 								var movie_name='����';
 								$.ajax({
-									url : "getroom.do",
+									url : "getmovie.do",
 									type : "get",
 									data : {
 										"theater" : $(this).attr('value')
@@ -53,16 +54,15 @@ $(document)
 									if (data) {
 											$('input[name="theater"]').val(
 											$(val).attr("value"));
-											$('.theater_room').html("");
+											$('.movie').html("<div>영화<div>");
 											$.each(data,function(key,value){
 												$.each(value,function(key,value){
-													
-													if(key=="room_idx"){
-														room_idx=value;
+													if(key=="idx"){
+														idx=value;
 													}
-													if(key=="theater_room_no"){
-													$('.theater_room').append(
-																"<a room_idx="+room_idx+" href='#'>"
+													if(key=="movie"){
+													$('.movie').append(
+																"<a movie="+value+" idx="+idx+" href='#'>"
 																+ value
 																+ "</a>");
 													}
@@ -70,6 +70,33 @@ $(document)
 											});//list
 										
 										}// if
+									
+													$('.movie > a').click(function(){
+																val=this;//이벤트객체유지
+																$('input[name="viewing_id"]').val($(this).attr("viewing_id"));
+																	$.ajax({
+																		url : "getroom.do",
+																		type : "get",
+																		data : {
+																		"idx" : $(val).attr('idx'),
+																		"movie" : $(val).attr('movie')
+																	}, success : function(data){
+																		$('.theater_room').html("<div>상영관</div>");
+																		$.each(data,function(key,value){
+																			$.each(value,function(key,value){
+																			if(key=='theater_room_idx'){
+																				theater_room_idx=value;}
+																			if(key=='room_name'){
+																				room_name=value;
+																				$('.theater_room').append("<a theater_room_idx='"+theater_room_idx+"' href='#'>"+value+"</a>");
+																			}
+																			});
+																		});
+																	}
+																	});
+
+
+															});
 										$('.theater_room a').click(
 												function(){
 													val=this;												
@@ -86,7 +113,7 @@ $(document)
 														}
 														else{
 															$.each(data,function(index,value){
-																$('.movie').html("");
+																$('.movie').html("<div>영화</did>");
 																$.each(value,function(index,value){
 																	if(index=="viewing_id")
 																	viewing_id=value;
@@ -98,23 +125,7 @@ $(document)
 																	}
 																});
 															});
-															$('.movie > a').click(function(){
-																val=this;//이벤트객체유지
-																$('input[name="viewing_id"]').val($(this).attr("viewing_id"));
-																	$.ajax({
-																		url : "getseat.do",
-																		type : "get",
-																		data : {
-																		"viewing_id" : $(val).attr('viewing_id')
-																	}, success : function(data){
-																		$.each(data,function(key,value){
-																			$('.row>a[seat='+value+']').removeAttr('href').css("cursor","Default").children().css("background-color","#999999");
-																		});
-																	}
-																	});
-
-
-															});
+												
 														}
 														}//success
 													});

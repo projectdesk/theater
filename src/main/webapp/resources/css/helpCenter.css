@@ -10,7 +10,18 @@ section .help_section_bottom{
 		height:500px;
 		margin:0 auto;
 }
-
+.help_select{
+	width:500px;
+	margin:5px auto;
+	text-align: center;
+	
+}
+.help_select a{
+	margin:0 5px;
+	font-size: 22px;	
+}
 table{
-	width:100%;
+	width:85%;
+	margin: 0 auto;
+
 }

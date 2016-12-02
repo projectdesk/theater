@@ -4,8 +4,9 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.movie.dto.UserDTO;
+import com.movie.dto.MovieName;
 import com.movie.dto.ReservationDTO;
+import com.movie.dto.UserDTO;
 
 public class BoardService {
 	SqlSession sqlSession;
@@ -25,12 +26,12 @@ public class BoardService {
 		sqlSession.insert("boardMapper.insertSeat",dto);
 	}
 
-	public List selectRoom(String theater) {
-		return sqlSession.selectList("boardMapper.selectRoom",theater);
+	public List selectRoom(MovieName dto) {
+		return sqlSession.selectList("boardMapper.selectRoom",dto);
 	}
 	
-	public List selectMovie(int room_idx){
-		return sqlSession.selectList("boardMapper.selectMovie",room_idx);
+	public List selectMovie(String theater){
+		return sqlSession.selectList("boardMapper.selectMovie",theater);
 	}
 
 	public Object selectSeat(int viewing_id) {

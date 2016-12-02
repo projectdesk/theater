@@ -14,8 +14,9 @@
 	<section>
 		<div class="help_section_top"></div>
 		<div class="help_section_bottom">
+			<div class="help_select"><a href="#">1:1 문의</a><a href="#">자주 묻는 질문</a></div>
 			<table>
-				<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th></tr>
+				<tr><th width="60px">번호</th><th width="150px">날짜</th><th width="600px">제목</th><th>글쓴이</th><th width="60px"></th></tr>
 			</table>
 		</div>
 	</section>

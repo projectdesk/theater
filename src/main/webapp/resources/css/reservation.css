@@ -1,40 +1,61 @@
 *{
+	 border: 1px solid red;
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-size: 10px;
+}
+.section_inner{
+	width:1200px;
+	margin:0 auto;
+	overflow: hidden;
 }
 a{
   text-decoration: none;
   color: black;
 }
 .theater{
-  border: 1px solid red;
+  float:left;
+  width: 150px;
+  height: 500px;
 }
 .theater a{
-  display: inline-block;
-  width: 80px;
+  display: block;
   height: 40px;
-  border: 1px solid red;
   text-align: center;
   line-height: 35px;
 }
 .theater_room{
-  border: 1px solid red;
+  float:left;
+  width: 150px;
+  height: 500px;
 }
 .theater_room a{
-  border: 1px solid red;
-  display: inline-block;
-  width: 30px;
+  display: block;
   height: 30px;
   text-align: center;
   line-height: 25px;
 }
-
+.select_bar{
+  float:left;
+  overflow:hidden;
+  margin: 0 auto;
+  width: 250px;
+  height: 500px;
+  
+}
+.movie{
+	float:left;
+	width: 150px;
+	height: 500px;
+}
+.movie_date{
+	float:  left;
+	width:  150px;
+	height: 500px;
+}
 .movie > a{
-	display:inline-block;
-	border:1px solid green;
-	width: 80px;
+	display:block;
 	height: 50px;
 	font-size: 10px;
 	text-align: center;
@@ -48,7 +69,6 @@ a{
 
 .watching_number a{  
   display: inline-block;
-  border: 1px solid red;
   width: 20px;
   height: 20px;
   text-align: center;
@@ -63,12 +83,6 @@ a{
   background-color: red;
 }
 
-.select_bar{
-  margin: 0 auto;
-  width: 500;
-  border:1px solid red;
-  
-}
 .row{
   clear: both;
 }
@@ -90,5 +104,4 @@ span{
 .seat_gap{
   float: left;
   position: relative;
-  border: 1px solid blue;
 }
