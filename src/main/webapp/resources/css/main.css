@@ -1,0 +1,78 @@
+*{
+	box-sizing: border-box;
+	margin:0;
+	padding: 0;
+	opacity: 0.99;
+}
+
+body *{
+	border: 1px solid red;
+}
+
+header{
+	height: 151px;
+	background-image: url("bar.jpg");
+    background-repeat: repeat-x;
+}
+
+header .contain{
+	width: 1200px;
+	margin: 0 auto;
+	height: 100%;
+	overflow: hidden;
+}
+
+header .logo{
+	width: 169px;
+	height: 100%;
+	float: left;
+	background-color: #253A53;
+}
+
+header nav{
+	height: 100%;
+	overflow: hidden;
+}
+
+nav .nav_top{
+height: 45%;
+}
+
+nav .nav_bottom{
+height: 55%;
+}
+
+section{
+}
+
+section .section_top{
+
+	margin: 0 auto;
+	background-color: #ddd;
+}
+.rolling{
+	background-image: url("rolling_1.jpg");
+	margin: 0 auto;
+	height: 310px;
+	width: 1200px;
+
+}
+.top_inner{
+	height: 950px;
+	width: 1200px;
+	margin: 0 auto;
+}
+
+section .section_bottom{
+	height: 1020px;
+	margin: 0 auto;
+	background-color: #fff;
+}
+.bottom_inner{
+	height: 100%;
+	width: 1200px;
+	margin: 0 auto;
+}
+footer{
+	height: 255px;
+}

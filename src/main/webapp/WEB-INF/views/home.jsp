@@ -1,14 +1,24 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page session="false" %>
+<!DOCTYPE html>
 <html>
 <head>
-	<title>Home</title>
+	<title>main</title>
+	<link rel="stylesheet" type="text/css" href="resources/css/main.css">
 </head>
 <body>
-<h1>
-	Hello world!  
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+	<!-- header -->
+	<%@include file="header.jsp" %>
+	<section>
+		<div class="section_top">
+			<div class="rolling"></div>
+			<div class="top_inner"></div>
+		</div>
+		<div class="section_bottom">
+			<div class="bottom_inner"></div>
+		</div>
+	</section>
+		<!-- footer -->
+	<%@include file="footer.jsp" %>
 </body>
 </html>

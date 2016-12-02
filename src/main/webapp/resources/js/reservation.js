@@ -129,7 +129,7 @@ $(document)
 						console.log($(this).attr("gap_data"));
 					});
 
-					// ���� �ʱ�ȭ�� ����
+					// 좌석선택
 					$('.watching_number a').click(
 							function() {
 								$(".watching_number>a").css("background-color",

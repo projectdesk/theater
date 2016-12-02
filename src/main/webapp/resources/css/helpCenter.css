@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+section .help_section_top{
+		width:1200px;
+		height:500px;
+		margin:0 auto;
+}
+
+section .help_section_bottom{
+		width:1200px;
+		height:500px;
+		margin:0 auto;
+}
+
+table{
+	width:100%;
+}
