@@ -52,6 +52,7 @@ $(document)
 									},
 								success : function(data) {
 									if (data) {
+											$(val).addClass("selected");
 											$('input[name="theater"]').val(
 											$(val).attr("value"));
 											$('.movie').html("<div>영화<div>");
@@ -81,6 +82,7 @@ $(document)
 																		"idx" : $(val).attr('idx'),
 																		"movie" : $(val).attr('movie')
 																	}, success : function(data){
+																		$(val).addClass("selected");
 																		$('.theater_room').html("<div>상영관</div>");
 																		$.each(data,function(key,value){
 																			$.each(value,function(key,value){
@@ -92,44 +94,37 @@ $(document)
 																			}
 																			});
 																		});
-																	}
+																		$('.theater_room a').click(
+																		function(){
+																			alert("클릭");
+																			val=this;												
+																			$('input[name="room"]').val($(this).text());
+																			$('input[name="room_idx"]').val($(this).attr("room_idx"));
+																			$.ajax({
+																				url : "gettime.do",
+																				type : "get",
+																				data : {
+																				"idx" : $(val).attr('theater_room_idx'),
+																				"movie" :$('.movie a[class="selected"]').text()
+																				}, success : function(data){
+																				$(val).addClass("selected");
+																				$.each(data,function(index,value){
+																					$.each(value,function(index,value){
+																						alert(index+":"+value);
+																					});
+																				});
+																																						
+																				}//success
+																			});
+																		});//.theater_room>a click
+																	
+
+																	}//success
 																	});
 
 
 															});
-										$('.theater_room a').click(
-												function(){
-													val=this;												
-													$('input[name="room"]').val($(this).text());
-													$('input[name="room_idx"]').val($(this).attr("room_idx"));
-													$.ajax({
-														url : "getmovie.do",
-														type : "get",
-														data : {
-														"room_idx" : $(val).attr('room_idx')
-														}, success : function(data){
-														if(data==""){
-															alert("no movie");
-														}
-														else{
-															$.each(data,function(index,value){
-																$('.movie').html("<div>영화</did>");
-																$.each(value,function(index,value){
-																	if(index=="viewing_id")
-																	viewing_id=value;
-																	if(index=="room_idx")
-																	room_idx=value;
-																	if(index=="movie_name"){
-																	movie_name=value;
-																	$('.movie').append("<a viewing_id="+viewing_id+" href='#'>"+movie_name+"</a>");
-																	}
-																});
-															});
-												
-														}
-														}//success
-													});
-												});//.theater_room>a click
+										
 									}// success
 								});// ajax
 							});// click

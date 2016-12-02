@@ -65,6 +65,15 @@ public class ReservationController {
 		return room;
 	}
 	@ResponseBody
+	@RequestMapping(value = "/gettime.do", method = RequestMethod.GET)
+	public  Object getTime(MovieName dto,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+		System.out.println(dto.getIdx());
+		System.out.println(dto.getMovie());
+		List time=BoardService.selectTime(dto);
+		return time;
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = "/getseat.do", method = RequestMethod.GET)
 	public  Object getSeat(@Param("viewing_id")String viewing_id,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
 		System.out.println("test");

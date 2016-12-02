@@ -37,5 +37,10 @@ public class BoardService {
 	public Object selectSeat(int viewing_id) {
 		return sqlSession.selectList("boardMapper.selectAreadySeat",viewing_id);
 	}
+
+	public List selectTime(MovieName dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.selectTime",dto);
+	}
 	
 }
