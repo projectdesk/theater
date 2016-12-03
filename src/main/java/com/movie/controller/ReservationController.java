@@ -2,7 +2,6 @@ package com.movie.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,9 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.BoardService;
-import com.movie.dto.DateTimeDTO;
-import com.movie.dto.MovieName;
-import com.movie.dto.ReservationDTO;
+import com.movie.dto.DateDTO;
 
 /**
  * Handles requests for the application home page.
@@ -31,8 +28,11 @@ public class ReservationController {
 	@Autowired
 	BoardService BoardService;
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
-	public String reservationGet() {
-		BoardService.selectFirst();		
+	public String reservationGet(Model model) {
+		List theater=BoardService.selectFirstTheater();
+		List movie=BoardService.selectFirstMovie();
+		model.addAttribute("theaters",theater);
+		model.addAttribute("movies",movie);
 		return "reservation";
 	}
 	
@@ -57,28 +57,35 @@ public class ReservationController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getroom.do", method = RequestMethod.GET)
-	public  Object getMovie(MovieName dto,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+	@RequestMapping(value = "/gettheater.do", method = RequestMethod.GET)
+	public  Object getMovie(@Param("movie")String movie , Model model) throws UnsupportedEncodingException {
 		System.out.println("test");
-		System.out.println(dto.getIdx());
-		System.out.println(dto.getMovie());
-		List room=BoardService.selectRoom(dto);
-		return room;
+		System.out.println(movie);
+		List theater=BoardService.selectTheater(movie);
+		return theater;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getdate.do", method = RequestMethod.GET)
+	public  Object getDate(DateDTO dto, Model model) throws UnsupportedEncodingException {
+		List date=BoardService.selectDate(dto);
+		System.out.println(date);
+		return date;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value = "/gettime.do", method = RequestMethod.GET)
-	public  Object getTime(MovieName dto,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
-		System.out.println(dto.getIdx());
-		System.out.println(dto.getMovie());
-		List time=BoardService.selectTime(dto);
+	public  Object getTime(@Param("no")int no , Model model) throws UnsupportedEncodingException {
+		System.out.println(no);
+		List time=BoardService.selectTime(no);
 		return time;
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/getseat.do", method = RequestMethod.GET)
-	public  Object getSeat(@Param("idx") int idx,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
-		System.out.println(idx);
-		List seat=BoardService.selectSeat(idx);
+	public  Object getSeat(@Param("no") int no,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+		System.out.println(no);
+		List seat=BoardService.selectSeat(no);
 		return seat;
 	}
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.movie.dto.DateDTO;
 import com.movie.dto.DateTimeDTO;
 import com.movie.dto.MovieName;
 import com.movie.dto.ReservationDTO;
@@ -27,25 +28,37 @@ public class BoardService {
 //		sqlSession.insert("boardMapper.insertSeat",dto);
 //	}
 
-	public List selectRoom(MovieName dto) {
-		return sqlSession.selectList("boardMapper.selectRoom",dto);
+	public List selectTheater(String movie) {
+		return sqlSession.selectList("boardMapper.selectTheater",movie);
 	}
 	
 	public List selectMovie(String theater){
 		return sqlSession.selectList("boardMapper.selectMovie",theater);
 	}
 
-	public List selectSeat(int idx) {
-		return sqlSession.selectList("boardMapper.selectAreadySeat",idx);
-	}
-
-	public List selectTime(MovieName dto) {
+	public List selectDate(DateDTO dto) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardMapper.selectTime",dto);
+		return sqlSession.selectList("boardMapper.selectDate",dto);
+	}
+	
+	public List selectSeat(int no) {
+		return sqlSession.selectList("boardMapper.selectAreadySeat",no);
 	}
 
-	public List selectFirst() {
-		return sqlSession.selectList("boardMapper.selectFirst");
+	public List selectTime(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("boardMapper.selectTime",no);
 	}
+
+	public List selectFirstTheater() {
+		return sqlSession.selectList("boardMapper.selectFirstTheater");
+	}
+	public List selectFirstMovie() {
+		return sqlSession.selectList("boardMapper.selectFirstMovie");
+	}
+
+	
+
+	
 	
 }

@@ -5,25 +5,30 @@
 <mapper namespace="boardMapper">
 <!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
 <!--     select * from table -->
-<!--   </select> -->selectFirst
-<!-- <select id="selectFirst" resultType="com.movie.dto.MovieName"> -->
-	
-<!-- </select> -->
-<select id="selectMovie" parameterType="String" resultType="com.movie.dto.MovieName">
-	select movie_in_theater.* from theater,movie_in_theater 
-	where theater.idx=movie_in_theater.idx and theater_name=#{theater};
+<!--   </select>selectFirst -->
+<select id="selectFirstTheater" resultType="String">
+	select name from theater order by no asc
 </select>
-<select id="selectRoom" parameterType="com.movie.dto.MovieName" resultType="com.movie.dto.TheaterRoomDTO">
-	select distinct room_name,theater_room_idx from theater_room, movie_in_gwan where theater_room_idx=idx and movie=#{movie}
+<select id="selectFirstMovie" resultType="String">
+	select name from movie order by no asc
 </select>
-<select id="selectTime" parameterType="com.movie.dto.MovieName" resultType="com.movie.dto.DateTimeDTO">
-	select * from date_time where theater_room_idx=#{idx} and movie=#{movie};
+<select id="selectMovie" parameterType="String" resultType="com.movie.dto.MovieDTO">
+	select name from (select * from movie,avail_theater where no=movie_no)a where theater=#{theater}
+</select>
+<select id="selectTheater" parameterType="String" resultType="String">
+	select theater from avail_theater where movie_no=(select no from movie where name=#{movie})
+</select>
+<select id="selectDate" parameterType="com.movie.dto.DateDTO" resultType="com.movie.dto.DateDTO">
+	select no,mdate from date where theater=#{theater} and movie_no=(select no from movie where name=#{movie})
+</select>
+<select id="selectTime" parameterType="int" resultType="com.movie.dto.TimeDTO">
+	select * from time where date_no=#{no}
 </select>
 <!-- <select id="selectSeat" resultType="String" parameterType="com.movie.dto.DateTimeDTO"> -->
 <!-- 	select seat_no from reservation_seat where date_time_idx=#{idx} -->
 <!-- </select> -->
 <select id="selectAreadySeat" resultType="String" parameterType="int">
-	select seat_no from reservation_seat where date_time_idx=#{idx}
+	select seat from seat where time_no=#{no}
 </select>
 <!-- <insert id="insertSeat" parameterType="com.movie.dto.ReservationDTO"> -->
 <!-- 	insert into reservation_seat values(#{viewing_id},'user',#{seat}) -->

@@ -37,14 +37,33 @@ $(document)
 					$('form[name="reservation"]').submit();
 					
 				;});
+				
+				function getDate(theater,movie){
+					$.ajax({
+						url : "getdate.do",
+						type : "get",
+						data : {
+							"theater" : $(theater).attr('value'),
+							"movie" : $(movie).attr('value')
+						},success : function(data){
+							$.each(data,function(index,value){
+								$.each(value,function(index,val){
+									if(index=='no')
+										no=val;
+									if(index=='mdate'){
+									$('.movie_date').append('<a no='+no+' href="#">'+val+'</a>');
+									}
+							});
+							});
+						}
+					});//ajax
+				}
+				
+				//영화관 선택
 					$(".theater").on('click','a',
 							function() {
-								var val=this;// 이벤트 객체 유지
-								var room_name;
-								var idx;
-								var date;
-								var theater_room_idx;
-								var movie_name;
+								var val=this;// 이벤트 객체 유지v
+								var no;
 								$.ajax({
 									url : "getmovie.do",
 									type : "get",
@@ -53,25 +72,30 @@ $(document)
 									},
 								success : function(data) {
 									if (data) {
-											$(val).addClass("selected");
-											$('input[name="theater"]').val(
-											$(val).attr("value"));
-											$('.movie').html("<div>영화</div>");
-											$.each(data,function(key,value){
-												$.each(value,function(key,value){
-													if(key=="idx"){
-														idx=value;
-													}
-													if(key=="movie"){
-													$('.movie').append(
-																"<a movie="+value+" idx="+idx+" href='#'>"
-																+ value
-																+ "</a>");
-													}
-												});// bean
-											});// list
-										
-										}// if
+											if(!$('.movie a').hasClass('selected')||($('.movie a').hasClass('selected')&&$('.theater a').hasClass('selected'))){
+												$('.theater a').removeClass("selected");
+												$(val).addClass("selected");
+												$('.movie').html("<div class='title'>영화</div>");
+												$.each(data,function(key,value){
+													$.each(value,function(key,value){
+														if(key=="no"){
+															no=value;
+														}
+														if(key=="name"){
+														$('.movie').append(
+																	"<a no="+no+" value="+value+" href='#'>"
+																	+ value
+																	+ "</a>");
+														}
+													});// bean
+												});// list
+											}//if(!$('.movie a').hasClass('selected'))
+											else{
+												$('.theater a').removeClass("selected");
+												$(val).addClass("selected");
+												getDate($('.theater a[class="selected"]'),$('.movie a[class="selected"]'));
+											}//both selected
+										}// if(date)
 									
 													
 										
@@ -81,29 +105,26 @@ $(document)
 					// 영화 선택
 					$('.movie').on('click','a',function(){
 						val=this;// 이벤트객체유지
-						$('input[name="viewing_id"]').val($(this).attr("viewing_id"));
 							$.ajax({
-								url : "getroom.do",
+								url : "gettheater.do",
 								type : "get",
 								data : {
-								"idx" : $(val).attr('idx'),
-								"movie" : $(val).attr('movie')
+								"movie" : $(val).attr('value')
 							}, success : function(data){
+								if(!$('.theater a').hasClass('selected')){
+								$('.movie a').removeClass("selected");
 								$(val).addClass("selected");
-								$('.theater_room').html("<div>상영관</div>");
+								$('.theater').html("<div class='title'>영화관</div>");
 								$.each(data,function(key,value){
-									$.each(value,function(key,value){
-									if(key=='theater_room_idx'){
-										theater_room_idx=value;}
-									if(key=='room_name'){
-										room_name=value;
-										$('.theater_room').append("<a theater_room_idx='"+theater_room_idx+"' href='#'>"+value+"</a>");
-									}
-									});
+										$('.theater').append("<a value="+value+" href='#'>"+value+"</a>");
 								});
 								
 							
-
+							    }else{
+							    	$('.movie a').removeClass("selected");
+									$(val).addClass("selected");
+									getDate($('.theater a[class="selected"]'),$('.movie a[class="selected"]'));
+							    }//both selected
 							}// success
 							});// ajax
 
@@ -125,7 +146,7 @@ $(document)
 									"movie" :$('.movie a[class="selected"]').text()
 									}, success : function(data){
 									$(val).addClass("selected");
-									$('.movie_date').html("<div>상영시간</div>");
+									$('.movie_date').html("<div class='title'>상영시간</div>");
 									$.each(data,function(index,value){
 										$.each(value,function(index,value){
 											if(index=='idx')
@@ -141,29 +162,48 @@ $(document)
 								});
 							});// .theater_room>a click
 					
-					// 상영시간 선택
+					// 상영날짜 선택
 					$('.movie_date').on('click','a',
 							function(){
 								val=this;												
-// $('input[name="room"]').val($(this).text());
-// $('input[name="room_idx"]').val($(this).attr("room_idx"));
+								$.ajax({
+									url : "gettime.do",
+									type : "get",
+									data : {
+									"no" : $(val).attr('no'),
+									}, success : function(data){
+									$('.movie_date a').removeClass("selected");
+									$(val).addClass("selected");
+									$('.movie_time').html("<div class='title'>상영시간</div>");
+										$.each(data,function(index,value){
+											$.each(value,function(index,value){
+												if(index=='no')
+													no=value;
+												if(index=='time')
+													$('.movie_time').append('<a no='+no+' href="#">'+value+'</a>');
+											});															
+									});
+								}// success
+								});
+							});// .movie_date>a click
+					
+					$('.movie_time').on('click','a',
+							function(){
+								val=this;												
 								$.ajax({
 									url : "getseat.do",
 									type : "get",
 									data : {
-									"idx" : $(val).attr('idx'),
+									"no" : $(val).attr('no'),
 									}, success : function(data){
 									$(val).addClass("selected");
-// $.each(data,function(index,value){
 										$.each(data,function(index,value){
-											$('.select_bar .row a[seat='+value+'] span').addClass('allready').parent().removeAttr('href');
-												
-											});
-// });
-																											
-									}// success
+											$('.row a[seat='+value+'] span').addClass('allready');
+									});
+								}// success
 								});
-							});// .theater_room>a click
+							});// .movie_time>a click
+					
 					
 					
 					$(".seat_gap").each(function() {
@@ -186,12 +226,10 @@ $(document)
 								false;
 							});
 					
-							
-
-					// �¼������
+					var a=['A','B','C','D','E','F','G','H','I','J'];
 					for ( var i = 0; i < 10; i++) {
-						$(".select_bar").append(
-								'<div class="row" row_num=' + i + '>');
+						$(".seat_container").append(
+								'<div class="row" row_num=' + i + '><span class="title">'+a[i]+'</span>');
 						for ( var j = 0; j < 10; j++) {
 							if (i == 0) {
 								$("div[row_num=" + i + "]").append(
@@ -204,7 +242,7 @@ $(document)
 												+ '><span class="no">' + i + j
 												+ '</span></a>');
 							}
-							$(".select_bar").append('</div>');
+							$(".seat_container").append('</div>');
 						}
 					}
 					
