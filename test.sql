@@ -1,51 +1,51 @@
 show tables;
 
-insert into movie values(default,'a123456789','¹İÁöÀÇÁ¦¿Õ','Á¹¶óÀëÀÖÀ½',20161111,'ÆÇÅ¸Áö','½ºÆ¼ºì','12¼¼°ü¶÷°ú');
+insert into movie values(default,'a123456789','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½','ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½',20161111,'ï¿½ï¿½Å¸ï¿½ï¿½','ï¿½ï¿½Æ¼ï¿½ï¿½','12ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
 
-insert into theater values(default,'°­³²Á¡',
-	'1234','°­³²´ë·Î 123-11 2Ãş','02-1234-5678'
+insert into theater values(default,'ê°•ë‚¨ì ',
+	'1234','ê°•ë‚¨êµ¬ 123-11','02-1234-5678'
 );
 
-insert into theater values(default,'Àá½ÇÁ¡',
-	'1234','Àá½Ç·Î 123-11 2Ãş','02-1234-5678'
+insert into theater values(default,'ì¢…ë¡œì ',
+	'1234','ì¢…ë¡œêµ¬ 123-11','02-1234-5678'
 );
 
-insert into kmoon.theater values(default,'Á¾·ÎÁ¡',
-	'1234','Á¾°¢·Î 123-11 2Ãş','02-1234-5678'
+insert into kmoon.theater values(default,'ì ì‹¤ì ',
+	'1234','ì ì‹¤ë¡œ 123-11','02-1234-5678'
 );
 
-insert into movie_in_theater value(1,'¹İÁöÀÇÁ¦¿Õ');
-insert into movie_in_theater value(1,'ÇØ¸®Æ÷ÅÍ');
-insert into movie_in_theater value(1,'¿¤¸®½º');
+insert into movie_in_theater value(1,'ë°˜ì§€ì˜ì œì™•');
+insert into movie_in_theater value(1,'í•´ë¦¬í¬í„°');
+insert into movie_in_theater value(1,'ì—˜ë¦¬ìŠ¤');
 
-insert into theater_room values(default,1,'1°ü',100);
-insert into theater_room values(default,1,'2°ü',200);
-insert into theater_room values(default,1,'3°ü',300);
+insert into theater_room values(default,1,'1ï¿½ï¿½',100);
+insert into theater_room values(default,1,'2ï¿½ï¿½',200);
+insert into theater_room values(default,1,'3ï¿½ï¿½',300);
 
-insert into theater_room values(default,(select no from theater
- where theater_name='Á¾·ÎÁ¡'),100,1);
- insert into theater_room values(default,(select no from theater
- where theater_name='Á¾·ÎÁ¡'),100,2);
- insert into theater_room values(default,(select no from theater
- where theater_name='Á¾·ÎÁ¡'),100,3);
+insert into theater_room values(default,(select idx from theater
+ where theater_name='ì ì‹¤ì '),'1ê´€',100);
+insert into theater_room values(default,(select idx from theater
+ where theater_name='ì ì‹¤ì '),'2ê´€',200);
+insert into theater_room values(default,(select idx from theater
+ where theater_name='ì ì‹¤ì '),'3ê´€',300);
  
  insert into theater_room values(default,(select no from theater
- where theater_name='Àá½ÇÁ¡'),100,1);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½'),100,1);
  insert into theater_room values(default,(select no from theater
- where theater_name='Àá½ÇÁ¡'),100,2);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½'),100,2);
  insert into theater_room values(default,(select no from theater
- where theater_name='Àá½ÇÁ¡'),100,3);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½'),100,3);
  
  insert into theater_room values(default,(select no from theater
- where theater_name='°­³²Á¡'),100,1);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),100,1);
  insert into theater_room values(default,(select no from theater
- where theater_name='°­³²Á¡'),100,2);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),100,2);
  insert into theater_room values(default,(select no from theater
- where theater_name='°­³²Á¡'),100,3);
+ where theater_name='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),100,3);
  
 insert into viewing_time values(default,
-(select serial from movie where title='¹İÁöÀÇÁ¦¿Õ'),
-'¹İÁöÀÇÁ¦¿Õ3',
+(select serial from movie where title='ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½'),
+'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½3',
 200,
 1,
 (select theater_no from theater_room where room_idx=1))

@@ -4,7 +4,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Locale;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.ibatis.annotations.Param;
@@ -16,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.BoardService;
-import com.movie.dto.ReservationDTO;
+import com.movie.dto.DateTimeDTO;
 import com.movie.dto.MovieName;
+import com.movie.dto.ReservationDTO;
 
 /**
  * Handles requests for the application home page.
@@ -31,21 +31,22 @@ public class ReservationController {
 	@Autowired
 	BoardService BoardService;
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
-	public String reservationGet(Locale locale, Model model) {
+	public String reservationGet() {
+		BoardService.selectFirst();		
 		return "reservation";
 	}
 	
-	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
-	public String resservationPost(ReservationDTO dto, Model model) {
-		String[] array=dto.getSeat().split(",");
-		for(int i=0;i<array.length;i++){
-			System.out.println(array[i]);
-			dto.setSeat(array[i]);
-			BoardService.insertSeat(dto);
-		}
-		
-		return "reservation";
-	}
+//	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
+//	public String resservationPost(ReservationDTO dto, Model model) {
+//		String[] array=dto.getSeat().split(",");
+//		for(int i=0;i<array.length;i++){
+//			System.out.println(array[i]);
+//			dto.setSeat(array[i]);
+//			BoardService.insertSeat(dto);
+//		}
+//		
+//		return "reservation";
+//	}
 	@ResponseBody
 	@RequestMapping(value = "/getmovie.do", method = RequestMethod.GET)
 	public  Object getRoom(@Param("theater")String theater , Model model) {
@@ -75,11 +76,10 @@ public class ReservationController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/getseat.do", method = RequestMethod.GET)
-	public  Object getSeat(@Param("viewing_id")String viewing_id,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
-		System.out.println("test");
-		System.out.println(viewing_id);
-		Object movie=BoardService.selectSeat(Integer.parseInt(viewing_id));
-		return movie;
+	public  Object getSeat(@Param("idx") int idx,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+		System.out.println(idx);
+		List seat=BoardService.selectSeat(idx);
+		return seat;
 	}
 
 }

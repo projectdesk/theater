@@ -20,21 +20,22 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class='section_inner'>
-			<div class="theater">
+		<div class="reservation_title">예매</div>
+			<div class="theater movie_back">
 				<div>영화관</div>
 				<a href="#" value="강남점">강남점</a><a href="#" value="종로점">종로점</a><a
 					href="#" value="잠실점">잠실점</a>
 			</div>
-			<div class="theater_room">
-			<div>상영관</div>
-			</div>
-			<div class='movie'>
+			<div class='movie movie_back'>
 			<div>영화</div>
 			</div>
-			<div class="movie_date">
+			<div class="movie_date movie_back">
 			<div>날짜</div>
 			</div>
-			<div class="select_bar">
+			<div class="movie_time movie_back">
+			<div>시간</div>
+			</div>
+			<div class="select_bar movie_back">
 			<div>좌석선택</div>
 				<div class="watching_number">
 					어른 : <a href="#" value="1">1</a><a href="#" value="2">2</a><a
