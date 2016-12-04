@@ -46,6 +46,7 @@ $(document)
 							"theater" : $(theater).attr('value'),
 							"movie" : $(movie).attr('value')
 						},success : function(data){
+							$('.movie_date').html("<div class='title'>상영시간</div>");
 							$.each(data,function(index,value){
 								$.each(value,function(index,val){
 									if(index=='no')
@@ -76,6 +77,8 @@ $(document)
 												$('.theater a').removeClass("selected");
 												$(val).addClass("selected");
 												$('.movie').html("<div class='title'>영화</div>");
+												$('.movie_date').html("<div class='title'>날짜</div>");
+												$('.movie_time').html("<div class='title'>시간</div>");
 												$.each(data,function(key,value){
 													$.each(value,function(key,value){
 														if(key=="no"){
@@ -179,8 +182,12 @@ $(document)
 											$.each(value,function(index,value){
 												if(index=='no')
 													no=value;
+												if(index=='room')
+													room=value;
 												if(index=='time')
-													$('.movie_time').append('<a no='+no+' href="#">'+value+'</a>');
+													time=value
+												if(index=='room')
+												$('.movie_time').append('<a no='+no+' href="#">'+time+' ('+value+')</a>');
 											});															
 									});
 								}// success
@@ -230,16 +237,16 @@ $(document)
 					for ( var i = 0; i < 10; i++) {
 						$(".seat_container").append(
 								'<div class="row" row_num=' + i + '><span class="title">'+a[i]+'</span>');
-						for ( var j = 0; j < 10; j++) {
+						for ( var j = 1; j < 11; j++) {
 							if (i == 0) {
 								$("div[row_num=" + i + "]").append(
-										'<a href="#" seat=' + i + j
+										'<a href="#" seat=' + j
 												+ '><span class="no">' + j
 												+ '</span></a>');
 							} else {
 								$("div[row_num=" + i + "]").append(
 										'<a href="#" seat=' + i + j
-												+ '><span class="no">' + i + j
+												+ '><span class="no">' + j
 												+ '</span></a>');
 							}
 							$(".seat_container").append('</div>');

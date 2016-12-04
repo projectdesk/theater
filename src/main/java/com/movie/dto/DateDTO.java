@@ -6,6 +6,7 @@ public class DateDTO {
  private int no;
  private int movie_no;
  private String mdate;
+ private String today;
  
 public String getTheater() {
 	return theater;
@@ -36,6 +37,12 @@ public String getMdate() {
 }
 public void setMdate(String mdate) {
 	this.mdate = mdate;
+}
+public String getToday() {
+	return today;
+}
+public void setToday(String today) {
+	this.today = today;
 }
  
  

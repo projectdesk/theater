@@ -1,6 +1,7 @@
 package com.movie.controller;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.BoardService;
 import com.movie.dto.DateDTO;
+import com.movie.dto.SelectMovieDTO;
+import com.movie.util.GetToday;
 
 /**
  * Handles requests for the application home page.
@@ -49,9 +52,12 @@ public class ReservationController {
 //	}
 	@ResponseBody
 	@RequestMapping(value = "/getmovie.do", method = RequestMethod.GET)
-	public  Object getRoom(@Param("theater")String theater , Model model) {
-		System.out.println(theater);
-		List movie=BoardService.selectMovie(theater);
+	public  Object getRoom(SelectMovieDTO dto , Model model) {
+		Calendar cal=Calendar.getInstance();
+		String today=GetToday.getToday(cal);
+		dto.setToday(today);
+		dto.setToday(today);
+		List movie=BoardService.selectMovie(dto);
 		System.out.println(movie);
 		return movie;
 	}
@@ -68,6 +74,10 @@ public class ReservationController {
 	@ResponseBody
 	@RequestMapping(value = "/getdate.do", method = RequestMethod.GET)
 	public  Object getDate(DateDTO dto, Model model) throws UnsupportedEncodingException {
+		Calendar cal=Calendar.getInstance();
+		String today=GetToday.getToday(cal);
+		dto.setToday(today);
+		System.out.println(today);
 		List date=BoardService.selectDate(dto);
 		System.out.println(date);
 		return date;

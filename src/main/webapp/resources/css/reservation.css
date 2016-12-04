@@ -182,12 +182,14 @@ a {
 
 
 .row .title {
+	float:left;
 	display:inline-block;
-	width:15px;
 	border: 1px solid black;
 	font-size:15px;
-	height: 100%;
-
+	margin:0;
+	width: 26px;
+	height: 26px;
+	text-align: center;
 }
 .row a {
 	display:inline-block;
@@ -201,6 +203,7 @@ a {
 	font-size:15px;
 	height: 100%;
 	width: 100%;
+	text-align: center;
 
 }
 
