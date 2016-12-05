@@ -147,6 +147,7 @@ a {
 .watching_number {
 	width: 500px;
 	margin: 0 auto;
+	font-size: 15px;
 }
 
 .watching_number a {
@@ -155,6 +156,7 @@ a {
 	height: 20px;
 	text-align: center;
 	line-height: 18px;
+	font-size: 15px;
 }
 .seat_container{
 	clear:both;

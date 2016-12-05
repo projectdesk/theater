@@ -5,7 +5,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
   http://www.springframework.org/schema/beans/spring-beans.xsd
    http://www.springframework.org/schema/context 
-      http://www.springframework.org/schema/context/spring-context.xsd">
+   http://www.springframework.org/schema/context/spring-context.xsd">
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
@@ -26,5 +26,10 @@
 	<bean id="reservationService" class="com.movie.dao.ReservationService">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
-
+	<bean id="EtcService" class="com.movie.dao.EtcService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	<bean id="UserService" class="com.movie.dao.UserService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
 </beans>

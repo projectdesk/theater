@@ -49,20 +49,16 @@ height: 45%;
 nav .nav_bottom{
 height: 55%;
 }
-.nav_bottom .nav_bar{
+.nav_bottom{
 	width:600px;
 	margin-left:100px;
 	text-align: center;
 }
-
-.nav_bottom ul{
-	margin-top:10px;
-}
-.nav_bottom li{
+.nav_bar li{
 	float:left;
 	list-style: none;
-	
 }
+
 .nav_bottom li a{
 	display:inline-block;
 /* 	border:1px solid red; */
@@ -72,6 +68,31 @@ height: 55%;
 	padding: 15px 15px;
 	font-weight: bold;
 	
+}
+.nav_top{
+	width:400px;
+	margin-left:250px;
+	text-align: center;
+}
+
+.nav_top ul{
+	margin-top:10px;
+}
+.nav_top li a{
+	display:inline-block;
+/* 	border:1px solid red; */
+	font-size:15px;
+	margin:0 5px;
+	padding: 15px 15px;
+	font-weight: bold;
+}
+.nav_top .seperate{
+	display:inline-block;
+	border:1px solid black;
+	width: 1px;
+	height: 15px;
+	position:absolute;
+	top:30px;
 }
 
 

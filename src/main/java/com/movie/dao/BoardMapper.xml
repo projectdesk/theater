@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Board">
+	<select id="selectpassword" resultType="String" parameterType="com.movie.dto.BoardDTO">
+     select password from movie_user where
+    id=#{id}
+	</select>
+	<insert id="insertBoard" parameterType="com.movie.dto.BoardDTO">
+		INSERT INTO movie_user
+		(
+		id,
+		password,
+		name,
+		birthday,
+		email,
+		zipcode,
+		address,
+		address2,
+		phone
+		)
+		VALUES(
+		#{id},
+		#{password},
+		#{name},
+		#{email},
+		#{birthday},
+		#{zipcode},
+		#{address},
+		#{address2},
+		#{phone}
+		)
+	</insert>
+	
+	<update id="updateBoard">
+	update movie_user set
+		password=#{password},
+		name=#{name},
+		birthday=#{birthday},
+		email=#{email},
+		zipcode=#{zipcode},
+		address=#{address},
+		address2=#{address2},
+		phone=#{phone}
+		where id=#{id}
+	</update>
+	
+	<delete id="deleteBoard">
+	delete from movie_user
+	where id=#{id}
+	</delete>
+</mapper>

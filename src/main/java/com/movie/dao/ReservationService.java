@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.movie.dto.DateDTO;
 import com.movie.dto.SelectMovieDTO;
-import com.movie.dto.UserDTO;
 
 public class ReservationService {
 	SqlSession sqlSession;
@@ -14,10 +13,10 @@ public class ReservationService {
 		this.sqlSession = sqlSession;
 	}
 	
-	public int insertUser(UserDTO dto){
-		sqlSession.insert("ReservationMapper.insertUser",dto);
-		return 1;
-	}
+//	public int insertUser(UserDTO dto){
+//		sqlSession.insert("ReservationMapper.insertUser",dto);
+//		return 1;
+//	}
 
 //	public void insertSeat(ReservationDTO dto) {
 //		int no=sqlSession.selectOne("boardMapper.selectSeat",dto);

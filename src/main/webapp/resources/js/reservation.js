@@ -1,43 +1,43 @@
 $(document)
 		.ready(
 				function() {
-				// 디폴트이벤트 제거
+				// �뵒�뤃�듃�씠踰ㅽ듃 �젣嫄�
 				$('input[type="submit"]').click(function(){return false;});
-				// 폼값 검사
+				// �뤌媛� 寃��궗
 				$('input[type="submit"]').click(function(){
 					if($('input[name="theater"]').val()==""||$('input[name="theater"]').val()==0||$('input[name="theater"]').val()==null){
-						alert("영화관을 선택하세요");
+						alert("�쁺�솕愿��쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					if($('input[name="room"]').val()==""||$('input[name="room"]').val()==0||$('input[name="room"]').val()==null){
-						alert("상영관을 선택하세요");
+						alert("�긽�쁺愿��쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					if($('input[name="viewing_id"]').val()==""||$('input[name="viewing_id"]').val()==0||$('input[name="viewing_id"]').val()==null){
-						alert("영화을 선택하세요");
+						alert("�쁺�솕�쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					if($('input[name="howmany"]').val()==""||$('input[name="howmany"]').val()==0||$('input[name="howmany"]').val()==null){
-						alert("인원을 선택하세요");
+						alert("�씤�썝�쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					if($('input[name="seat"]').val()==""||$('input[name="seat"]').val()==0||$('input[name="seat"]').val()==null){
-						alert("좌석을 선택하세요");
+						alert("醫뚯꽍�쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					
 					if($('input[name="nownum"]').val()==""||$('input[name="nownum"]').val()==0||$('input[name="nownum"]').val()==null||$('input[name="nownum"]').val()<$('input[name="howmany"]').val()){
-						alert("선택숫자가 부족합니다.");
+						alert("�꽑�깮�닽�옄媛� 遺�議깊빀�땲�떎.");
 						return;
 					}
 					if($('input[name="room_idx"]').val()==""||$('input[name="room_idx"]').val()==0||$('input[name="room_idx"]').val()==null){
-						alert("상영관을 선택하세요");
+						alert("�긽�쁺愿��쓣 �꽑�깮�븯�꽭�슂");
 						return;
 					}
 					$('form[name="reservation"]').submit();
 					
 				;});
-				
+				$('section').on('click','a',function(){return false;})
 				function getDate(theater,movie){
 					$.ajax({
 						url : "getdate.do",
@@ -46,7 +46,7 @@ $(document)
 							"theater" : $(theater).attr('value'),
 							"movie" : $(movie).attr('value')
 						},success : function(data){
-							$('.movie_date').html("<div class='title'>상영시간</div>");
+							$('.movie_date').html("<div class='title'>날짜</div>");
 							$.each(data,function(index,value){
 								$.each(value,function(index,val){
 									if(index=='no')
@@ -60,10 +60,10 @@ $(document)
 					});//ajax
 				}
 				
-				//영화관 선택
+				//�쁺�솕愿� �꽑�깮
 					$(".theater").on('click','a',
 							function() {
-								var val=this;// 이벤트 객체 유지v
+								var val=this;// �씠踰ㅽ듃 媛앹껜 �쑀吏�v
 								var no;
 								$.ajax({
 									url : "getmovie.do",
@@ -105,9 +105,9 @@ $(document)
 									}// success
 								});// ajax
 							});// click
-					// 영화 선택
+					// �쁺�솕 �꽑�깮
 					$('.movie').on('click','a',function(){
-						val=this;// 이벤트객체유지
+						val=this;// �씠踰ㅽ듃媛앹껜�쑀吏�
 							$.ajax({
 								url : "gettheater.do",
 								type : "get",
@@ -116,6 +116,8 @@ $(document)
 							}, success : function(data){
 								if(!$('.theater a').hasClass('selected')){
 								$('.movie a').removeClass("selected");
+								$('.movie_date a').removeClass("selected");
+								$('.movie_time a').removeClass("selected");
 								$(val).addClass("selected");
 								$('.theater').html("<div class='title'>영화관</div>");
 								$.each(data,function(key,value){
@@ -124,6 +126,8 @@ $(document)
 								
 							
 							    }else{
+							    	$('.movie_date a').removeClass("selected");
+									$('.movie_time a').removeClass("selected");
 							    	$('.movie a').removeClass("selected");
 									$(val).addClass("selected");
 									getDate($('.theater a[class="selected"]'),$('.movie a[class="selected"]'));
@@ -135,7 +139,7 @@ $(document)
 					});
 					
 					
-					// 관선택
+					// 愿��꽑�깮
 					$('.theater_room').on('click','a',
 							function(){
 								val=this;												
@@ -149,7 +153,7 @@ $(document)
 									"movie" :$('.movie a[class="selected"]').text()
 									}, success : function(data){
 									$(val).addClass("selected");
-									$('.movie_date').html("<div class='title'>상영시간</div>");
+									$('.movie_date').html("<div class='title'>날짜</div>");
 									$.each(data,function(index,value){
 										$.each(value,function(index,value){
 											if(index=='idx')
@@ -165,7 +169,7 @@ $(document)
 								});
 							});// .theater_room>a click
 					
-					// 상영날짜 선택
+					// �긽�쁺�궇吏� �꽑�깮
 					$('.movie_date').on('click','a',
 							function(){
 								val=this;												
@@ -177,7 +181,7 @@ $(document)
 									}, success : function(data){
 									$('.movie_date a').removeClass("selected");
 									$(val).addClass("selected");
-									$('.movie_time').html("<div class='title'>상영시간</div>");
+									$('.movie_time').html("<div class='title'>시간</div>");
 										$.each(data,function(index,value){
 											$.each(value,function(index,value){
 												if(index=='no')
@@ -218,13 +222,11 @@ $(document)
 						console.log($(this).attr("gap_data"));
 					});
 
-					// 좌석선택
+					// 醫뚯꽍�꽑�깮
 					$('.watching_number a').click(
 							function() {
-								$(".watching_number>a").css("background-color",
-										"white");
+								$(".watching_number>a").removeAttr("style");
 								$("span").removeClass("no_active");
-								$("span").addClass("active");
 								$("input[name='seat']").val("");
 								$("input[name='nownum']").val(0);
 								$(this).css("background-color", "#227799");
@@ -256,7 +258,7 @@ $(document)
 						
 					
 							
-					// �������ο�, �����ο� ǥ�ù� Ŭ�����߰�
+					// 占쏙옙占쏙옙占쏙옙占싸울옙, 占쏙옙占쏙옙占싸울옙 표占시뱄옙 클占쏙옙占쏙옙占쌩곤옙
 					$('.row a')
 							.click(
 									function() {
