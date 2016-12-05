@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.movie.dao.BoardService;
+import com.movie.dao.ReservationService;
 import com.movie.dto.DateDTO;
 import com.movie.dto.SelectMovieDTO;
 import com.movie.util.GetToday;
@@ -29,11 +29,11 @@ public class ReservationController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@Autowired
-	BoardService BoardService;
+	ReservationService reservationService;
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
 	public String reservationGet(Model model) {
-		List theater=BoardService.selectFirstTheater();
-		List movie=BoardService.selectFirstMovie();
+		List theater=reservationService.selectFirstTheater();
+		List movie=reservationService.selectFirstMovie();
 		model.addAttribute("theaters",theater);
 		model.addAttribute("movies",movie);
 		return "reservation";
@@ -45,7 +45,7 @@ public class ReservationController {
 //		for(int i=0;i<array.length;i++){
 //			System.out.println(array[i]);
 //			dto.setSeat(array[i]);
-//			BoardService.insertSeat(dto);
+//			reservationService.insertSeat(dto);
 //		}
 //		
 //		return "reservation";
@@ -57,7 +57,7 @@ public class ReservationController {
 		String today=GetToday.getToday(cal);
 		dto.setToday(today);
 		dto.setToday(today);
-		List movie=BoardService.selectMovie(dto);
+		List movie=reservationService.selectMovie(dto);
 		System.out.println(movie);
 		return movie;
 	}
@@ -67,7 +67,7 @@ public class ReservationController {
 	public  Object getMovie(@Param("movie")String movie , Model model) throws UnsupportedEncodingException {
 		System.out.println("test");
 		System.out.println(movie);
-		List theater=BoardService.selectTheater(movie);
+		List theater=reservationService.selectTheater(movie);
 		return theater;
 	}
 	
@@ -78,7 +78,7 @@ public class ReservationController {
 		String today=GetToday.getToday(cal);
 		dto.setToday(today);
 		System.out.println(today);
-		List date=BoardService.selectDate(dto);
+		List date=reservationService.selectDate(dto);
 		System.out.println(date);
 		return date;
 	}
@@ -87,7 +87,7 @@ public class ReservationController {
 	@RequestMapping(value = "/gettime.do", method = RequestMethod.GET)
 	public  Object getTime(@Param("no")int no , Model model) throws UnsupportedEncodingException {
 		System.out.println(no);
-		List time=BoardService.selectTime(no);
+		List time=reservationService.selectTime(no);
 		return time;
 	}
 	
@@ -95,7 +95,7 @@ public class ReservationController {
 	@RequestMapping(value = "/getseat.do", method = RequestMethod.GET)
 	public  Object getSeat(@Param("no") int no,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
 		System.out.println(no);
-		List seat=BoardService.selectSeat(no);
+		List seat=reservationService.selectSeat(no);
 		return seat;
 	}
 

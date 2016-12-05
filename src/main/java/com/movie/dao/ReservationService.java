@@ -8,14 +8,14 @@ import com.movie.dto.DateDTO;
 import com.movie.dto.SelectMovieDTO;
 import com.movie.dto.UserDTO;
 
-public class BoardService {
+public class ReservationService {
 	SqlSession sqlSession;
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 	
 	public int insertUser(UserDTO dto){
-		sqlSession.insert("boardMapper.insertUser",dto);
+		sqlSession.insert("ReservationMapper.insertUser",dto);
 		return 1;
 	}
 
@@ -27,32 +27,32 @@ public class BoardService {
 //	}
 
 	public List selectTheater(String movie) {
-		return sqlSession.selectList("boardMapper.selectTheater",movie);
+		return sqlSession.selectList("ReservationMapper.selectTheater",movie);
 	}
 	
 	public List selectMovie(SelectMovieDTO dto){
-		return sqlSession.selectList("boardMapper.selectMovie",dto);
+		return sqlSession.selectList("ReservationMapper.selectMovie",dto);
 	}
 
 	public List selectDate(DateDTO dto) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardMapper.selectDate",dto);
+		return sqlSession.selectList("ReservationMapper.selectDate",dto);
 	}
 	
 	public List selectSeat(int no) {
-		return sqlSession.selectList("boardMapper.selectAreadySeat",no);
+		return sqlSession.selectList("ReservationMapper.selectAreadySeat",no);
 	}
 
 	public List selectTime(int no) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("boardMapper.selectTime",no);
+		return sqlSession.selectList("ReservationMapper.selectTime",no);
 	}
 
 	public List selectFirstTheater() {
-		return sqlSession.selectList("boardMapper.selectFirstTheater");
+		return sqlSession.selectList("ReservationMapper.selectFirstTheater");
 	}
 	public List selectFirstMovie() {
-		return sqlSession.selectList("boardMapper.selectFirstMovie");
+		return sqlSession.selectList("ReservationMapper.selectFirstMovie");
 	}
 
 	
