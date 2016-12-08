@@ -8,9 +8,16 @@
 				<div class="nav_top">
 					<div class="nav_bar">
 						<ul>
-							<li><a href="#">로그인</a><div class="seperate"></div></li>
+							<li>
+							<c:if test="${sessionScope.id==null}">				
+							<a href="login.do">로그인</a>
+							</c:if>
+							<c:if test="${sessionScope.id!=null}">				
+							<a href="logout.do">로그아웃</a>
+							</c:if>
+							<div class="seperate"></div></li>
 							<li><a href="register.do">회원가입</a><div class="seperate"></div></li>
-							<li><a href="#">마이페이지</a><div class="seperate"></div></li>
+							<li><a href="mypage.do">마이페이지</a><div class="seperate"></div></li>
 							<li><a href="#">예매취소</a></li>
 						</ul>
 					</div>

@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+.theater_left {
+	float: left;
+	width: 17%;
+	height: 100%;
+	border: 1px solid red;
+}
+
+.theater_left a{
+	display:block;
+	text-align: center;
+	height: 50px;
+	line-height: 45px;
+	font-weight: 600;
+	font-size: 20px;
+	border-bottom: 1px solid black;
+}
+
+.theater_right {
+	float: right;
+	width: 83%; height : 100%;
+	border: 1px solid red;
+	height: 100%;
+	padding: 10px;
+	font-size: 18px;
+}

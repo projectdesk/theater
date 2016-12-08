@@ -1,5 +1,7 @@
 package com.movie.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,11 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.movie.dao.EtcService;
+import com.movie.dao.TheaterService;
 import com.movie.dto.MovieInsertDTO;
 @Controller
 public class EtcController {
 	@Autowired
 	EtcService etcService;
+
 	
 	@RequestMapping(value = "/insertmovie.do", method = RequestMethod.GET)
 	public String insertMovieForm(Model model) {
@@ -24,4 +28,6 @@ public class EtcController {
 //		model.addAttribute("theaters",theater);
 		return "movieInsert";
 	}
+	
+
 }

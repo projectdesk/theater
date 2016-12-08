@@ -3,9 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReservationMapper">
-<!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
-<!--     select * from table -->
-<!--   </select>selectFirst -->
 <select id="selectFirstTheater" resultType="String">
 	select name from theater order by no asc
 </select>
@@ -14,10 +11,9 @@
 </select>
 <select id="selectMovie" parameterType="String" resultType="com.movie.dto.MovieDTO">
 	 select distinct movie.name,movie.no from movie,date where movie.no=date.movie_no and theater=#{theater} and mdate>=#{today};
-<!-- 	select name from (select * from movie,avail_theater where no=movie_no)a where theater=#{theater} -->
 </select>
 <select id="selectTheater" parameterType="String" resultType="String">
-	select theater from avail_theater where movie_no=(select no from movie where name=#{movie})
+	select theater from avail_theater where movie_no=(select no from movie where name=#{movie} order by no desc limit 1)
 </select>
 <select id="selectDate" parameterType="com.movie.dto.DateDTO" resultType="com.movie.dto.DateDTO">
 	select no,mdate from date where theater=#{theater} and movie_no=(select no from movie where name=#{movie}) and mdate>=#{today}
@@ -25,14 +21,18 @@
 <select id="selectTime" parameterType="int" resultType="com.movie.dto.TimeDTO">
 	select * from time where date_no=#{no}
 </select>
-<!-- <select id="selectSeat" resultType="String" parameterType="com.movie.dto.DateTimeDTO"> -->
-<!-- 	select seat_no from reservation_seat where date_time_idx=#{idx} -->
-<!-- </select> -->
+<select id="selectSeat" resultType="int" parameterType="com.movie.dto.ReservationDTO">
+	select count(*) from seat where time_no=#{time_no} and seat=#{seat}
+</select>
 <select id="selectAreadySeat" resultType="int" parameterType="int">
 	select seat from seat where time_no=#{no}
 </select>
-<!-- <insert id="insertSeat" parameterType="com.movie.dto.ReservationDTO"> -->
-<!-- 	insert into reservation_seat values(#{viewing_id},'user',#{seat}) -->
-<!-- </insert> -->
+<insert id="insertSeat" parameterType="com.movie.dto.ReservationDTO">
+	insert into 
+	seat(time_no,seat,user) values(#{time_no},#{seat},#{user})
+</insert>
+<update id="updateRemain" parameterType="int">
+	update time set remain=remain-1 where no=#{no}
+</update>
 </mapper>
 

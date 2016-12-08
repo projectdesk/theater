@@ -5,35 +5,23 @@ $(document)
 				$('input[type="submit"]').click(function(){return false;});
 				// �뤌媛� 寃��궗
 				$('input[type="submit"]').click(function(){
-					if($('input[name="theater"]').val()==""||$('input[name="theater"]').val()==0||$('input[name="theater"]').val()==null){
-						alert("�쁺�솕愿��쓣 �꽑�깮�븯�꽭�슂");
-						return;
-					}
-					if($('input[name="room"]').val()==""||$('input[name="room"]').val()==0||$('input[name="room"]').val()==null){
-						alert("�긽�쁺愿��쓣 �꽑�깮�븯�꽭�슂");
-						return;
-					}
-					if($('input[name="viewing_id"]').val()==""||$('input[name="viewing_id"]').val()==0||$('input[name="viewing_id"]').val()==null){
-						alert("�쁺�솕�쓣 �꽑�깮�븯�꽭�슂");
-						return;
-					}
-					if($('input[name="howmany"]').val()==""||$('input[name="howmany"]').val()==0||$('input[name="howmany"]').val()==null){
-						alert("�씤�썝�쓣 �꽑�깮�븯�꽭�슂");
+					if($('input[name="time_no"]').val()==""||$('input[name="howmany"]').val()==0||$('input[name="howmany"]').val()==null){
+						alert("상영시간을 선택해주세요");
 						return;
 					}
 					if($('input[name="seat"]').val()==""||$('input[name="seat"]').val()==0||$('input[name="seat"]').val()==null){
-						alert("醫뚯꽍�쓣 �꽑�깮�븯�꽭�슂");
+						alert("좌석을 선택해주세요.");
 						return;
 					}
 					
 					if($('input[name="nownum"]').val()==""||$('input[name="nownum"]').val()==0||$('input[name="nownum"]').val()==null||$('input[name="nownum"]').val()<$('input[name="howmany"]').val()){
-						alert("�꽑�깮�닽�옄媛� 遺�議깊빀�땲�떎.");
+						alert("인원수만큼 좌석을 선택해주세요..");
 						return;
 					}
-					if($('input[name="room_idx"]').val()==""||$('input[name="room_idx"]').val()==0||$('input[name="room_idx"]').val()==null){
-						alert("�긽�쁺愿��쓣 �꽑�깮�븯�꽭�슂");
+					if($('input[name="user_confirm"]').val()==""){
+						location.href="login.do";
 						return;
-					}
+					}						
 					$('form[name="reservation"]').submit();
 					
 				;});
@@ -189,9 +177,13 @@ $(document)
 												if(index=='room')
 													room=value;
 												if(index=='time')
-													time=value
+													time=value;
+												if(index=='max')
+													max=value;
+												if(index=='remain')
+													remain=value;
 												if(index=='room')
-												$('.movie_time').append('<a no='+no+' href="#">'+time+' ('+value+')</a>');
+												$('.movie_time').append('<a no='+no+' href="#">'+time+' ('+value+')<br>('+remain+'/'+max+')</a>');
 											});															
 									});
 								}// success
@@ -200,15 +192,16 @@ $(document)
 					
 					$('.movie_time').on('click','a',
 							function(){
-								val=this;												
+								val=this;	
 								$.ajax({
 									url : "getseat.do",
 									type : "get",
 									data : {
 									"no" : $(val).attr('no'),
 									}, success : function(data){
-									$(val).addClass("selected");
-										$.each(data,function(index,value){
+										$(val).addClass("selected");
+										$('input[name=time_no]').val($(val).attr('no'));
+									$.each(data,function(index,value){
 											$('.row a[seat='+value+'] span').addClass('allready');
 									});
 								}// success

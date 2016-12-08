@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.ReservationService;
 import com.movie.dto.DateDTO;
+import com.movie.dto.ReservationDTO;
 import com.movie.dto.SelectMovieDTO;
 import com.movie.util.GetToday;
 
@@ -38,18 +40,20 @@ public class ReservationController {
 		model.addAttribute("movies",movie);
 		return "reservation";
 	}
-	
-//	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
-//	public String resservationPost(ReservationDTO dto, Model model) {
-//		String[] array=dto.getSeat().split(",");
-//		for(int i=0;i<array.length;i++){
-//			System.out.println(array[i]);
-//			dto.setSeat(array[i]);
-//			reservationService.insertSeat(dto);
-//		}
-//		
-//		return "reservation";
-//	}
+	@RequestMapping(value = "/reservation.do", method = RequestMethod.POST)
+	public String resservationPost(ReservationDTO dto,HttpSession session, Model model) {
+		if(session.getAttribute("id")!=null)
+		dto.setUser((String)session.getAttribute("id"));
+		else 
+		return "redirect:reservation.do";
+		String[] array=dto.getSeat().split(",");
+		for(int i=0;i<array.length;i++){
+			System.out.println(array[i]);
+			dto.setSeat(array[i]);
+			reservationService.insertSeat(dto);
+		}
+		return "redirect:reservation.do?successed=true";
+	}
 	@ResponseBody
 	@RequestMapping(value = "/getmovie.do", method = RequestMethod.GET)
 	public  Object getRoom(SelectMovieDTO dto , Model model) {

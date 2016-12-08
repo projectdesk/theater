@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reviewMapper">
+<!--   <select id="selectBoard" resultType="com.study.dto.BoardDTO"> -->
+<!--     select * from table -->
+<!--   </select> -->
+
+<!-- 관객 -->
+<!-- 글쓰기 -->
+<insert id="audienceWrite" parameterType="com.movie.dto.ReviewDTO">
+		insert into audience_review values(#{movie_no},default,#{grade},#{title},#{content},#{writer},0,now());
+</insert>
+<!-- 목록 ,페이징-->
+<select id="audienceList" resultType="com.movie.dto.ReviewDTO" parameterType="int">
+		select * from audience_review order by review_no DESC limit 5 offset #{page}
+</select>
+<!-- 내용 -->
+<select id="audienceContent" resultType="com.movie.dto.ReviewDTO" parameterType="int" >
+		select * from audience_review where review_no=#{review_no}
+</select>
+<!--  조회수-->
+<update id="audenceHit" parameterType="int">
+		update audience_review set hit = hit + 1 where review_no = #{review_no}
+</update>
+<!--검색 -->
+<select id="audienceSearch" resultType="com.movie.dto.ReviewDTO" parameterType="int">
+		select * from audience_review where movie_no = #{movie_no} order by review_no DESC
+</select>
+<!-- 총페이지 -->
+<select id="audienceCount" resultType="int">
+		select count(*)from audience_review
+</select>
+<!-- 검색된페이지 -->
+<select id="audienceCountSearch" resultType="int">
+		select count(*)from audience_review where movie_no = #{movie_no}
+</select>
+<!--삭제  -->
+<delete id="audienceDelete" parameterType="com.movie.dto.ReviewDTO">
+		delete from audience_review where review_no = #{review_no}
+</delete>
+
+<!-- 전문가 -->
+<!-- 글쓰기 -->
+<insert id="expertWrite" parameterType="com.movie.dto.ReviewDTO">
+		insert into expert_review values(#{movie_no},default,#{grade},#{title},#{content},#{writer},0,now());
+</insert>
+<!-- 목록,페이징 -->
+<select id="expertList" resultType="com.movie.dto.ReviewDTO">
+		select * from expert_review order by review_no DESC limit 5 offset #{page}
+</select>
+<!-- 내용 -->
+<select id="expertContent" resultType="com.movie.dto.ReviewDTO" parameterType="int" >
+		select * from expert_review where review_no=#{review_no}
+</select>
+<!-- 조회수 -->
+<update id="expertHit" parameterType="int">
+		update expert_review set hit = hit + 1 where review_no = #{review_no}
+</update>
+<!--검색 -->
+<select id="expertSearch" resultType="com.movie.dto.ReviewDTO" parameterType="int">
+		select * from expert_review where movie_no = #{movie_no} order by review_no DESC;
+</select>
+<!-- 총페이지 -->
+<select id="expertCount" resultType="int">
+		select count(*)from expert_review
+</select>
+<!-- 검색된페이지 -->
+<select id="expertCountSearch" resultType="int">
+		select count(*)from expert_review where movie_no = #{movie_no}
+</select>
+<delete id="expertDelete" parameterType="com.movie.dto.ReviewDTO">
+		delete from expert_review where review_no = #{review_no}
+
+</delete>
+
+</mapper>
+

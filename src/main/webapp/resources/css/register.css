@@ -8,7 +8,7 @@ td{
 }
 td:FIRST-CHILD{
 	text-align: right;
-	width: 120px;
+	width: 180px;
 }
 th{
 	padding:5px;

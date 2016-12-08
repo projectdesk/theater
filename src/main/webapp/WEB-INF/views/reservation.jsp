@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +17,7 @@
 <body>
 	<!-- header -->
 	<%@include file="header.jsp"%>
+	<%-- 	<jsp:include page="header.jsp"></jsp:include> --%>
 	<section>
 		<div class='section_inner'>
 			<div class="reservation_title">예매</div>
@@ -30,7 +30,7 @@
 			<div class='movie movie_back'>
 				<div class="title">영화</div>
 				<c:forEach var="movie" items="${movies}">
-				<a href="#" value="${movie}">${movie}</a>
+					<a href="#" value="${movie}">${movie}</a>
 				</c:forEach>
 			</div>
 			<div class="movie_date movie_back">
@@ -45,23 +45,27 @@
 					어른 : <a href="#" value="1">1</a><a href="#" value="2">2</a><a
 						href="#" value="3">3</a><a href="#" value="4">4</a><a href="#"
 						value="5">5</a>
-
 					<form name="reservation" action="reservation.do" method="post">
-						<input type="hidden" value="" name="theater" /> <input
-							type="hidden" value="" name="room" /> <input type="hidden"
-							value="" name="viewing_id" /> <input type="hidden" value="0"
-							name="howmany" /> <input type="hidden" value="0" name="nownum" />
-						<input type="hidden" value="" name="seat" /> <input type="hidden"
-							value="" name="room_idx" /> <input type="submit" value="예약하기" />
+						<input type="hidden" value="" name="howmany" /> <input
+							type="hidden" value="" name="nownum" /><br> <input
+							type="hidden" value="" name="time_no" /> <input type="hidden"
+							value="" name="seat" /><br> <input type="hidden"
+							value="${sessionScope.id}" name="user_confirm" /><br> <input
+							type="submit" value="예약하기" />
 					</form>
 				</div>
 				<span class="seat_container"></span>
-				
+
 			</div>
 		</div>
 		<!--section_innser -->
 	</section>
 	<!-- footer -->
 	<%@include file="footer.jsp"%>
+	<c:if test="${param.successed==true}">
+		<script type="text/javascript">
+			alert("예약완료");
+		</script>
+	</c:if>
 </body>
 </html>

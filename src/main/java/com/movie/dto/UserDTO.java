@@ -9,7 +9,7 @@ public class UserDTO {
 	private String birthday;
 	private String email;
 	private int zipcode;
-	private String address;
+	private String address1;
 	private String address2;
 	private int phone;
 	
@@ -69,12 +69,12 @@ public class UserDTO {
 		this.zipcode = zipcode;
 	}
 
-	public String getAddress() {
-		return address;
+	public String getAddress1() {
+		return address1;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setAddress1(String address1) {
+		this.address1 = address1;
 	}
 
 	public String getAddress2() {

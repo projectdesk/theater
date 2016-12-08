@@ -26,10 +26,16 @@
 	<bean id="reservationService" class="com.movie.dao.ReservationService">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
-	<bean id="EtcService" class="com.movie.dao.EtcService">
+	<bean id="etcService" class="com.movie.dao.EtcService">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
-	<bean id="UserService" class="com.movie.dao.UserService">
+	<bean id="userService" class="com.movie.dao.UserService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	<bean id="theaterService" class="com.movie.dao.TheaterService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	<bean id="reviewService" class="com.movie.dao.ReviewService">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 </beans>
