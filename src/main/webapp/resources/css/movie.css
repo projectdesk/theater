@@ -1,0 +1,25 @@
+#wrap{
+  display: flex;
+  flex-flow:colum nowrap;
+  width:100%;
+  margin:0 auto;
+  overflow: hidden;
+}
+
+
+#wrap section {
+  box-sizing: border-box;
+  width:1200px;
+  margin: 0 auto;
+}
+
+.movie_page {margin:50px auto; width: 700px;
+
+}
+
+.movie_page .left {float:left; width:230px; display: block; padding:0 10px 30px;}
+
+
+
+.movie_page .buttom {clear: inherit;  display: inline-block;}
+

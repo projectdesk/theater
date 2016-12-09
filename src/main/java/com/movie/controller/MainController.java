@@ -32,6 +32,11 @@ public class MainController {
 		return "home";
 	}
 	
+	@RequestMapping(value = "/movie.do", method = RequestMethod.GET)
+	public String movie(Locale locale, Model model) {
+		return "redirect:movieList.do";
+	}
+	
 	@RequestMapping(value = "/theater.do", method = RequestMethod.GET)
 	public String selectTheater(Model model) {
 		List list=theaterService.selectTheater();

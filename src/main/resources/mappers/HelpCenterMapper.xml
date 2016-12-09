@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="helpCenterMapper">
+
+
+	<!-- =====================================질문===================================== -->
+	
+	
+	<!-- 질문자 글쓰기 -->
+	<insert id="insertQuestion" parameterType="com.movie.dto.QuestionDTO">
+		insert into question
+		(no,writer,title,content,kinds,wdate,check_answer)
+		values(default,#{writer},#{title},#{content},#{kinds},now(),default);
+	</insert>
+
+	<!-- 질문글 자세히 보기 -->
+	<select id="selectQuestionok" resultType="com.movie.dto.QuestionDTO"
+		parameterType="int">
+		select no,writer,title,content,kinds,wdate,check_answer
+		from question where
+		no = #{no};
+	</select>
+
+	<!-- 질문글 답변여부 -->
+	<update id="updateQuestion" parameterType="com.movie.dto.QuestionDTO">
+		update question set
+		check_answer = 'Y' where no = #{no}
+	</update>
+
+	<!-- 리스트 페이징 -->
+	<select resultType="com.movie.dto.QuestionDTO" id="selectQuestion"
+		parameterType="int"> select * from question order by no desc limit 5 offset
+		#{page}
+	</select>
+
+	<!-- 총 페이지 -->
+	<select resultType="int" id="countQuestion"> select count(*) from question
+	</select>
+
+	<!-- 총 검색된페이지 -->
+	<select id="countQuestionSerch" resultType="int">
+		select count(*)from
+		question where kinds = #{kinds}
+	</select>
+
+	<!--질문 유형별 검색 -->
+	<select id="selectQuestionSerch" resultType="com.movie.dto.QuestionDTO"
+		parameterType="String">
+		select * from question where kinds =
+		#{kinds} order by no
+		DESC
+	</select>
+
+
+	<!-- 삭제 -->
+	<delete id="deleteQuestion" parameterType="com.movie.dto.QuestionDTO">
+		delete from question
+		where no = #{no}
+	</delete>
+
+
+
+	<!-- =====================================답변===================================== -->
+
+
+
+	<!-- 답변 글쓰기 -->
+	<insert id="insertAnswer" parameterType="com.movie.dto.Qeustion_answerDTO">
+		insert into
+		question_answer(question_no,awriter,atitle,acontent,awdate)
+		values(#{question_no},#{awriter},#{atitle},#{acontent},now());
+	</insert>
+
+	<!-- 답글 자세히 보기 -->
+	<select id="selectAnswerok" resultType="com.movie.dto.Qeustion_answerDTO"
+		parameterType="int">
+		select question_no,awriter,atitle,acontent,awdate from
+		question_answer where
+		question_no = #{question_no};
+	</select>
+
+	<!-- 수정 -->
+	<update id="updateAnswer" parameterType="com.movie.dto.Qeustion_answerDTO">
+		update question_answer
+		set atitle = #{atitle},acontent =
+		#{acontent},awriter = #{awriter}
+		where question_no = #{question_no}
+	</update>
+	
+
+	<!-- =====================================자주찾는글===================================== -->
+
+
+	<!-- 자주찾는글 쓰기 -->
+	<insert id="insertFrequencyQuestion" parameterType="com.movie.dto.QuestionDTO">
+		insert into
+		frequency_question
+		(no,title,content,kinds)
+		values(default,#{title},#{content},#{kinds});
+	</insert>
+
+	<!-- 자주찾는글 리스트 -->
+	<select resultType="com.movie.dto.QuestionDTO" id="selectFrequencyQuestion"
+		parameterType="int"> select * from frequency_question order by no desc limit
+		5 offset
+		#{page}
+	</select>
+
+
+	<!-- 자주찾는글 페이지 -->
+	<select resultType="int" id="countFrequencyQuestion"> select count(*) from
+		frequency_question
+	</select>
+
+</mapper>
+

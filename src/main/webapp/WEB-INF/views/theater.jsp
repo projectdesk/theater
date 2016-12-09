@@ -18,14 +18,14 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-			<div class="theater_left">
+			<div class="section_left">
 				<c:forEach items="${theaters}" var="theater">
 					<div>
 						<a href="theater.do?theater=${theater.name}">${theater.name}</a>
 					</div>
 				</c:forEach>
 			</div>
-			<div class="theater_right">
+			<div class="section_right">
 				<c:forEach items="${theaters}" var="theater">
 					<c:if test="${param.theater==null}">
 						<c:if test="${theater.no==1}">

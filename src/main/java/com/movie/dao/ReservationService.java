@@ -54,8 +54,8 @@ public class ReservationService {
 	public List selectFirstTheater() {
 		return sqlSession.selectList("ReservationMapper.selectFirstTheater");
 	}
-	public List selectFirstMovie() {
-		return sqlSession.selectList("ReservationMapper.selectFirstMovie");
+	public List selectFirstMovie(String today) {
+		return sqlSession.selectList("ReservationMapper.selectFirstMovie",today);
 	}
 
 	

@@ -38,4 +38,11 @@
 	<bean id="reviewService" class="com.movie.dao.ReviewService">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
+	<bean id="helpCenterService" class="com.movie.dao.HelpCenterService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	<bean id="MovieService" class="com.movie.dao.MovieService">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+	
 </beans>

@@ -3,25 +3,33 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="UserMapper">
-		<select id="selectId" resultType="int" parameterType="String">
-			select count(*) from user where id=#{id}		
-		</select>
-		
-		<select id="selectLoginInfo" resultType="int" parameterType="HashMap">
-			select count(*) from user where id=#{id} and password=#{password}		
-		</select>
-		
-		<select id="selecReservations" resultType="HashMap" parameterType="String">
-			select date.theater,movie.name,date.mdate as date,time.time,seat.seat 
-			from movie,date,time,seat 
-			where movie.no=date.movie_no and date.no=time.date_no and 
-			time.no=seat.time_no and seat.user=#{user} 
-			order by date asc,time asc,seat asc	
-		</select>
-		
+	<select id="selectId" resultType="int" parameterType="String">
+		select count(*) from user where id=#{id}
+	</select>
+
+	<select id="selectLoginInfo" resultType="int" parameterType="HashMap">
+		select count(*) from user where id=#{id} and password=#{password}
+	</select>
+	<!-- mypage reservation_info -->
+	<select id="selecReservations" resultType="HashMap"
+		parameterType="String">
+		select time.no,date.theater,movie.name,date.mdate as
+		date,time.time,seat.seat
+		from movie,date,time,seat
+		where movie.no=date.movie_no and date.no=time.date_no and
+		time.no=seat.time_no and seat.user=#{user}
+		order by date asc,time asc,seat asc
+	</select>
+	<select id="selectUserPass" resultType="String" parameterType="String">
+		select password from user where id=#{id}
+	</select>
 	<insert id="insertUser" parameterType="com.movie.dto.UserDTO">
-		INSERT INTO user(id,password,name,birthday,email,zipcode,address1,address2,phone)
-		 VALUES(#{id},#{password},#{name},#{birthday},#{email},#{zipcode},#{address1},#{address2},
+		INSERT INTO
+		user(id,password,name,birthday,email,zipcode,address1,address2,phone)
+		VALUES(#{id},#{password},#{name},#{birthday},#{email},#{zipcode},#{address1},#{address2},
 		#{phone})
 	</insert>
+	<update id="updateUserPass" parameterType="String">
+		update user set password=#{newPassword}
+	</update>
 </mapper>

@@ -199,6 +199,8 @@ $(document)
 									data : {
 									"no" : $(val).attr('no'),
 									}, success : function(data){
+										$('.movie_time a').removeClass("selected");
+										$('span').removeClass("allready");
 										$(val).addClass("selected");
 										$('input[name=time_no]').val($(val).attr('no'));
 									$.each(data,function(index,value){

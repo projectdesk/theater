@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="movieMapper">
+
+
+  <!-- movieMainPage -->
+  <select id="moviePageList" resultType="com.movie.dto.MoviePageDTO"
+    parameterType="int">
+    select no, title, poster from movie_info,poster where no = poster.movie_no order by no desc limit 12 offset #{page}
+  </select>
+
+
+  <!-- moviePage -->
+  <select id="movieDetailPage" resultType="com.movie.dto.MoviePageDTO"
+    parameterType="int">
+    select * from movie_info,poster where movie_info.no = #{no} and 
+    movie_info.no  = poster.movie_no;
+  </select>
+
+
+
+  <!-- movieWrite -->
+  <insert id="movieWrite" parameterType="com.movie.dto.MoviePageDTO"
+    useGeneratedKeys="true">
+    INSERT INTO movie_info VALUES
+    (default,#{title},#{content},#{play_date},#{genre},#{director},#{limit_play},#{actor});
+  </insert>
+
+  <insert id="moviePosterInsert" parameterType="com.movie.dto.MoviePageDTO">
+    INSERT INTO
+    poster(movie_no, poster) VALUES((SELECT count(*)
+    FROM movie_info
+    WHERE no ), #{poster})
+  </insert>
+</mapper>

@@ -34,8 +34,10 @@ public class ReservationController {
 	ReservationService reservationService;
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
 	public String reservationGet(Model model) {
+		Calendar cal=Calendar.getInstance();
+		String today=GetToday.getToday(cal);
 		List theater=reservationService.selectFirstTheater();
-		List movie=reservationService.selectFirstMovie();
+		List movie=reservationService.selectFirstMovie(today);
 		model.addAttribute("theaters",theater);
 		model.addAttribute("movies",movie);
 		return "reservation";

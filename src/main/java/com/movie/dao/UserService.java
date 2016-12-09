@@ -2,6 +2,7 @@ package com.movie.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -40,5 +41,19 @@ public class UserService {
 	public List selectReservations(String id) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("UserMapper.selecReservations",id);
+	}
+
+	public int selectUserPass(String id,String password) {
+		// TODO Auto-generated method stub
+		String db_pass=sqlSession.selectOne("UserMapper.selectUserPass",id);
+		if(password.equals(db_pass))
+			return 1;
+		else
+			return 0;
+	}
+
+	public int UpdateUserPass(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("UserMapper.updateUserPass",map);
 	}
 }
