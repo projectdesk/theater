@@ -25,15 +25,15 @@
 					<input type="hidden" name="question_no" value="${param.no}">
 					<tr align="center">
 						<td width="60">게시자</td>
-						<td><input type="text" name="awriter" value="운영자"></td>
+						<td><input type="text" name="writer" value="운영자"></td>
 					</tr>
 					<tr align="center">
 						<td width="90">제목</td>
-						<td><input type="text" name="atitle"></td>
+						<td><input type="text" name="title"></td>
 					</tr>
 					<tr align="center">
 						<td>질문내용</td>
-						<td><textarea name="acontent" cols="90" rows="23"></textarea></td>
+						<td><textarea name="content" cols="90" rows="23"></textarea></td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="submit"

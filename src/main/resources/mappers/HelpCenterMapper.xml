@@ -6,8 +6,8 @@
 
 
 	<!-- =====================================질문===================================== -->
-	
-	
+
+
 	<!-- 질문자 글쓰기 -->
 	<insert id="insertQuestion" parameterType="com.movie.dto.QuestionDTO">
 		insert into question
@@ -69,14 +69,14 @@
 	<!-- 답변 글쓰기 -->
 	<insert id="insertAnswer" parameterType="com.movie.dto.Qeustion_answerDTO">
 		insert into
-		question_answer(question_no,awriter,atitle,acontent,awdate)
-		values(#{question_no},#{awriter},#{atitle},#{acontent},now());
+		question_answer(question_no,writer,title,content,wdate)
+		values(#{question_no},#{writer},#{title},#{content},now());
 	</insert>
 
 	<!-- 답글 자세히 보기 -->
 	<select id="selectAnswerok" resultType="com.movie.dto.Qeustion_answerDTO"
 		parameterType="int">
-		select question_no,awriter,atitle,acontent,awdate from
+		select question_no,writer,title,content,wdate from
 		question_answer where
 		question_no = #{question_no};
 	</select>
@@ -84,11 +84,12 @@
 	<!-- 수정 -->
 	<update id="updateAnswer" parameterType="com.movie.dto.Qeustion_answerDTO">
 		update question_answer
-		set atitle = #{atitle},acontent =
-		#{acontent},awriter = #{awriter}
-		where question_no = #{question_no}
+		set title = #{title},content =
+		#{content},writer = #{writer}
+		where
+		question_no = #{question_no}
 	</update>
-	
+
 
 	<!-- =====================================자주찾는글===================================== -->
 
@@ -107,12 +108,29 @@
 		5 offset
 		#{page}
 	</select>
-
-
 	<!-- 자주찾는글 페이지 -->
 	<select resultType="int" id="countFrequencyQuestion"> select count(*) from
 		frequency_question
 	</select>
-
+	<!-- 자주찾는글 검색 -->
+	<select id="serchFrequencyQuestion" resultType="com.movie.dto.QuestionDTO"
+		parameterType="String">
+		select * from frequency_question where kinds = #{kinds}
+		order by no desc
+	</select>
+	
+	<!-- 자주찾는글 갯수 -->
+	<select id="serchCountFrequencyQuestion" resultType="int">
+		select
+		count(*)from
+		frequency_question where kinds = #{kinds}
+	</select>
+	
+	<!-- 자주찾는글 리스트 -->
+	<select resultType="com.movie.dto.QuestionDTO" id="serchPagFrequencyQuestion"
+		parameterType="int"> select * from frequency_question order by no desc limit
+		5 offset
+		#{page}
+	</select>
 </mapper>
 

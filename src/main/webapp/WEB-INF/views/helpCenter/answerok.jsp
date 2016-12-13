@@ -25,19 +25,19 @@
 		<input type=hidden name="getQuestion_no" value="${sdto.question_no}"/>
 			<tr>
 				<td width="100px" align="center">게시자</td>
-				<td height="30px" align="center" width="400px">${sdto.awriter}</td>
+				<td height="30px" align="center" width="400px">${sdto.writer}</td>
 			</tr>
 			<tr>
 				<td align="center">날짜</td>
-				<td height="30px" align="center" width="200px">${sdto.awdate}</td>
+				<td height="30px" align="center" width="200px">${sdto.wdate}</td>
 			</tr>
 			<tr>
 				<td align="center">제목</td>
-				<td height="30px" align="center">[답변]${sdto.atitle}</td>
+				<td height="30px" align="center">[답변]${sdto.title}</td>
 			</tr>
 			<tr>
 				<td align="center">본문</td>
-				<td height="200px" align="center">${sdto.acontent}</td>
+				<td height="200px" align="center">${sdto.content}</td>
 			</tr>
 			<tr>
 				<td colspan="2" align="right"><input type="button"

@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.stereotype.Repository;
 
+import com.movie.dto.FindPwDTO;
 import com.movie.dto.UserDTO;
 public class UserService {
 	SqlSession sqlSession;
@@ -52,8 +52,30 @@ public class UserService {
 			return 0;
 	}
 
-	public int UpdateUserPass(Map<String, String> map) {
+	public int updateUserPass(Map<String, String> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("UserMapper.updateUserPass",map);
 	}
+
+	public UserDTO selectUserInfo(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.selectUserInfo",id);
+	}
+
+	public int updateUserInfo(UserDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("UserMapper.updateUserInfo",dto);
+	}
+
+	public String selectUserId(Map map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.selectUserId",map);
+	}
+
+	public String selectUserPw(FindPwDTO dto) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("UserMapper.selectUserPw",dto);
+	}
+
+	
 }

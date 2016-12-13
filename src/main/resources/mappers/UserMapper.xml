@@ -6,7 +6,12 @@
 	<select id="selectId" resultType="int" parameterType="String">
 		select count(*) from user where id=#{id}
 	</select>
-
+	<select id="selectUserId" resultType="String" parameterType="HashMap">
+		select id from user where id=#{id} and email=#{email}
+	</select>
+	<select id="selectUserPw" resultType="String" parameterType="com.movie.dto.FindPwDTO">
+		select password from user where id=#{id} and email=#{email} and name=#{name} and birthday=#{birthday}
+	</select>
 	<select id="selectLoginInfo" resultType="int" parameterType="HashMap">
 		select count(*) from user where id=#{id} and password=#{password}
 	</select>
@@ -23,6 +28,9 @@
 	<select id="selectUserPass" resultType="String" parameterType="String">
 		select password from user where id=#{id}
 	</select>
+	<select id="selectUserInfo" resultType="com.movie.dto.UserDTO" parameterType="String">
+		select id,name,birthday,zipcode,address1,address2,phone,email from user where id=#{id}
+	</select>
 	<insert id="insertUser" parameterType="com.movie.dto.UserDTO">
 		INSERT INTO
 		user(id,password,name,birthday,email,zipcode,address1,address2,phone)
@@ -31,5 +39,9 @@
 	</insert>
 	<update id="updateUserPass" parameterType="String">
 		update user set password=#{newPassword}
+	</update>
+	<update id="updateUserInfo" parameterType="com.movie.dto.UserDTO">
+		update user set password=#{password},birthday=#{birthday},zipcode=#{zipcode},address1=#{address1},
+		address2=#{address2},phone=#{phone},email=#{email} where id=#{id}
 	</update>
 </mapper>

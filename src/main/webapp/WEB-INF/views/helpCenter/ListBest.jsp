@@ -11,8 +11,8 @@
 	href="resources/css/helpCenter.css">
 <head>
 <title>자주묻는 질문 게시판</title>
-<script type="text/javascript"
-	src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js">
+<script type="text/javascript" src="resources/js/jquery-3.1.1.js">
+	
 </script>
 </head>
 
@@ -25,6 +25,13 @@
 		<div class="help_select">
 			<a href="helpcenter.do">1:1 문의</a><a href="ListBest.do">자주 묻는 질문</a>
 		</div>
+		<div>
+			<a href="ListBest.do">[전체글]</a><a href="ListBest.do?kinds=멤버쉽포인트안내">[멤버쉽포인트안내]</a><a
+				href="ListBest.do?kinds=아이디/비밀번호찾기">[아이디/비밀번호]</a><a
+				href="ListBest.do?kinds=패스워드변경">[패스워드변경]</a><a
+				href="ListBest.do?kinds=예매/관람">[예매관련]</a><a
+				href="ListBest.do?kinds=기타">[기타]</a>
+		</div>
 		<table>
 			<tr>
 				<th width="60px">번호</th>
@@ -32,25 +39,35 @@
 				<th width="700px">제목</th>
 				<th colspan="2" width="20px">글쓴이</th>
 			</tr>
-			<c:forEach var="flist" items="${flist}">
+			<c:forEach var="item" items="${flist}">
 
 				<tr align="center">
-					<td width="60px">${flist.no}</td>
-					<td width="100px">${flist.kinds}</td>
-					<td width="700px" class="open_nav_link" no="${flist.no}"><a>${flist.title}</a></td>
+					<td width="60px">${item.no}</td>
+					<td width="100px">${item.kinds}</td>
+					<td width="700px" class="open_nav_link" no="${item.no}"><a>${item.title}</a></td>
 					<td width="20px" colspan="2">운영자</td>
 				</tr>
-				<tr class="open_nav" style="display:none;" align="center" no="${flist.no}">
-					<td width="700px" colspan="4">${flist.content}</td>
+				<tr class="open_nav" style="display: none;" align="center"
+					no="${item.no}">
+					<td width="700px" colspan="4">${item.content}</td>
 				</tr>
+			</c:forEach>
+			<c:forEach var="item" items="${klist}">
+				<c:if test="${item!=null}">
+					<tr align="center">
+						<td width="60px">${item.no}</td>
+						<td width="100px">${item.kinds}</td>
+						<td width="700px" class="open_nav_link" no="${item.no}"><a>${item.title}</a></td>
+						<td width="20px" colspan="2">운영자</td>
+					</tr>
 
+				</c:if>
 			</c:forEach>
 		</table>
-		<dr>
-		<div>
+		<div class="paging">
 			<c:if test="${paging.leftOn==true}">
 				<a class="left_on"
-					href="helpcenter.do?page=${paging.firstPage-paging.maxPage}">◀</a>
+					href="ListBest.do?page=${paging.firstPage-paging.maxPage}">◀</a>
 			</c:if>
 			<c:if test="${paging.leftOn==false}">
 				<a class="left_off">◀</a>
@@ -61,31 +78,33 @@
 					<a class="page_num page_off">${num}</a>
 				</c:if>
 				<c:if test="${page!=num}">
-					<a class="page_num" page_num="${num}" href="helpcenter.do?page=${num}">${num}</a>
+					<a class="page_num" page_num="${num}"
+						href="ListBest.do?page=${num}">${num}</a>
 				</c:if>
 
 			</c:forEach>
 			<c:if test="${paging.rightOn==true}">
 				<a class="right_on"
-					href="helpcenter.do?page=${paging.firstPage+paging.maxPage}">▶</a>
+					href="ListBest.do?page=${paging.firstPage+paging.maxPage}">▶</a>
 			</c:if>
 			<c:if test="${paging.rightOn==false}">
 				<a class="right_off">▶</a>
 			</c:if>
-			<input type="button" style="WIDTH: 60pt; HEIGHT: 20pt" value="글쓰기"
-				onclick="window.location='ListBest_insert.do'"></input>
 		</div>
+		<input type="button"
+			style="WIDTH: 60pt; HEIGHT: 20pt; float: right; margin-right: 90px; , margin-top: 30px;"
+			value="글쓰기" onclick="window.location='ListBest_insert.do'"></input>
 	</div>
 	</section>
 	<!-- footer -->
 	<%@include file="../footer.jsp"%>
 	<script type="text/javascript">
-	$(".open_nav_link").click(function(){
-		no=$(this).attr("no");
-		$(".open_nav[no="+no+"]").slideToggle();
-	//$("next .open_nav").slideToggle(250); 
-});
-</script>
+		$(".open_nav_link").click(function() {
+			no = $(this).attr("no");
+			$(".open_nav[no=" + no + "]").slideToggle("fast", "linear");
+			//$("next .open_nav").slideToggle(250); 
+		});
+	</script>
 </body>
 </html>
 

@@ -10,14 +10,8 @@ import com.movie.dto.QuestionDTO;
 public class HelpCenterService {
 	SqlSession sqlSession;
 
-	
-	
-	
 	// =================================질문===================================
-	
-	
-	
-	
+
 	public void setSqlSession(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
@@ -26,8 +20,6 @@ public class HelpCenterService {
 	public void insertQuestion(QuestionDTO qdto) {
 		sqlSession.insert("helpCenterMapper.insertQuestion", qdto);
 	}// end of insertquestion
-
-	
 
 	// 질문글 확인
 
@@ -57,7 +49,7 @@ public class HelpCenterService {
 	}// end of QuestionSearch
 		// 유형별 검색 리스트
 
-	public List<QuestionDTO> selectQuestionSerch2(int page) {
+	public List<QuestionDTO> selectQuestionpage(int page) {
 		page = (page - 1) * 5;
 		System.out.println(page);
 		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.selectQuestion", page);
@@ -75,25 +67,19 @@ public class HelpCenterService {
 		// TODO Auto-generated method stub
 		return sqlSession.delete("helpCenterMapper.deleteQuestion", qdto);
 	}
-	
-	//답변여부 변경 
+
+	// 답변여부 변경
 	public int updateQuestion(int no) {
 		return sqlSession.update("helpCenterMapper.updateQuestion", no);
 	}// end of update
-	
-	
-	
+
 	// =================================답글===================================
 
-	
-	
-	
 	// 답글쓰기
 
 	public int insertAnswer(Qeustion_answerDTO sdto) {
 		return sqlSession.insert("helpCenterMapper.insertAnswer", sdto);
 	}// end of insertanswer
-
 
 	// 답글확인
 	public Qeustion_answerDTO selectAnswerok(int question_no) {
@@ -101,20 +87,14 @@ public class HelpCenterService {
 		return sdto;
 	}// end of selectanswerok
 
-
 	// 답글 수정
 	public int updateAnswer(Qeustion_answerDTO adto) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("helpCenterMapper.updateAnswer", adto);
 	}
 
-	
-	
-	
 	// =================================자주찾는글===================================
 
-	
-	
 	// 자주찾는글 쓰기
 	public void insertFrequencyQuestion(QuestionDTO fdto) {
 		sqlSession.insert("helpCenterMapper.insertFrequencyQuestion", fdto);
@@ -128,12 +108,33 @@ public class HelpCenterService {
 		return sqlSession.selectList("helpCenterMapper.selectFrequencyQuestion", page);
 	}// end of frequency_question_List
 
-
-		// 자주찾는글 갯수
+	// 자주찾는글 갯수
 
 	public int countFrequencyQuestion() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("helpCenterMapper.countFrequencyQuestion");
+	}// end of countFrequencyQuestion
+
+	// 자주찾는글 검색 리스트
+
+	public List<QuestionDTO> selectFrequencyQuestionSerch(String kinds) {
+		List<QuestionDTO> listserch = sqlSession.selectList("helpCenterMapper.serchFrequencyQuestion", kinds);
+		return listserch;
+	}// end of QuestionSearch
+
+	// 검색 페이지 총 수
+
+	public int countFrequencyQuestionSerch() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("helpCenterMapper.serchCountFrequencyQuestion");
 	}// end of selectAllCount
+
+	// 자주찾는글 페이징  
+	public List<QuestionDTO> pageFrequencyQuestionSerch(int page) {
+		page = (page - 1) * 5;
+		System.out.println(page);
+		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.serchPagFrequencyQuestion", page);
+		return list;
+	}// end of QuestionSearch
 
 }// end of class

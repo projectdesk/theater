@@ -19,11 +19,7 @@ location.href="./";
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-			<div class="section_left">
-				<a href="mypage.do">예매정보</a>
-				<a href="moduser.do">개인정보 수정</a>
-				<a href="modpass.do">비밀번호 수정</a>
-			</div>
+			<%@include file="mypageNav.jsp"%>
 			<div class="section_right">
 				<table>
 					<tr>
@@ -43,7 +39,7 @@ location.href="./";
 							<td>${reservation.date}</td>
 							<td>${reservation.time}</td>
 							<td>${reservation.seat}</td>
-							<td>취소</td>
+							<td><a href="cancel_reserv.do?no=${reservation.no}">취소</a></td>
 						<c:set var="preNo" value="${reservation.no}"/>
 					</c:forEach>
 				</table>

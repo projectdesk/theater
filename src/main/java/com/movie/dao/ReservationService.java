@@ -1,13 +1,14 @@
 package com.movie.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.movie.dto.DateDTO;
 import com.movie.dto.ReservationDTO;
 import com.movie.dto.SelectMovieDTO;
-import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 
 public class ReservationService {
 	SqlSession sqlSession;
@@ -58,8 +59,20 @@ public class ReservationService {
 		return sqlSession.selectList("ReservationMapper.selectFirstMovie",today);
 	}
 
-	
 
+	public int deleteReservation(int no) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("ReservationMapper.deleteReservation",no);
+	}
+
+
+	public int updateSeatNum(int no, int result) {
+		// TODO Auto-generated method stub
+		Map<String,Integer> map=new HashMap<String,Integer>();
+		map.put("no", no);
+		map.put("result", result);
+		return sqlSession.update("ReservationMapper.updateSeatNum",map);
+	}
 	
 	
 }

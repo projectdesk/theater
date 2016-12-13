@@ -8,7 +8,7 @@
   <!-- movieMainPage -->
   <select id="moviePageList" resultType="com.movie.dto.MoviePageDTO"
     parameterType="int">
-    select no, title, poster from movie_info,poster where no = poster.movie_no order by no desc limit 12 offset #{page}
+    select no, title, poster,play_date from movie_info,poster where no = poster.movie_no order by no desc limit 12 offset #{page}
   </select>
 
 

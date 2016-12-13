@@ -3,6 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReservationMapper">
+<resultMap type="com.movie.dto.MovieDTO" id="movie">
+	
+</resultMap>
 <select id="selectFirstTheater" resultType="String">
 	select name from theater order by no asc
 </select>
@@ -34,5 +37,11 @@
 <update id="updateRemain" parameterType="int">
 	update time set remain=remain-1 where no=#{no}
 </update>
+<update id="updateSeatNum" parameterType="HashMap">
+	update time set remain=remain+#{result} where no=#{no}
+</update>
+<delete id="deleteReservation" parameterType="int">
+	delete from seat where time_no=#{no}
+</delete>
 </mapper>
 

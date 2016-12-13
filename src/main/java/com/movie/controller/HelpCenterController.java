@@ -41,26 +41,41 @@ public class HelpCenterController {
 	}// end insertgo
 
 	@RequestMapping(value = "/question.do", method = RequestMethod.POST)
-	public String insert(QuestionDTO questdto, Model model, HttpServletRequest request) {
+	public String insert(QuestionDTO questdto, Model model, HttpServletRequest request,String kinds) {
 		BoardService.insertQuestion(questdto);
-		return List(model, request);
+		return List(model, request, kinds);
 
 	}// end insert
 
+	
+
 	// 리스트
 	@RequestMapping(value = "/helpcenter.do", method = RequestMethod.GET)
-	public String List(Model model, HttpServletRequest request) {
+	public String List(Model model, HttpServletRequest request,@RequestParam(value="kinds",defaultValue="null") String kinds) {
 		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
+
 		}
-		List list = BoardService.selectQuestion(page);
-		int allCount = BoardService.countQuestion();
+		if(!kinds.equals("null")){
+		List klist = BoardService.selectQuestionSerch(kinds);
+		List flist = BoardService.selectQuestionpage(page);
+		int allCount = BoardService.countQuestionSerch();
 		HelpCenterPaging helpCenterPaging = HelpCenterPaging.getInstance();
 		PagingDTO dto = helpCenterPaging.getPaging(allCount, page);
+		model.addAttribute("klist", klist);
 		model.addAttribute("paging", dto);
-		model.addAttribute("list", list);
 		model.addAttribute("page", page);
+		}else {
+			
+			List flist = BoardService.selectQuestion(page);
+			int allCount = BoardService.countQuestion();
+			HelpCenterPaging helpCenterPaging = HelpCenterPaging.getInstance();
+			PagingDTO dto = helpCenterPaging.getPaging(allCount, page);
+			model.addAttribute("flist", flist);
+			model.addAttribute("paging", dto);
+			model.addAttribute("page", page);
+		}
 		return "helpCenter/List";
 
 	}// end insert
@@ -79,34 +94,6 @@ public class HelpCenterController {
 		return "helpCenter/questionok";
 	}// end Listok
 
-	// 글검색
-	@RequestMapping(value = "/ListSearch.do", method = RequestMethod.POST)
-	public String ListSearchgo(HttpServletRequest request, QuestionDTO qdto, @RequestParam("kinds") String kinds,
-			Model model) {
-		return ListSearch(request, qdto, kinds, model);
-	}// end of ListSearchgo
-
-	// 검색글 리스트
-	@RequestMapping(value = "/ListSearch.do", method = RequestMethod.GET)
-	public String ListSearch(HttpServletRequest request, QuestionDTO qdto, @RequestParam("kinds") String kinds,
-			Model model) {
-		int page = 1;
-		if (request.getParameter("page") != null) {
-			page = Integer.parseInt(request.getParameter("page"));
-		}
-		List<QuestionDTO> slist = BoardService.selectQuestionSerch2(page);
-		List<QuestionDTO> plist = BoardService.selectQuestionSerch(kinds);
-		int SCount = BoardService.countQuestionSerch();
-		System.out.println("slist : " + slist);
-		System.out.println("plist : " + plist);
-		HelpCenterPaging helpCenterPaging = HelpCenterPaging.getInstance();
-		PagingDTO qgto = helpCenterPaging.getPaging(SCount, page);
-		model.addAttribute("paging", qgto);
-		model.addAttribute("slist", slist);
-		model.addAttribute("plist", plist);
-		model.addAttribute("page", page);
-		return "helpCenter/ListSearch";
-	}// end of ListSearch
 
 	// 삭제
 	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
@@ -147,22 +134,10 @@ public class HelpCenterController {
 		} else {
 			System.out.println("update failed");
 		}
-		response.sendRedirect("List.do");
+		response.sendRedirect("helpcenter.do");
 	}// end insert_answer
 
-	// 답변보기
-	@RequestMapping(value = "/answerok.do", method = RequestMethod.GET)
-	public String answerok(Qeustion_answerDTO quest_answerdto, QuestionDTO questdto,
-			@Param("question_no") int question_no, Model model) {
-		Qeustion_answerDTO sdto = BoardService.selectAnswerok(question_no);
-		System.out.println(question_no + "question_no");
-		System.out.println("dto코노오오온트롤 :" + sdto);
-		model.addAttribute("sdto", sdto);
-		return "helpCenter/answerok";
-	}// end answerok
-		// 답변보기
-
-
+	
 	// 답변 수정
 	@RequestMapping(value = "/UpdateAnswer.do", method = RequestMethod.GET)
 	public String modForm(Qeustion_answerDTO adto, @Param("question_no") Model model, int question_no) {
@@ -179,7 +154,7 @@ public class HelpCenterController {
 			System.out.println("update success");
 		else
 			System.out.println("update failed");
-		response.sendRedirect("List.do");
+		response.sendRedirect("helpcenter.do");
 	}// end of update
 
 	// =====================================자주찾는글=====================================
@@ -194,28 +169,43 @@ public class HelpCenterController {
 	}// end inserfrequency_question_insertgotgo
 
 	@RequestMapping(value = "/ListBest_insert.do", method = RequestMethod.POST)
-	public String insertFrequencyQuestion(QuestionDTO questdto, Model model, HttpServletRequest request) {
+	public String insertFrequencyQuestion(QuestionDTO questdto, Model model, HttpServletRequest request, String kinds) {
 		BoardService.insertFrequencyQuestion(questdto);
-		System.out.println("프리퀀시이이이이" + questdto);
-		return ListBest(model, request);
+		return ListBest(model, request, kinds);
 	}// end frequency_question_insert
 
 	// 자주찾는글 리스트
 	@RequestMapping(value = "/ListBest.do", method = RequestMethod.GET)
-	public String ListBest(Model model, HttpServletRequest request) {
+	public String ListBest(Model model, HttpServletRequest request,@RequestParam(value="kinds",defaultValue="null") String kinds) {
 		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 
 		}
-		List flist = BoardService.selectFrequencyQuestion(page);
-		int allCount = BoardService.countFrequencyQuestion();
+		if(!kinds.equals("null") ){
+		List klist = BoardService.selectFrequencyQuestionSerch(kinds);
+		List flist = BoardService.pageFrequencyQuestionSerch(page);
+		int allCount = BoardService.countFrequencyQuestionSerch();
 		HelpCenterPaging helpCenterPaging = HelpCenterPaging.getInstance();
 		PagingDTO dto = helpCenterPaging.getPaging(allCount, page);
+		model.addAttribute("klist", klist);
 		model.addAttribute("paging", dto);
-		model.addAttribute("flist", flist);
 		model.addAttribute("page", page);
+		}else {
+			
+			List flist = BoardService.selectFrequencyQuestion(page);
+			int allCount = BoardService.countFrequencyQuestion();
+			HelpCenterPaging helpCenterPaging = HelpCenterPaging.getInstance();
+			PagingDTO dto = helpCenterPaging.getPaging(allCount, page);
+			model.addAttribute("flist", flist);
+			model.addAttribute("paging", dto);
+			model.addAttribute("page", page);
+		}
 		return "helpCenter/ListBest";
 	}// end ListBest
+
+
+	
+	
 
 }// end of class

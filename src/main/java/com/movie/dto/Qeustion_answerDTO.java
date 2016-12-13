@@ -3,41 +3,42 @@ package com.movie.dto;
 public class Qeustion_answerDTO {
     
 	int question_no;
-	String atitle;
-	String acontent;
-	String awriter;
-	String awdate;
-	
+	String title;
+	String content;
+	String writer;
+	String wdate;
 	public int getQuestion_no() {
 		return question_no;
 	}
 	public void setQuestion_no(int question_no) {
 		this.question_no = question_no;
 	}
-	public String getAtitle() {
-		return atitle;
+	public String getTitle() {
+		return title;
 	}
-	public void setAtitle(String atitle) {
-		this.atitle = atitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public String getAcontent() {
-		return acontent;
+	public String getContent() {
+		return content;
 	}
-	public void setAcontent(String acontent) {
-		this.acontent = acontent;
+	public void setContent(String content) {
+		this.content = content;
 	}
-	public String getAwriter() {
-		return awriter;
+	public String getWriter() {
+		return writer;
 	}
-	public void setAwriter(String awriter) {
-		this.awriter = awriter;
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
-	public String getAwdate() {
-		return awdate;
+	public String getWdate() {
+		return wdate;
 	}
-	public void setAwdate(String awdate) {
-		this.awdate = awdate;
+	public void setWdate(String wdate) {
+		this.wdate = wdate;
 	}
+	
+	
 	
 	
 	

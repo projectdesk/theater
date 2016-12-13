@@ -13,9 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.movie.dao.ReservationService;
+import com.movie.dao.UserService;
 import com.movie.dto.DateDTO;
 import com.movie.dto.ReservationDTO;
 import com.movie.dto.SelectMovieDTO;
@@ -32,6 +34,8 @@ public class ReservationController {
 	 */
 	@Autowired
 	ReservationService reservationService;
+	@Autowired
+	UserService userService;
 	@RequestMapping(value = "/reservation.do", method = RequestMethod.GET)
 	public String reservationGet(Model model) {
 		Calendar cal=Calendar.getInstance();
@@ -104,5 +108,34 @@ public class ReservationController {
 		List seat=reservationService.selectSeat(no);
 		return seat;
 	}
-
+	
+	@RequestMapping(value = "/cancel_reserv.do", method = RequestMethod.GET)
+	public  String cancel(@Param("no") int no,HttpServletResponse response , Model model) throws UnsupportedEncodingException {
+		System.out.println(no);
+		model.addAttribute("no",no);
+		return "cancelCheck";
+	}
+	@RequestMapping(value = "/cancel_check.do", method = RequestMethod.POST)
+	public  String cancelCheck(@RequestParam("no")String num,
+		@Param("password") String password,
+		HttpSession session , Model model) throws UnsupportedEncodingException {
+		String id=(String)session.getAttribute("id");
+		System.out.println("num: "+num);
+		int no=Integer.parseInt(num);
+		System.out.println(no);
+		int result=userService.selectUserPass(id,password);
+		if(result>0){
+			result=reservationService.deleteReservation(no);
+			if(result>0){
+				System.out.println("예약취소");
+				result=reservationService.updateSeatNum(no,result);
+				if(result>0)
+					System.out.println("인원업데이트");;
+				}
+			else
+					System.out.println("취소실패");
+		}
+		return "redirect:mypage.do";
+	}
+	
 }

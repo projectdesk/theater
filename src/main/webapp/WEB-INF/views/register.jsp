@@ -11,6 +11,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="resources/js/jquery-ui.js"></script>
 <script src="resources/js/register.js"></script>
+<script src="resources/js/user.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 </head>
 <body>
@@ -18,7 +19,7 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-			<form method="post" action="register.do">
+			<form method="post" action="register.do" name="regForm">
 				<table width="800" border="1" cellspacing="0" cellpadding="3"
 					align="center">
 					<tr>
@@ -76,8 +77,8 @@
 							placeholder=" 핸드폰번호를 적어 주세요."></td>
 					</tr>
 					<tr>
-						<td colspan="2" align="center"><input type="submit"
-							name="confirm" value="등  록"> <input type="reset"
+						<td colspan="2" align="center"><input type="button"
+								value="등 록" onclick="inputCheck()"> <input type="reset"
 							name="reset" value="다시입력"> <input type="button"
 							value="가입안함" onclick="inputForm.jsp"></td>
 					</tr>

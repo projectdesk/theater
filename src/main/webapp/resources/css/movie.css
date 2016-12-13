@@ -1,25 +1,37 @@
-#wrap{
-  display: flex;
-  flex-flow:colum nowrap;
-  width:100%;
-  margin:0 auto;
-  overflow: hidden;
+
+section {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 0 auto;
+	overflow: hidden;
 }
 
-
-#wrap section {
-  box-sizing: border-box;
-  width:1200px;
-  margin: 0 auto;
+.movie_page {
+	width: 880px;
+	margin: 10px auto;
 }
 
-.movie_page {margin:50px auto; width: 700px;
-
+.movie_page img {
+	width: 150px;
+	height: 215px;
+}
+.movie_page span{
+	font-size: 13px;
+}
+.movie_title {
+	position: absolute;
+	bottom: 45px;
+	
 }
 
-.movie_page .left {float:left; width:230px; display: block; padding:0 10px 30px;}
+.movie_page .left {
+	position:relative;
+	float: left;
+	display: inline-block;
+	padding: 0 10px 30px;
+}
 
-
-
-.movie_page .buttom {clear: inherit;  display: inline-block;}
-
+.movie_page .buttom {
+	clear: inherit;
+	display: inline-block;
+}

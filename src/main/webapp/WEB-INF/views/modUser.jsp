@@ -7,16 +7,14 @@
 <title>MyPage</title>
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
 <link rel="stylesheet" type="text/css" href="resources/css/myPage.css">
+<link rel="stylesheet" type="text/css" href="resources/css/modUser.css">
 </head>
 <body>
 	<!-- header -->
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-			<div class="section_left">
-				<a href="mypage.do">예매정보</a> <a href="moduser.do">개인정보 수정</a> <a
-					href="modpass.do">비밀번호 수정</a>
-			</div>
+			<%@include file="mypageNav.jsp"%>
 			<c:if test="${passwordCheck==null}">
 				<div class="section_right">
 					<form action="mod_user.do" method="post">
@@ -33,7 +31,7 @@
 				</div>
 			</c:if>
 			<c:if test="${passwordCheck==true}">
-				<form method="post" action="register.do">
+				<form method="post" action="update_user.do">
 					<table width="800" border="1" cellspacing="0" cellpadding="3"
 						align="center">
 						<tr>
@@ -41,7 +39,7 @@
 						</tr>
 						<tr>
 							<td>사용자 ID</td>
-							<td><input type="text" name="id" size="10" maxlength="12" readonly="readonly">
+							<td><input type="text" name="id" size="10" maxlength="12" readonly="readonly" value="${user.id}">
 							</td>
 						</tr>
 						<tr>
@@ -56,38 +54,38 @@
 						</tr>
 						<tr>
 							<td>사용자 이름</td>
-							<td><input type="text" name="name" size="15" maxlength="10" readonly="readonly"></td>
+							<td><input type="text" name="name" size="15" maxlength="10" readonly="readonly" value="${user.name}"></td>
 						</tr>
 						<tr>
 							<td>생년월일</td>
 							<td><input type="text" name="birthday" size="20"
-								id="datepicker"></td>
+								id="datepicker" value="${user.birthday}"></td>
 						</tr>
 						<tr>
 							<td>E-Mail</td>
 							<td><input type="email" name="email" size="40"
-								maxlength="30"></td>
+								maxlength="30" value="${user.email}"></td>
 						</tr>
 						<tr>
 							<td>우편번호</td>
 							<td><input type="text" name="zipcode" id="zipcode" size="12"
-								placeholder=" 우편번호 검색" readonly="readonly"> <input
+								placeholder=" 우편번호 검색" readonly="readonly" value="${user.zipcode}"> <input
 								type="button" value=" 우편번호찾기" onClick="addressSearch()"></td>
 						</tr>
 						<tr>
 							<td>주소</td>
 							<td><input type="text" name="address1" id="address1"
-								size="70" placeholder=" 주소를 검색해주세요." readonly="readonly"></td>
+								size="70" placeholder=" 주소를 검색해주세요." readonly="readonly" value="${user.address1}"></td>
 						</tr>
 						<tr>
 							<td>상세 주소</td>
 							<td><input type="text" name="address2" id="address2"
-								size="70" placeholder=" 상세주소를 적어 주세요."></td>
+								size="70" placeholder=" 상세주소를 적어 주세요." value="${user.address2}"></td>
 						</tr>
 						<tr>
 							<td>핸드폰 번호</td>
 							<td><input type="text" name="phone" size="20"
-								placeholder=" 핸드폰번호를 적어 주세요."></td>
+								placeholder=" 핸드폰번호를 적어 주세요." value="${user.phone}"></td>
 						</tr>
 						<tr>
 							<td colspan="2" align="center"><input type="submit"

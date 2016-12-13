@@ -10,34 +10,21 @@
 <title></title>
 <style>
 </style>
+<input type="text" placeholder ="내용">
 </head>
 <body>
-
-
   <%@include file="header.jsp"%>
-
-  <div id="wrap">
     <section>
+    <div><a href="#">전체</a><a href="#">현재상영작</a><a href="#">개봉예정작</a></div>
     <div class="movie_page">
-     <c:set var="i" value="0" /> <c:set var="j" value="3" />
           <c:forEach var="item" items="${list}" varStatus="status">
-
-            <c:if test="${status.count<=3}">
               <div class="left">
-                <a href="./moviePage.do?no=${item.no}"><img src="resources/image/${item.poster}" width="200" height="300"></a><br> <span>${item.title}</span>
-                <br> <span>${item.play_date}</span>
+                <a href="./moviePage.do?no=${item.no}"><img src="resources/image/${item.poster}"></a><br><span class="movie_title">${item.title}</span>
+                <br><span>${item.play_date}</span>
               </div>
-            </c:if>
-            <c:if test="${status.count>=3}">
-              <div class="left">
-                <a href="./moviePage.do?no=${item.no}"><img src="resources/image/${item.poster}" width="200" height="300"></a> <br> <span>${item.title}</span>
-                <br> <span>${item.play_date}</span>
-              </div>
-            </c:if>
-            <c:set var="i" value="${i+1}" />
-          </c:forEach></li>
+          </c:forEach>
+    </div>
     </section>
-  </div>
   <%@include file="footer.jsp"%>
 </body>
 </html>

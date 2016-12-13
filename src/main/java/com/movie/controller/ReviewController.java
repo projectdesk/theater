@@ -33,7 +33,7 @@ public class ReviewController {
 	//����
 	@RequestMapping(value = "/audience_ReviewWrite.do", method = RequestMethod.GET)
 	public String Insertgo(){
-		return "audience_ReviewWrite";
+		return "review/audience_ReviewWrite";
 	}
 	
 	@RequestMapping(value = "/audience_ReviewWrite.do", method = RequestMethod.POST)
@@ -55,14 +55,14 @@ public class ReviewController {
 		model.addAttribute("paging",dto);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page);
-		return "audience_ReviewList";
+		return "review/audience_ReviewList";
 	}
 	@RequestMapping(value = "/audience_ReviewContent.do", method = RequestMethod.GET)
 	public String ListContent(ReviewDTO reviewdto,@Param("review_no") int review_no,Model model){
 		ReviewDTO dto = reviewService.audienceReviewContent(review_no);
 		System.out.println("dto:"+dto);
 		model.addAttribute("dto",dto);
-		return "audience_ReviewContent";	
+		return "review/audience_ReviewContent";	
 	}
 	//�˻�,����¡
 	@RequestMapping(value = "/audience_ReviewSearch.do", method = RequestMethod.POST)
@@ -88,12 +88,12 @@ public class ReviewController {
 		model.addAttribute("slist",slist);
 		model.addAttribute("plist",plist);
 		model.addAttribute("page",page);
-		return "audience_ReviewSearch";
+		return "review/audience_ReviewSearch";
 	}
 	@RequestMapping(value="audience_ReviewDelete.do",method =RequestMethod.GET)
 	public String Deletego(ReviewDTO dto,Model model){
 		model.addAttribute("review_no",dto.getReview_no());
-		return "audience_ReviewDelete";
+		return "review/audience_ReviewDelete";
 	}
 	@RequestMapping(value="audience_ReviewDelete.do",method =RequestMethod.POST)
 	public String Delete(ReviewDTO dto){
@@ -105,7 +105,7 @@ public class ReviewController {
 	
 	@RequestMapping(value = "/expert_ReviewWrite.do", method = RequestMethod.GET)
 	public String eInsertgo(){
-		return "expert_ReviewWrite";
+		return "review/expert_ReviewWrite";
 	}
 	
 	@RequestMapping(value = "/expert_ReviewWrite.do", method = RequestMethod.POST)
@@ -127,7 +127,7 @@ public class ReviewController {
 		model.addAttribute("paging",dto);
 		model.addAttribute("list",list);
 		model.addAttribute("page",page);
-		return "expert_ReviewList";
+		return "review/expert_ReviewList";
 		
 	}
 	@RequestMapping(value = "/expert_ReviewContent.do", method = RequestMethod.GET)
@@ -135,7 +135,7 @@ public class ReviewController {
 		ReviewDTO dto = reviewService.expertReviewContent(review_no);
 		System.out.println("dto:"+dto);
 		model.addAttribute("dto",dto);
-		return "expert_ReviewContent";	
+		return "review/expert_ReviewContent";	
 	}
 	
 	@RequestMapping(value = "/expert_ReviewSearch.do", method = RequestMethod.GET)
@@ -154,13 +154,13 @@ public class ReviewController {
 		model.addAttribute("slist",slist);
 		model.addAttribute("plist",plist);
 		model.addAttribute("page",page);
-		return "expert_ReviewSearch";
+		return "review/expert_ReviewSearch";
 	}
 	
 	@RequestMapping(value="expert_ReviewDelete.do",method =RequestMethod.GET)
 	public String eDeletego(ReviewDTO dto,Model model){
 		model.addAttribute("review_no",dto.getReview_no());
-		return "expert_ReviewDelete";
+		return "review/expert_ReviewDelete";
 	}
 	
 	@RequestMapping(value = "/expert_ReviewSearch.do", method = RequestMethod.POST)
@@ -173,7 +173,7 @@ public class ReviewController {
 	@RequestMapping(value="expert_ReviewDelete.do",method =RequestMethod.POST)
 	public String eDelete(ReviewDTO dto){
 		int result = reviewService.expertReviewDelete(dto);
-		return "wincloseE";
+		return "review/winclosewE";
 		
 	}
 	

@@ -1,7 +1,7 @@
 @CHARSET "UTF-8";
 section .help_section_top{
 		width:1200px;
-		height:500px;
+		height:350px;
 		margin:0 auto;
 }
 
@@ -17,11 +17,21 @@ section .help_section_bottom{
 	
 }
 .help_select a{
-	margin:0 5px;
+	margin:0 30px;
 	font-size: 22px;	
 }
 table{
 	width:85%;
 	margin: 0 auto;
-
+	border-collapse: collapse;
+}
+th,td{
+	border: 1px solid black;
+	padding: 5px;
+}
+.open_nav_link a{
+	cursor: pointer;
+}
+.paging{
+	margin-top: 10px;
 }

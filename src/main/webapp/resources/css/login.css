@@ -1,0 +1,156 @@
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+* {
+	margin: 0;
+	padding: 0;
+	font-family: "Nanum Gothic", sans-serif;
+}
+
+section {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+.top_wrap {
+	height: 520px; width : 1200px;
+	margin: 0 auto;
+	overflow: hidden;
+	position: relative;
+	width: 1200px;
+}
+
+.top {
+	float: left;
+	overflow: hidden;
+	margin-top: 5px;
+}
+
+.top ul {
+	
+}
+
+.top ul li {
+	display: block;
+	float: left;
+	padding-left: 15px;
+	list-style: none;
+	vertical-align: middle;
+	height: 22px;
+	line-height: 25px;
+	font-size: 12px;
+	font-family: "Nanum Gothic", sans-serif;
+	font-weight: 700;
+	color: #6A6A6A;
+}
+
+.top ul li span {
+	font-weight: 800;
+	line-height: 15px;
+}
+
+.login_form {
+	clear: both;
+	width: 850px;
+	height: 350px;
+	margin-top: 90px;
+	float: left;
+}
+
+.poster {
+	width: 350px;
+	position: absolute;
+	right: 0px;
+	z-index: 1;
+	top: 1px;
+}
+
+table {
+}
+
+table tr {
+	
+}
+
+table tr .sign {
+	font-size: 12px;
+	line-height: 30px;
+	font-weight: 600;
+	letter-spacing: 1px;
+	color: #555;
+}
+
+table tr td {
+	
+}
+
+.log_form input {
+	width: 250px;
+	height: 40px;
+	border: 2px solid #ddd;
+}
+.log_form td {
+	text-align: center;
+}
+
+.idcheck_form label {
+	display:inline-block;
+	width: 70px;
+	height: 40px;
+	text-align: right;
+	line-height: 38px;
+	padding-right: 10px;
+}
+
+.idcheck_form input {
+	width: 180px;
+	height: 40px;
+	border: 2px solid #ddd;
+	float: right;
+}
+
+.pwdcheck input {
+	width: 180px;
+	height: 40px;
+	border: 2px solid #ddd;
+}
+.button_top input {
+	background-color: #111;
+	border: 0;
+	color: #fff;
+	width: 250px;
+	height: 30px;
+	margin-top: 1px;
+}
+
+.idcheck {
+	display: inline-block;
+	position: absolute;
+	top: 50px;
+	left: 300px;
+}
+
+.pwd_check {
+	display: inline-block;
+	position: absolute;
+	top: 250px;
+	left: 300px;
+}
+
+.button_left input {
+	background-color: #111;
+	margin: 0;
+	width: 125px;
+	height: 30px;
+	border: 0;
+	color: #fff;
+	float: left;
+}
+
+.button_right input {
+	background-color: #111;
+	width: 123px;
+	height: 30px;
+	border: 0;
+	color: #fff;
+	float: right;
+}

@@ -13,10 +13,7 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-			<div class="section_left">
-				<a href="mypage.do">예매정보</a> <a href="moduser.do">개인정보 수정</a> <a
-					href="modpass.do">비밀번호 수정</a>
-			</div>
+			<%@include file="mypageNav.jsp"%>
 			<div class="section_right">
 				<form action="mod_userpass.do" method="post">
 					<table>

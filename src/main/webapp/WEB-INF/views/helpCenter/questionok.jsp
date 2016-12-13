@@ -55,11 +55,11 @@
 			
 				<tr>
 					<td width="165px" align="center">제목</td>
-					<td height="30px" align="center">[답변]${sdto.atitle}</td>
+					<td height="30px" align="center">[답변]${sdto.title}</td>
 				</tr>
 				<tr>
 					<td align="center">본문</td>
-					<td height="200px" align="center">${sdto.acontent}</td>
+					<td height="200px" align="center">${sdto.content}</td>
 				</tr>
            </table>
            </c:if>
