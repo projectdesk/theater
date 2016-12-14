@@ -39,8 +39,8 @@
 
 	<div class="search">
 		<form action="ListBest.do" method="get">
-			<input type="text" placeholder="FAQ검색" name="keyword"> <input
-				class="icon" type="submit" value="">
+			<input type="text" placeholder="FAQ검색" name="keyword">
+			<input class="icon" type="submit" value="">
 		</form>
 	</div>
 
@@ -112,7 +112,7 @@
 						<td width="60px">${item.no}</td>
 						<td width="100px">${item.kinds}</td>
 						<td width="700px" class="open_nav_link" no="${item.no}"><a
-							href="questionok.do?no=${item.no}&question_no=${item.no}">${item.title}</a></td>
+						href="questionok.do?no=${item.no}&question_no=${item.no}">${item.title}</a></td>
 						<td width="20px" colspan="2">운영자</td>
 					</tr>
 				</c:if>
@@ -145,11 +145,9 @@
 			<c:if test="${paging.rightOn==false}">
 				<a class="right_off">▶</a>
 			</c:if>
+			<input type="hidden" id="user" value="${sessionScope.id}">
+			<input type="button" value="글쓰기" onclick='if(document.getElementById("user").value!=""){location.href="question.do";}else{alert("로그인하세요");}'>
 		</div>
-		<input type="hidden" id="user" value="${sessionScope.id}"> <input
-			type="button" value="글쓰기"
-			onclick='if(document.getElementById("user").value!=""){location.href="question.do";}else{alert("로그인하세요");}'>
-	</div>
 	</div>
 
 

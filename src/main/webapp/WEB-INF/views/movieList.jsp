@@ -27,7 +27,7 @@
     <div class="paging">
 			<c:if test="${paging.leftOn==true}">
 				<a class="left_on"
-					href="helpcenter.do?page=${paging.firstPage-paging.maxPage}">◀</a>
+					href="movieList.do?page=${paging.firstPage-paging.maxPage}">◀</a>
 			</c:if>
 			<c:if test="${paging.leftOn==false}">
 				<a class="left_off">◀</a>
@@ -39,13 +39,13 @@
 				</c:if>
 				<c:if test="${page!=num}">
 					<a class="page_num" page_num="${num}"
-						href="helpcenter.do?page=${num}">${num}</a>
+						href="movieList.do?page=${num}">${num}</a>
 				</c:if>
 
 			</c:forEach>
 			<c:if test="${paging.rightOn==true}">
 				<a class="right_on"
-					href="helpcenter.do?page=${paging.firstPage+paging.maxPage}">▶</a>
+					href="movieList.do?page=${paging.firstPage+paging.maxPage}">▶</a>
 			</c:if>
 			<c:if test="${paging.rightOn==false}">
 				<a class="right_off">▶</a>
@@ -53,7 +53,7 @@
 <!--     <div></div> -->
     <div><ul><li>인기순위</li>
     <c:forEach var="item" items="${bestList}" varStatus="status">
-    	<li><a href="./moviePage.do?no=${item.no}">${item.title}</a></li>
+    	<li><a href="./movieList.do?no=${item.no}">${item.title}</a></li>
     </c:forEach>
     </ul>
     </div>
