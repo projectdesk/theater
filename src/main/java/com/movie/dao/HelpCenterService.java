@@ -1,6 +1,8 @@
 package com.movie.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -29,17 +31,19 @@ public class HelpCenterService {
 	}// end of selectquestionok
 
 	// 페이징 리스트
-	public List selectQuestion(int page) {
+	public List selectQuestion(int page,String id) {
 		// TODO Auto-generated method stub
 		page = (page - 1) * 5;
-		System.out.println(page);
-		return sqlSession.selectList("helpCenterMapper.selectQuestion", page);
+		QuestionDTO dto=new QuestionDTO();
+		dto.setNo(page);
+		dto.setWriter(id);
+		return sqlSession.selectList("helpCenterMapper.selectQuestion", dto);
 	}// end of selectNewsList
 
 	// 리스트 페이지 수
-	public int countQuestion() {
+	public int countQuestion(String id) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("helpCenterMapper.countQuestion");
+		return sqlSession.selectOne("helpCenterMapper.countQuestion",id);
 	}// end of selectAllCount
 		// 유형별 검색 리스트
 
@@ -57,9 +61,9 @@ public class HelpCenterService {
 	}// end of QuestionSearch
 		// 검색 페이지 총 수
 
-	public int countQuestionSerch() {
+	public int countQuestionSerch(String kind) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("helpCenterMapper.countQuestionSerch");
+		return sqlSession.selectOne("helpCenterMapper.countQuestionSerch",kind);
 	}// end of selectAllCount
 
 	// 삭제
@@ -136,5 +140,16 @@ public class HelpCenterService {
 		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.serchPagFrequencyQuestion", page);
 		return list;
 	}// end of QuestionSearch
+
+	public List selectFrequencyList(String title) {
+		// TODO Auto-generated method stub
+		title="%"+title+"%";
+		return sqlSession.selectList("helpCenterMapper.selectFrequencyList", title);
+	}
+
+	public int selectFrequencyCount(String title) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("helpCenterMapper.selectSearchCount", title);
+	}
 
 }// end of class

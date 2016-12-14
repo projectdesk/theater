@@ -3,7 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="helpCenterMapper">
+	<select resultType="com.movie.dto.QuestionDTO" id="selectQuestion"
+		parameterType="com.movie.dto.QuestionDTO"> select * from question where writer=#{writer} order by no desc limit 5 offset
+		#{no}
+	</select>
 
+	<!-- 총 페이지 -->
+	<select resultType="int" id="countQuestion" parameterType="String"> select count(*) from question where writer=#{id}
+	</select>
+
+
+	<!--질문 유형별 검색 -->
+	<select id="selectQuestionSerch" resultType="com.movie.dto.QuestionDTO"
+		parameterType="String">
+		select * from question where kinds =
+		#{kinds} order by no
+		DESC
+	</select>
+	
+		<!-- 총 검색된페이지 -->
+	<select id="countQuestionSerch" resultType="int" parameterType="String">
+		select count(*)from
+		frequency_question where kinds = #{kinds}
+	</select>
+	
 
 	<!-- =====================================질문===================================== -->
 
@@ -30,28 +53,12 @@
 	</update>
 
 	<!-- 리스트 페이징 -->
-	<select resultType="com.movie.dto.QuestionDTO" id="selectQuestion"
-		parameterType="int"> select * from question order by no desc limit 5 offset
-		#{page}
-	</select>
 
-	<!-- 총 페이지 -->
-	<select resultType="int" id="countQuestion"> select count(*) from question
-	</select>
 
-	<!-- 총 검색된페이지 -->
-	<select id="countQuestionSerch" resultType="int">
-		select count(*)from
-		question where kinds = #{kinds}
-	</select>
 
-	<!--질문 유형별 검색 -->
-	<select id="selectQuestionSerch" resultType="com.movie.dto.QuestionDTO"
-		parameterType="String">
-		select * from question where kinds =
-		#{kinds} order by no
-		DESC
-	</select>
+
+
+
 
 
 	<!-- 삭제 -->
@@ -118,19 +125,27 @@
 		select * from frequency_question where kinds = #{kinds}
 		order by no desc
 	</select>
-	
+
 	<!-- 자주찾는글 갯수 -->
-	<select id="serchCountFrequencyQuestion" resultType="int">
+	<select id="serchCountFrequencyQuestion" resultType="int" parameterType="String">
 		select
 		count(*)from
 		frequency_question where kinds = #{kinds}
 	</select>
-	
+
 	<!-- 자주찾는글 리스트 -->
 	<select resultType="com.movie.dto.QuestionDTO" id="serchPagFrequencyQuestion"
 		parameterType="int"> select * from frequency_question order by no desc limit
 		5 offset
 		#{page}
 	</select>
+	
+	<select id="selectFrequencyList" parameterType="String" resultType="com.movie.dto.QuestionDTO">
+		select * from frequency_question where title like #{title}
+	</select>
+	<select id="selectSearchCount" parameterType="String" resultType="int">
+		select count(*) from frequency_question where title like #{title}
+	</select>
+	
 </mapper>
 

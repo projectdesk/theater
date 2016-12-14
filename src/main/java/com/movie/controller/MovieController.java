@@ -1,9 +1,11 @@
 package com.movie.controller;
 
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
@@ -19,30 +21,86 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.movie.dao.MovieService;
 import com.movie.dto.MoviePageDTO;
+import com.movie.dto.PagingDTO;
+import com.movie.util.Paging;
 
 @Controller
 public class MovieController {
 
 	@Autowired
 	MovieService movieservice;
-
-
+//
+//	@RequestMapping(value = "/helpcenter.do", method = RequestMethod.GET)
+//	public String List(Model model, HttpServletRequest request,HttpSession session,
+//		@RequestParam(value = "kinds", defaultValue = "null") String kind) {
+//		int page = 1;
+//		int allCount = 0;
+//		Paging paging = Paging.getInstance();
+//		PagingDTO dto = null;
+//		List flist = null;
+//		if (request.getParameter("page") != null) {
+//			page = Integer.parseInt(request.getParameter("page"));
+//		}
+//		if (kind.equals("null")) {
+//			System.out.println("Test");
+//			String id=(String)session.getAttribute("id");
+//			System.out.println("test1");
+//			flist = BoardService.selectQuestion(page,id);
+//			System.out.println("test2");
+//			allCount = BoardService.countQuestion(id);
+//			System.out.println("tset3");
+//			dto = paging.getPaging(allCount, page);
+//			model.addAttribute("flist", flist);
+//		} else {
+//			List klist = BoardService.selectQuestionSerch(kind);
+//			allCount = BoardService.countQuestionSerch(kind);
+//			dto = paging.getPaging(allCount, page);
+//			model.addAttribute("klist", klist);
+//		}
+//		model.addAttribute("paging", dto);
+//		model.addAttribute("page", page);
+//		return "helpCenter/List";
+//
+//	}// end insert
+	
+	
+	
 	// ��ȭ����Ʈ ������
 	@RequestMapping(value = "/movieList.do", method = RequestMethod.GET)
-	public String movieList(HttpServletRequest request, Model model) {
-
-
-		int page = 1;
-		if(request.getParameter("page") != null){
-			page = Integer.parseInt(request.getParameter("page"));
+	public String movieList(@RequestParam(value="page",defaultValue="1")int page,@RequestParam(value="sort",defaultValue="")String sort,HttpServletRequest request, Model model) {
+		int allCount = 0;
+		Paging paging = Paging.getInstance();
+		paging.setNewsPerPage(15);//한페이지당 글수
+		paging.setMaxPage(5);//페이지바 최대 페이지 수
+		PagingDTO dto = null;
+		Calendar cal=Calendar.getInstance();
+		List list=null;
+		page=page = (page - 1) * 12;
+		String today=cal.get(cal.YEAR)+"-"+(cal.get(cal.MONTH)+1)+"-"+cal.get(cal.DATE);
+		System.out.println(today);
+		if(sort.equals("")){//전체영화
+			System.out.println("전체");
+			list = movieservice.moviePageInfoByDate(page,today,sort);
+			allCount=movieservice.movieCountAll(today);
+			dto=paging.getPaging(allCount, page);
 		}
-		
-		List list = movieservice.moviePageInfo(page);
-//		int allCount = boardService.audienceReviewCount();
-//		Paging paging = Paging.getInstance();
-//		dto = paging.getPaging(allCount, page);
+		else if(sort.equals("now")){//개봉작
+			System.out.println("개봉작");
+			list = movieservice.moviePageInfoByDate(page,today,sort);
+			allCount=movieservice.movieCountNow(today);
+			dto=paging.getPaging(allCount, page);
+		}
+		else if(sort.equals("comming")){//예정작
+			System.out.println("예정작");
+			list = movieservice.moviePageInfoByDate(page,today,sort);
+			allCount=movieservice.movieCountComming(today);
+			dto=paging.getPaging(allCount, page);
+		}
+		List bestList = movieservice.selectBestMovie();
 		System.out.println(list);
 		model.addAttribute("list", list);
+		model.addAttribute("bestList", bestList);
+		model.addAttribute("paging",dto);
 		return "movieList";
 	}
 
@@ -51,8 +109,6 @@ public class MovieController {
 	public String movieView(Model model, MoviePageDTO dto, @Param("no") String no) throws Exception {
 		int serial = Integer.parseInt(no);
 		dto = movieservice.movieInfoSelect(serial);
-		System.out.println(dto.getActor());
-		System.out.println(dto);
 		model.addAttribute("dto", dto);
 
 		return "moviePage";

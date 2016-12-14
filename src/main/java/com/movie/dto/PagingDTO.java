@@ -3,8 +3,8 @@ package com.movie.dto;
 public class PagingDTO {
 	private int allCount;
 	private int allPage;
-	private int newsPerPage = 3;
-	private int maxPage = 5;
+	private int newsPerPage;
+	private int maxPage;
 	private int firstPage;
 	private int endPage;
 	private int nowPage;

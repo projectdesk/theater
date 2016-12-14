@@ -5,33 +5,68 @@
 <mapper namespace="movieMapper">
 
 
-  <!-- movieMainPage -->
-  <select id="moviePageList" resultType="com.movie.dto.MoviePageDTO"
-    parameterType="int">
-    select no, title, poster,play_date from movie_info,poster where no = poster.movie_no order by no desc limit 12 offset #{page}
-  </select>
+	<!-- movieMainPage -->
+	<select id="moviePageList" resultType="com.movie.dto.MoviePageDTO"
+		parameterType="int">
+		select no, title, poster,play_date from movie_info,poster where no =
+		poster.movie_no order by no desc limit 15 offset #{page}
+	</select>
 
+	<select id="selectMovieListNow" resultType="com.movie.dto.MoviePageDTO"
+		parameterType="HashMap">
+		<![CDATA[
+		select no, title, poster,play_date from movie_info,poster where no =
+		poster.movie_no and end_date>#{today} and #{today}>=play_date order by no desc limit 15
+		offset #{page}]]>
+	</select>
+	<select id="selectMovieListComming" resultType="com.movie.dto.MoviePageDTO"
+		parameterType="HashMap">
+		<![CDATA[
+		select no, title, poster,play_date from movie_info,poster where no =
+		poster.movie_no and #{today}<play_date order by no desc limit 15
+		offset #{page}]]>
+	</select>
 
-  <!-- moviePage -->
-  <select id="movieDetailPage" resultType="com.movie.dto.MoviePageDTO"
-    parameterType="int">
-    select * from movie_info,poster where movie_info.no = #{no} and 
-    movie_info.no  = poster.movie_no;
-  </select>
+	<!-- moviePage -->
+	<select id="movieDetailPage" resultType="com.movie.dto.MoviePageDTO"
+		parameterType="int">
+		select * from movie_info,poster where movie_info.no = #{no} and
+		movie_info.no = poster.movie_no;
+	</select>
 
+	<select id="selectBestMovie" resultType="com.movie.dto.MoviePageDTO"
+		parameterType="int">
+		select no,title from movie_info order by hit desc limit 10
+	</select>
+	<select id="movieCountAll" resultType="int">
+		select count(*) from movie_info
+	</select>
+	<select id="movieCountNow" resultType="int"
+		parameterType="String">
+		<![CDATA[
+		select count(*) from movie_info where end_date>#{today} and #{today}>=play_date]]>
+	</select>
+	<select id="movieCountComming" resultType="int"
+		parameterType="String">
+		<![CDATA[
+		select count(*) from movie_info where #{today}<play_date]]>
+	</select>
 
+	<!-- movieWrite -->
+	<insert id="movieWrite" parameterType="com.movie.dto.MoviePageDTO"
+		useGeneratedKeys="true">
+		INSERT INTO movie_info VALUES
+		(default,#{title},#{content},#{play_date},#{genre},#{director},#{limit_play},#{actor});
+	</insert>
 
-  <!-- movieWrite -->
-  <insert id="movieWrite" parameterType="com.movie.dto.MoviePageDTO"
-    useGeneratedKeys="true">
-    INSERT INTO movie_info VALUES
-    (default,#{title},#{content},#{play_date},#{genre},#{director},#{limit_play},#{actor});
-  </insert>
+	<insert id="moviePosterInsert" parameterType="com.movie.dto.MoviePageDTO">
+		INSERT INTO
+		poster(movie_no, poster) VALUES((SELECT count(*)
+		FROM movie_info
+		WHERE no ), #{poster})
+	</insert>
 
-  <insert id="moviePosterInsert" parameterType="com.movie.dto.MoviePageDTO">
-    INSERT INTO
-    poster(movie_no, poster) VALUES((SELECT count(*)
-    FROM movie_info
-    WHERE no ), #{poster})
-  </insert>
+	<update id="updateMovieHit" parameterType="int">
+		update movie_info set hit=hit+1 where no=#{no}
+	</update>
 </mapper>

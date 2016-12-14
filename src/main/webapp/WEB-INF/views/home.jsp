@@ -20,10 +20,26 @@
 				</div>
 				<div class="new_movie_wrap">
 					<div class="new_movie_images">
-						<div class="top">top</div>
+						<div class="top">
+							<iframe width="560" height="315"
+								src="https://www.youtube.com/embed/fU_xpiEwAnQ" frameborder="0"
+								allowfullscreen></iframe>
+						</div>
 						<div class="bottom">botton</div>
 					</div>
-					<div class="new_movie_info"><div class="top">rigit_top</div><div class="bottom">rigit_bottom</div></div>
+					<div class="new_movie_info">
+						<div class="top">
+							<img src="resources/image/movie_imageHLFR7EYI.jpg">
+						</div>
+						<div class="bottom">
+						신기한동물사전<br>
+						어드벤처<br>
+						2016.11.28개봉<br>
+						<p>신기한 동물들 탈출,뉴욕 최대의 위기!<br><br>
+						새로운 마법의 시대가 열린다.
+						</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

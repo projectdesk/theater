@@ -60,7 +60,7 @@ public class MainController {
 	
 	@RequestMapping(value = "/review.do", method = RequestMethod.GET)
 	public String review(Locale locale, Model model) {
-		return "redirect:expert_ReviewList.do";
+		return "redirect:ReviewList.do";
 	}
 	
 }

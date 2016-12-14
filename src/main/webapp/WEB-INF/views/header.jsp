@@ -3,7 +3,9 @@
   <header>
     <div class="contain">
       <a href="./">
-        <div class="logo">logo</div>
+        <div class="logo">
+          <span><img src="resources/css/emblem.png" width="150"></span>
+        </div>
       </a>
       <nav>
         <div class="nav_top">

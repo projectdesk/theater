@@ -64,7 +64,7 @@ public class UserController {
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
 	public String login1(@Param("id") String id, @Param("password") String password, HttpSession session,
-			HttpServletRequest request) {
+			HttpServletRequest request,Model model) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("id", id);
 		map.put("password", password);
@@ -72,6 +72,7 @@ public class UserController {
 		if (result > 0) {
 			System.out.println("로그인성공");
 			session.setAttribute("id", id);
+			model.addAttribute("refresh","true");
 			return "redirect:" + request.getHeader("Referer");
 		} else {
 			System.out.println("로그인실패");

@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -8,16 +8,13 @@
 <title>Content</title>
 </head>
 <body>
-<form name="form" method="post">
-<input type="hidden" value="${dto.review_no}" name="review_no">
-</form>
 <script type="text/javascript">
 function DeleteOpen(){
-	
-		var DeleteUrl="audience_ReviewDelete.do?review_no=${param.review_no}";
-		var DeleteOption ="width=370,height=360, resizable=no, scrollbars=no, status=no;";
-		window.open(DeleteUrl,"",DeleteOption);
-	 	document.getElementById('form').submit();
+	if (confirm("정말 삭제하시겠습니까??") == true){   
+	    document.DeleteForm.submit();
+	}else{  
+	    return;
+	}	
 }
 </script>
 	<div class="wrap">
@@ -52,9 +49,21 @@ function DeleteOpen(){
 			</tr>
 			<tr>
 				<td colspan="2" align="left">
-				<input type="button" onclick="window.location='audience_ReviewList.do'" value="���">
-				<input type="button" onclick="DeleteOpen()" value="����">
-				</td>
+				<c:if test="${param.sort=='audience'}">
+				<input type="button" onclick="window.location='ReviewList.do?sort=audience'" value="목록">
+				<form action="ReviewList.do?sort=audience" method="post" name="DeleteForm">
+				<input type="hidden" name="review_no" value="${dto.review_no}">
+				<input type="button" onclick="DeleteOpen()" value="삭제">
+				</form>
+				</c:if>
+				<c:if test="${param.sort!='audience'}">
+				<input type="button" onclick="window.location='ReviewList.do'" value="목록">
+				<form action="ReviewList.do" method="post" name="DeleteForm">
+				<input type="hidden" name="review_no" value="${dto.review_no}">
+				<input type="button" onclick="DeleteOpen()" value="삭제">
+				</form>
+				</c:if>
+
 			</tr>
 		</table>
 	</div>

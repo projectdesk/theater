@@ -4,7 +4,7 @@
 	float: left;
 	width: 17%;
 	height: 100%;
-	border: 1px solid red;
+/* 	border: 1px solid red; */
 }
 
 .section_left a{
@@ -14,13 +14,13 @@
 	line-height: 45px;
 	font-weight: 600;
 	font-size: 20px;
-	border-bottom: 1px solid black;
+/* 	border-bottom: 1px solid black; */
 }
 
 .section_right {
 	float: right;
 	width: 83%; height : 100%;
-	border: 1px solid red;
+/* 	border: 1px solid red; */
 	height: 100%;
 	padding: 10px;
 	font-size: 18px;
