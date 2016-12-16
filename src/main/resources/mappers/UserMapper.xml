@@ -18,11 +18,11 @@
 	<!-- mypage reservation_info -->
 	<select id="selecReservations" resultType="HashMap"
 		parameterType="String">
-		select time.no,date.theater,movie.name,date.mdate as
+		select time.no,poster.poster,date.theater,movie.name,date.mdate as
 		date,time.time,seat.seat
-		from movie,date,time,seat
+		from movie,date,time,seat,poster
 		where movie.no=date.movie_no and date.no=time.date_no and
-		time.no=seat.time_no and seat.user=#{user}
+		time.no=seat.time_no and seat.user=#{user} and movie.no=poster.movie_no 
 		order by date asc,time asc,seat asc
 	</select>
 	<select id="selectUserPass" resultType="String" parameterType="String">

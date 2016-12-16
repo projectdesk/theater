@@ -14,7 +14,7 @@
 <!-- 관객 -->
 <!-- 글쓰기 -->
 <insert id="audienceWrite" parameterType="com.movie.dto.ReviewDTO">
-		insert into audience_review(review_no,movie_no,title,content,writer,wdate,grade,hit) values(default,#{movie_no},#{title},#{content},#{writer},now(),#{grade},0);
+		insert into audience_review(review_no,movie_no,title,content,writer,wdate,grade,hit,name) values(default,#{movie_no},#{title},#{content},#{writer},now(),#{grade},0,#{name});
 </insert>
 <!-- 목록 ,페이징-->
 <select id="audienceList" resultType="com.movie.dto.ReviewDTO" parameterType="int">
@@ -29,8 +29,8 @@
 		update audience_review set hit = hit + 1 where review_no = #{review_no}
 </update>
 <!--검색 -->
-<select id="audienceSearch" resultType="com.movie.dto.ReviewDTO" parameterType="String" >
-		select review_no,grade,audience_review.title,writer,wdate,hit from audience_review,movie_info where audience_review.movie_no=movie_info.no and movie_info.title like #{title} order by review_no DESC
+<select id="audienceSearch" resultType="com.movie.dto.ReviewDTO" parameterType="com.movie.dto.ReviewDTO" >
+		select review_no,grade,audience_review.title,writer,wdate,audience_review.hit,name from audience_review,movie_info where audience_review.name=movie_info.title and movie_info.title like #{title} order by review_no DESC limit 5 offset #{movie_no}
 </select>
 <select id="audienceSearchs" resultType="com.movie.dto.ReviewDTO" parameterType="int">
 		select * from audience_review where movie_no = #{movie_no} order by review_no DESC
@@ -41,7 +41,7 @@
 </select>
 <!-- 검색된페이지 -->
 <select id="audienceCountSearch" resultType="int">
-		select count(*)from audience_review where movie_no = #{movie_no}
+		select count(*)from audience_review,movie_info where audience_review.name=movie_info.title and movie_info.title like #{title}
 </select>
 <!--삭제  -->
 <delete id="audienceDelete" parameterType="int">
@@ -56,7 +56,7 @@
 <!-- 전문가 -->
 <!-- 글쓰기 -->
 <insert id="expertWrite" parameterType="com.movie.dto.ReviewDTO">
-		insert into expert_review(review_no,movie_no,title,content,writer,wdate,grade,hit) values(default,#{movie_no},#{title},#{content},#{writer},now(),#{grade},0);
+		insert into expert_review(review_no,movie_no,title,content,writer,wdate,grade,hit,name) values(default,#{movie_no},#{title},#{content},#{writer},now(),#{grade},0,#{name});
 </insert>
 <!-- 목록,페이징 -->
 <select id="expertList" resultType="com.movie.dto.ReviewDTO">
@@ -71,19 +71,16 @@
 		update expert_review set hit = hit + 1 where review_no = #{review_no}
 </update>
 <!--검색 -->
-<select id="expertSearch" resultType="com.movie.dto.ReviewDTO" parameterType="String" >
-		select review_no,grade,expert_review.title,writer,wdate,hit from expert_review,movie_info where expert_review.movie_no=movie_info.no and movie_info.title like #{title} order by review_no DESC
-</select>
-<select id="expertSearchs" resultType="com.movie.dto.ReviewDTO" parameterType="int">
-		select * from expert_review where movie_no = #{movie_no} order by review_no DESC
+<select id="expertSearch" resultType="com.movie.dto.ReviewDTO" parameterType="com.movie.dto.ReviewDTO" >
+		select review_no,grade,expert_review.title,writer,wdate,expert_review.hit,name from expert_review,movie_info where expert_review.name=movie_info.title and movie_info.title like #{title} order by review_no DESC limit 5 offset #{movie_no}
 </select>
 <!-- 총페이지 -->
 <select id="expertCount" resultType="int">
 		select count(*)from expert_review
 </select>
 <!-- 검색된페이지 -->
-<select id="expertCountSearch" resultType="int">
-		select count(*)from expert_review where movie_no = #{movie_no}
+<select id="expertCountSearch" resultType="int" parameterType="String">
+		select count(*)from expert_review,movie_info where expert_review.name=movie_info.title and movie_info.title like #{title}
 </select>
 <delete id="expertDelete" parameterType="int">
 		delete from expert_review where review_no = #{review_no}

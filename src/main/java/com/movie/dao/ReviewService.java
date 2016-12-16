@@ -32,21 +32,21 @@ public class ReviewService {
 		return dto;
 	}
 	//ï¿½Ë»ï¿½
-	public List<ReviewDTO> audienceReviewSearch(String title){
+	public List<ReviewDTO> audienceReviewSearch(String title,int page){
 		title = "%"+title+"%";
-		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.audienceSearch",title);
-		return list;
-	}
-	public List<ReviewDTO> audienceReviewSearchPage(int page){
 		page=(page-1)*5;
-		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.audienceSearchs",page);
+		ReviewDTO dto =new ReviewDTO();
+		dto.setMovie_no(page);
+		dto.setTitle(title);
+		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.audienceSearch",dto);
 		return list;
 	}
 	public int audienceReviewCount(){
 		return sqlSession.selectOne("reviewMapper.audienceCount");
 	}
-	public int audienceReviewCountSearch(){
-		return sqlSession.selectOne("reviewMapper.audienceCountSearch");
+	public int audienceReviewCountSearch(String title){
+		title = "%"+title+"%";
+		return sqlSession.selectOne("reviewMapper.audienceCountSearch",title);
 	}
 	public int audienceReviewDelete(int review_no){
 		return sqlSession.delete("reviewMapper.audienceDelete",review_no);
@@ -72,21 +72,22 @@ public class ReviewService {
 		sqlSession.update("reviewMapper.expertHit",review_no);
 		return dto;
 	}
-	public List<ReviewDTO> expertReviewSearch(String title){
+	public List<ReviewDTO> expertReviewSearch(String title,int page){
 		title = "%"+title+"%";
-		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.expertSearch",title);
-		return list;
-	}
-	public List<ReviewDTO> expertReviewSearchPage(int page){
 		page=(page-1)*5;
-		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.expertSearchs",page);
+		ReviewDTO dto =new ReviewDTO();
+		dto.setMovie_no(page);
+		dto.setTitle(title);
+		List<ReviewDTO> list = sqlSession.selectList("reviewMapper.expertSearch",dto);
 		return list;
 	}
+	//////////////////<------- ¿©±â¼­ºÎÅÍ ¼Õº¸±â
 	public int expertReviewCount(){
 		return sqlSession.selectOne("reviewMapper.expertCount");
 	}
-	public int expertReviewCountSearch(){
-		return sqlSession.selectOne("reviewMapper.expertCountSearch");
+	public int expertReviewCountSearch(String title){
+		title = "%"+title+"%";
+		return sqlSession.selectOne("reviewMapper.expertCountSearch",title);
 	}
 	public int expertReviewDelete(int review_no){
 		return sqlSession.delete("reviewMapper.expertDelete",review_no);

@@ -28,7 +28,11 @@ public class MainController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public String home() {
+		return "home";
+	}
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	public String main() {
 		return "home";
 	}
 	
@@ -37,13 +41,6 @@ public class MainController {
 		return "redirect:movieList.do";
 	}
 	
-	@RequestMapping(value = "/theater.do", method = RequestMethod.GET)
-	public String selectTheater(Model model) {
-		List list=theaterService.selectTheater();
-		System.out.println(list);
-		model.addAttribute("theaters",list);
-		return "theater";
-	}
 	@RequestMapping(value = "/helpCenter", method = RequestMethod.GET)
 	public String helpCenter(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);

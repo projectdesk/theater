@@ -65,6 +65,7 @@ public class Paging {
 		dto.setNowPage(nowPage);
 		dto.setRightOn(rightOn);
 		dto.setLeftOn(leftOn);
+		System.out.println("test:"+dto.getNowPage());
 		return dto;
 	}
 }

@@ -2,6 +2,6 @@
 table{
 	float: left;
 }
-td input{
-	float:left;
+td input[type=submit]{
+	float:right;
 }

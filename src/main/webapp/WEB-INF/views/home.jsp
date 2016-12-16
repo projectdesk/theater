@@ -6,48 +6,46 @@
 <head>
 <title>main</title>
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/lib/jquery.bxslider.css">
+<link rel="stylesheet" type="text/css"
+	href="resources/css/main_section.css?ver=1">
+<script src="https://code.jquery.com/jquery-1.12.4.js"
+	integrity="sha256-Qw82+bXyGq6MydymqBxNPYTaUXXq7c8v3CwiYwLLNXU="
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="resources/js/lib/jquery.bxslider.min.js"></script>
+<script type="text/javascript" src="resources/js/main.js"></script>
 </head>
 <body>
-	<!-- header -->
-	<%-- 	<jsp:include page="header.jsp"></jsp:include> --%>
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="section_top">
-			<div class="rolling"></div>
 			<div class="top_inner">
-				<div class="new_movie_logo">
-					<img src="resources/css/new_movie.png">
+				<ul class="bxslider">
+					<li><img src="resources/css/rolling_1.jpg" /></li>
+					<li><img src="resources/css/rolling_2.jpg" /></li>
+				</ul>
+				<h1>오늘의 영화</h1>
+				<div class="movie_list">
+					<img src="resources/image/movie_imageHLFR7EYI.jpg" />
 				</div>
-				<div class="new_movie_wrap">
-					<div class="new_movie_images">
-						<div class="top">
-							<iframe width="560" height="315"
-								src="https://www.youtube.com/embed/fU_xpiEwAnQ" frameborder="0"
-								allowfullscreen></iframe>
-						</div>
-						<div class="bottom">botton</div>
-					</div>
-					<div class="new_movie_info">
-						<div class="top">
-							<img src="resources/image/movie_imageHLFR7EYI.jpg">
-						</div>
-						<div class="bottom">
-						신기한동물사전<br>
-						어드벤처<br>
-						2016.11.28개봉<br>
-						<p>신기한 동물들 탈출,뉴욕 최대의 위기!<br><br>
-						새로운 마법의 시대가 열린다.
-						</p>
-						</div>
-					</div>
+				<div class="movie_poster">
+					<a href="#" id="video_play"> <img
+						src="resources/image/main_movie.jpg">
+						<img id="play_btn" src="resources/image/play_btn.png" alt="재생"/>
+					</a>
 				</div>
+				<!--//movie_poster -->
 			</div>
-		</div>
-		<!-- 		<div class="section_bottom"> -->
-		<!-- 			<div class="bottom_inner"></div> -->
-		<!-- 		</div> -->
 	</section>
 	<!-- footer -->
 	<%@include file="footer.jsp"%>
+	<a href="#"><div class="overlay"></div></a>
+	<div class="video_wrap">
+		<iframe id="movie_video" width="100%" height="100%"
+			src="https://www.youtube.com/embed/4f3wL6cgFZ8?enablejsapi=1" frameborder="0"
+			allowfullscreen></iframe>
+	</div>
 </body>
 </html>

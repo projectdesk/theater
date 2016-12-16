@@ -29,43 +29,6 @@ public class MovieController {
 
 	@Autowired
 	MovieService movieservice;
-//
-//	@RequestMapping(value = "/helpcenter.do", method = RequestMethod.GET)
-//	public String List(Model model, HttpServletRequest request,HttpSession session,
-//		@RequestParam(value = "kinds", defaultValue = "null") String kind) {
-//		int page = 1;
-//		int allCount = 0;
-//		Paging paging = Paging.getInstance();
-//		PagingDTO dto = null;
-//		List flist = null;
-//		if (request.getParameter("page") != null) {
-//			page = Integer.parseInt(request.getParameter("page"));
-//		}
-//		if (kind.equals("null")) {
-//			System.out.println("Test");
-//			String id=(String)session.getAttribute("id");
-//			System.out.println("test1");
-//			flist = BoardService.selectQuestion(page,id);
-//			System.out.println("test2");
-//			allCount = BoardService.countQuestion(id);
-//			System.out.println("tset3");
-//			dto = paging.getPaging(allCount, page);
-//			model.addAttribute("flist", flist);
-//		} else {
-//			List klist = BoardService.selectQuestionSerch(kind);
-//			allCount = BoardService.countQuestionSerch(kind);
-//			dto = paging.getPaging(allCount, page);
-//			model.addAttribute("klist", klist);
-//		}
-//		model.addAttribute("paging", dto);
-//		model.addAttribute("page", page);
-//		return "helpCenter/List";
-//
-//	}// end insert
-	
-	
-	
-	// ��ȭ����Ʈ ������
 	@RequestMapping(value = "/movieList.do", method = RequestMethod.GET)
 	public String movieList(@RequestParam(value="page",defaultValue="1")int page,@RequestParam(value="sort",defaultValue="")String sort,HttpServletRequest request, Model model) {
 		int allCount = 0;
@@ -75,7 +38,6 @@ public class MovieController {
 		PagingDTO dto = null;
 		Calendar cal=Calendar.getInstance();
 		List list=null;
-		page=page = (page - 1) * 12;
 		String today=cal.get(cal.YEAR)+"-"+(cal.get(cal.MONTH)+1)+"-"+cal.get(cal.DATE);
 		System.out.println(today);
 		if(sort.equals("")){//전체영화

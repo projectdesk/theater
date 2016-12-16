@@ -58,6 +58,7 @@ public class MovieService {
 	public List moviePageInfoByDate(int page, String today,String sort) {
 		// TODO Auto-generated method stub
 		Map map=new HashMap();
+		page = (page - 1) * 15;
 		map.put("page", page);
 		map.put("today", today);
 		if(sort.equals(""))//전체영화

@@ -65,3 +65,43 @@ function loginCheck() {
 	}
 	document.loginform.submit();
 }
+
+function passwerdCheck() {
+	if (document.passForm.password.value == "") {
+		alert("비밀번호를 입력해 주세요");
+		document.passForm.password.focus();
+		return;
+    }
+	document.passForm.submit();
+}
+
+function passwerdCheck2() {
+	if (document.passForm.nowPassword.value == "") {
+		alert("현재 비밀번호를 입력해 주세요");
+		document.passForm.nowPassword.focus();
+		return;
+    }
+	if (document.passForm.newPassword.value == "") {
+		alert("새로운 비밀번호를 입력해 주세요");
+		document.passForm.newPassword.focus();
+		return;
+	}
+	if (document.passForm.confirmPassword.value == "") {
+		alert("비밀번호를 확인 해주세요");
+		document.passForm.confirmPassword.focus();
+		return;
+	}
+	if (document.passForm.newPassword.value != document.passForm.confirmPassword.value) {
+		alert("비밀번호가 다릅니다");
+		document.regForm.mem_repasswd.focus();
+		return;
+	}
+	if (document.passForm.nowPassword.value == document.passForm.newPassword.value) {
+		alert("변경하시는 비밀번호가 전 비밀번호와 같습니다");
+		document.regForm.mem_repasswd.focus();
+		return;
+	}
+
+	document.passForm.submit();
+}
+

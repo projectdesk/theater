@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+  pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -9,24 +9,64 @@
 <link rel="stylesheet" type="text/css" href="resources/css/myPage.css">
 </head>
 <body>
-	<!-- header -->
-	<%@include file="header.jsp"%>
-	<section>
-		<div class="top_inner">
-			<%@include file="mypageNav.jsp"%>
-			<div class="section_right">
-				<form action="mod_userpass.do" method="post">
-					<table>
-					<tr><td>현재 비밀번호 </td><td><input name="nowPassword" type="password" /></td></tr>
-					<tr><td>새로운 비밀번호 </td><td><input name="newPassword" type="password" /></td></tr>
-					<tr><td>비밀번호 확인  </td><td><input name="confirmPassword" type="password"/></td></tr>
-				   	<tr><td></td><td><input type="submit" value="변경하기" style="float:right"></td></tr>
-				   </table>
-				</form>
-			</div>
-		</div>
-	</section>
-	<!-- footer -->
-	<%@include file="footer.jsp"%>
+  <!-- header -->
+  <%@include file="header.jsp"%>
+  <section>
+
+
+    <div class="top_wrap">
+      <div class="top_wrap_inner">
+        <div class="top">
+          <ul class="left">
+            <li><a href="./"><img src="resources/css/home.png"></a></li>
+            <li><span>></span></li>
+            <li>마이페이지</li>
+            <li><span>></span></li>
+            <li>비밀번호 변경</li>
+          </ul>
+          <ul class="right">
+            <li>고객센터 연락처</li>
+            <li><span>/</span></li>
+            <li>1588-0000</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="top_inner">
+      <%@include file="mypageNav.jsp"%>
+      <div class="section_right">
+        <div class="section_right_inner">
+          <form action="mod_userpass.do" method="post">
+
+            <div class="mod_top_subtitle">
+              <p>비밀번호는 3개월에 한 번씩 바꿔주세요.</p>
+            </div>
+            
+            
+            <div class="mod_pass">
+              <ul>
+                <li><span class="pass_title">현재 비밀번호</span> <input
+                  name="nowPassword" type="password" /></li>
+                <li><span class="pass_title">새로운 비밀번호</span> <input
+                  name="newPassword" type="password" /></li>
+                <li><span class="pass_title">비밀번호 확인</span> <input
+                  name="confirmPassword" type="password" /></li>
+              </ul>
+
+            </div>
+            <div class="mod_pass_button">
+              <ul>
+                <li></li>
+                <li><input type="submit" value="변경하기"></li>
+              </ul>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- footer -->
+  <%@include file="footer.jsp"%>
 </body>
 </html>

@@ -19,12 +19,10 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
+		<h1>회원가입</h1>
 			<form method="post" action="register.do" name="regForm">
-				<table width="800" border="1" cellspacing="0" cellpadding="3"
+				<table  cellspacing="0" cellpadding="3"
 					align="center">
-					<tr>
-						<th colspan="2">회원가입</th>
-					</tr>
 					<tr>
 						<td>사용자 ID</td>
 						<td><input type="text" name="id" size="10" maxlength="12">

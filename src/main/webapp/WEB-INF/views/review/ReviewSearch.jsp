@@ -19,13 +19,13 @@ function movieCheck(){
 </script>
 <body>
 <c:if test="${param.sort=='audience'}">
-		<c:set var="address" value="ReviewList.do?sort=audience&"/>
+		<c:set var="address" value="ReviewSearch.do?sort=audience&"/>
 			<h1 align="center">관객리뷰</h1>
 			<form action="ReviewSearch.do" method="get" name="movieSelect">
 			<input type="hidden" name="sort" value="audience">
 		</c:if>
 		<c:if test="${param.sort!='audience'}">
-		<c:set var="address" value="ReviewList.do"/>
+		<c:set var="address" value="ReviewSearch.do?"/>
 			<h1 align="center">전문가 리뷰</h1>
 			<form action="ReviewSearch.do" method="get" name="movieSelect">
 		</c:if>
@@ -58,7 +58,8 @@ function movieCheck(){
   <table align="center" width="500" border="1">
       <tr>
       <td width="50">No</td>
-      <td width="100">평점</td>
+      <td width="50">평점</td>
+      <td width="100">MovieName</td>
       <td width="90">Title</td>
       <td width="90">Writer</td>
       <td width="120">Date</td>
@@ -69,7 +70,8 @@ function movieCheck(){
     <table align="center" width="500" border="1" >
       <tr>
         <td width="50">${item.review_no}</td>
-        <td width="100">${item.grade}</td>
+        <td width="50">${item.grade}</td>
+        <td width="100">${item.name}</td>
         <td width="90">
         <c:if test="${param.sort=='audience'}">
 		<a href="ReviewContent.do?sort=audience&review_no=${item.review_no}">${item.title}</a>
@@ -91,7 +93,7 @@ function movieCheck(){
 			<td align="center">
 				<c:if test="${paging.leftOn==true}">
 					<a class="left_on"
-						href="${address}?page=${paging.firstPage-paging.maxPage}"><</a>
+						href="${address}page=${paging.firstPage-paging.maxPage}"><</a>
 				</c:if>
 				<c:if test="${paging.leftOn==false}">
 					<a class="left_off"><</a>
@@ -102,13 +104,14 @@ function movieCheck(){
 						<a class="page_num page_off">${num}</a>
 					</c:if>
 					<c:if test="${page!=num}">
-						<a class="page_num" page_num="${num}" href="${address}?page=${num}">${num}</a>
+					<%-- <c:set var="" value=""> --%>
+						<a class="page_num" page_num="${num}" href="${address}title=${name}&page=${num}">${num}</a>
 					</c:if>
 
 				</c:forEach>
 				<c:if test="${paging.rightOn==true}">
 					<a class="right_on"
-						href="${address}?page=${paging.firstPage+paging.maxPage}">></a>
+						href="${address}page=${paging.firstPage+paging.maxPage}">></a>
 				</c:if>
 				<c:if test="${paging.rightOn==false}">
 					<a class="right_off">></a>

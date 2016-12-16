@@ -10,7 +10,7 @@ public class MoviePageDTO {
 	private String play_date;
 	private String genre;
 	private String director;
-	private String limit_play;
+	private String limit;
 	private String actor;
 	private int hit;
 
@@ -91,15 +91,16 @@ public class MoviePageDTO {
 		this.director = director;
 	}
 
-	public String getLimit_play() {
-		return limit_play;
-	}
-
-	public void setLimit_play(String limit_play) {
-		this.limit_play = limit_play;
-	}
 
 	
+	public String getLimit() {
+		return limit;
+	}
+
+	public void setLimit(String limit) {
+		this.limit = limit;
+	}
+
 	public int getNo() {
 		return no;
 	}
@@ -119,7 +120,7 @@ public class MoviePageDTO {
 	@Override
 	public String toString() {
 		return "MoviePageDTO [no=" + no + ", title=" + title + ", content=" + content + ", play_date="
-				+ play_date + ", genre=" + genre + ", director=" + director + ", limit_play=" + limit_play + "]";
+				+ play_date + ", genre=" + genre + ", director=" + director + ", limit=" + limit + "]";
 	}
 	
 	

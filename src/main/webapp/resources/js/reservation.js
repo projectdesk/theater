@@ -1,6 +1,7 @@
 $(document)
 		.ready(
 				function() {
+				var price=0;
 				// �뵒�뤃�듃�씠踰ㅽ듃 �젣嫄�
 				$('input[type="submit"]').click(function(){return false;});
 				// �뤌媛� 寃��궗
@@ -22,7 +23,36 @@ $(document)
 						location.href="login.do";
 						return;
 					}						
-					$('form[name="reservation"]').submit();
+//					 결제
+						var IMP = window.IMP; // 생략가능
+						IMP.init('imp96111342'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+						IMP.request_pay({
+						    pg : 'inicis', // version 1.1.0부터 지원.
+						    pay_method : 'card',
+						    merchant_uid : 'merchant_' + new Date().getTime(),
+						    name : '주문명:결제테스트',
+						    amount : price,
+						    buyer_email : 'iamport@siot.do',
+						    buyer_name : '구매자이름',
+						    buyer_tel : '010-1234-5678',
+						    buyer_addr : '서울특별시 강남구 삼성동',
+						    buyer_postcode : '123-456',
+						    m_redirect_url : 'https://www.yourdomain.com/payments/complete'
+						}, function(rsp) {
+						    if ( rsp.success ) {
+						        var msg = '결제가 완료되었습니다.';
+						        msg += '고유ID : ' + rsp.imp_uid;
+						        msg += '상점 거래ID : ' + rsp.merchant_uid;
+						        msg += '결제 금액 : ' + rsp.paid_amount;
+						        msg += '카드 승인번호 : ' + rsp.apply_num;
+						        msg +="<br> 이니시스에서 제공하는 테스트계정으로 결제가 진행됩니다. 실제로 결제승인이 이루어지지만, 매일 자정이 되기 전에 일괄 자동 취소가 이루어집니다.";
+						        $('form[name="reservation"]').submit();
+						    } else {
+						        var msg = '결제에 실패하였습니다.';
+						        msg += '에러내용 : ' + rsp.error_msg;
+						    }
+						    alert(msg);
+						});
 					
 				;});
 				$('section').on('click','a',function(){return false;})
@@ -202,6 +232,8 @@ $(document)
 										$('.movie_time a').removeClass("selected");
 										$('span').removeClass("allready");
 										$(val).addClass("selected");
+										$('.price_right span').text("");
+										price=0;
 										$('input[name=time_no]').val($(val).attr('no'));
 									$.each(data,function(index,value){
 											$('.row a[seat='+value+'] span').addClass('allready');
@@ -212,10 +244,10 @@ $(document)
 					
 					
 					
-					$(".seat_gap").each(function() {
-						$(this).css("width", $(this).attr("gap_data"));
-						console.log($(this).attr("gap_data"));
-					});
+//					$(".seat_gap").each(function() {
+//						$(this).css("width", $(this).attr("gap_data"));
+//						console.log($(this).attr("gap_data"));
+//					});
 
 					// 醫뚯꽍�꽑�깮
 					$('.watching_number a').click(
@@ -277,6 +309,13 @@ $(document)
 															parseInt($(
 																	"input[name='nownum']")
 																	.val()) + 1);
+											if($('.price_right span').text()!=""){
+											$('.price_right span').text(parseInt($('.price_right span').text())+9000);
+											}
+											else{
+											$('.price_right span').text(9000);
+											}
+											price+=9000;
 										}
 										return false;
 									});

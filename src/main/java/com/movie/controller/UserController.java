@@ -58,7 +58,10 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String login(Model model) {
+	public String login(Model model,HttpServletRequest request) {
+		String referrer = request.getHeader("Referer");
+	    request.getSession().setAttribute("prevPage", referrer);
+	    System.out.println(referrer);
 		return "login";
 	}
 
@@ -69,16 +72,14 @@ public class UserController {
 		map.put("id", id);
 		map.put("password", password);
 		int result = userService.selectLoginInfo(map);
+		String prePage=session.getAttribute("prevPage").toString();
 		if (result > 0) {
 			System.out.println("로그인성공");
 			session.setAttribute("id", id);
-			model.addAttribute("refresh","true");
-			return "redirect:" + request.getHeader("Referer");
 		} else {
 			System.out.println("로그인실패");
-			return "redirect:" + request.getHeader("Referer");
 		}
-
+		return "redirect:"+prePage;
 	}
 
 	@RequestMapping(value = "/logout.do", method = RequestMethod.GET)
@@ -88,13 +89,15 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
-	public String mypage(HttpSession session, Model model) {
+	public String mypage(HttpSession session, Model model,HttpServletRequest request) {
 		String id = (String) session.getAttribute("id");
 		List list = userService.selectReservations(id);
-		Long no = 0L, preno = 0L;
-		int val = 0;
+		Long no = 0L, preno = 999L;
+		int val = 0,remain=0;
+		String seat=null;
 		int j=0;
 		int k=0;
+		char[] row={'A','B','C','D','E','F','G','H','I','J'};
 		for (int i = 0; i < list.size(); i++) {
 			Map map = (Map) list.get(i);
 			no = (Long) map.get("no");
@@ -103,18 +106,29 @@ public class UserController {
 			if (preno == no) {
 				System.out.println("test");
 				val = (Integer) map.get("seat");
-				((Map) list.get(j)).put("seat", ((Map) list.get(j)).get("seat").toString() + "," + val);
+				remain=val/10;
+				val=val%10;
+				seat=row[remain]+Integer.toString(val);
+				System.out.println(seat);
+				((Map) list.get(j)).put("seat", ((Map) list.get(j)).get("seat").toString() + "," + seat);
 				list.remove(i);
 				--i;
 				System.out.println("removed");
 			}
 			else{
+				val = (Integer) map.get("seat");
+				remain=val/10;
+				val=val%10;
+				seat=row[remain]+Integer.toString(val);
+				System.out.println(seat);
+				((Map)list.get(i)).put("seat", seat);
 				j=i;
 			}
 			preno = (Long) map.get("no");
 		}
 		System.out.println(list);
 		model.addAttribute("reservations", list);
+		String referrer = request.getHeader("Referer");
 		return "myPage";
 	}
 

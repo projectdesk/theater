@@ -7,9 +7,17 @@ public class ReviewDTO {
 	private String content;
 	private String writer;
 	private String wdate;
+	private String name;
 	private int hit;
 	private int grade;
 	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public int getGrade() {
 		return grade;
 	}

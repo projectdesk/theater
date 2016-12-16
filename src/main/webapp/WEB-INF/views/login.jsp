@@ -62,9 +62,6 @@
          </form>
 </div>
 
-<div class="poster">
-<img src="resources/image/movie_image.png" width="350">
-</div>
      
     </div>
   </section>
