@@ -43,7 +43,7 @@
     <div class=write_form>
       <form action="ListBest_insert.do" method="post" name="question">
 
-        <div class="top_select">
+        <div class="top_select"  style="border:1px solid #ddd">
             <select name="kinds">
              <option value="">질문을 선택해 주세요.</option>
             <option value="멤버쉽포인트안내">멤버쉽 포인트 안내</option>
@@ -55,6 +55,10 @@
         </div>
 
         <table class="question_page">
+        <tr>
+        <td co></td>
+        <td></td>
+        </tr>
           <tr>
             <td align="center" class="question_con">제목</td>
             <td class="title"><input type="text" name="title"></td>

@@ -27,9 +27,9 @@
           <li><a href="">글쓰기</a></li>
         </ul>
         <ul class="right">
-          <li>다른 전문가 리뷰 </li>
+          <li>고객센터 연락처</li>
           <li><span>/</span></li>
-          <li>평점</li>
+          <li>1588-0000</li>
         </ul>
       </div>
     </div>
@@ -90,8 +90,10 @@
             </td>
             <td><textarea name="content"></textarea></td>
           </tr>
+          </table>
+          <table>
           <tr class="button">
-          <td>	<input type="button" value="등록하기" style="float: left;" onclick="inputCheck()">
+          <td><input type="button" value="등록하기" style="float: left;" onclick="inputCheck()"></td><td>
 				<c:if test="${param.sort=='audience'}">
 				<input  type="button" onclick="window.location.href='ReviewList.do?sort=audience'" value="취소">
 				</c:if>

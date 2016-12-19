@@ -72,7 +72,6 @@ public class MovieController {
 		int serial = Integer.parseInt(no);
 		dto = movieservice.movieInfoSelect(serial);
 		model.addAttribute("dto", dto);
-
 		return "moviePage";
 	}
 
@@ -96,7 +95,8 @@ public class MovieController {
 		MultipartFile f = dto.getFile();
 		if (!f.isEmpty()) {
 			String poster = f.getOriginalFilename();
-			String path = "C:\\Users\\HANKYUNGAE\\Desktop\\mywork_web\\theater\\src\\main\\webapp\\resources\\image\\";
+//			String path = "C:\\Users\\HANKYUNGAE\\Desktop\\mywork_web\\theater\\src\\main\\webapp\\resources\\image\\";
+			String path = ".\\resources\\image\\";
 			System.out.println("path :" + path);
 			File file = new File(path + File.separator + poster);
 			dto.setPoster(poster);

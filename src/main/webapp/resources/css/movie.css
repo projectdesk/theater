@@ -169,8 +169,9 @@ section {
 
 /* 뮤비 디테일 페이지 */
 .movieDetail {
+  overflow:hidden;
   width: 1200px;
-  margin: 0 auto;
+  margin: 40px auto;
 }
 
 .movieDetail_inner {
@@ -185,7 +186,6 @@ section {
 
 .movieDetail table {
   width: 600px;
-  margin-top: 100px;
   padding-left: 30px;
   line-height: 25px;
 }

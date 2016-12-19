@@ -23,15 +23,16 @@ public class EtcService {
 		result=insertAvailTheater(dto);
 		if(result>0)
 		System.out.println("avail theater");
-		result=selectAllreadyDate(dto.getNo());
+		result=selectAllreadyDate(dto);
 		if(result==0){
 		result=insertDate(dto);
 		System.out.println("insert date");
 		}
 		int date_no=selectDateNo(dto.getNo());
-		if(date_no>0)
+		if(date_no>0){
 		System.out.println("date_no");
 		dto.setDate_no(date_no);
+		}
 		result=insertTime(dto);
 		if(result>0)
 		System.out.println("insertTime");
@@ -52,8 +53,8 @@ public class EtcService {
 		return sqlSession.insert("EtcMapper.insertAvailTheater",dto);
 	}
 	
-	public int selectAllreadyDate(int no){
-		return sqlSession.selectOne("EtcMapper.selectAllreadyDate",no);
+	public int selectAllreadyDate(MovieInsertDTO dto){
+		return sqlSession.selectOne("EtcMapper.selectAllreadyDate",dto);
 	}	
 	
 	public int insertDate(MovieInsertDTO dto){

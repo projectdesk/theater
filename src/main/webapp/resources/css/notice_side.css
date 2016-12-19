@@ -1,174 +1,176 @@
 .inner {
-  width: 1200px;
-  margin: 0 auto;
+	width: 1200px;
+	margin: 0 auto;
 }
 
 h1 {
-  text-align: center;
-  font-size: 25px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  color: #333;
-  width: 1200px;
-  margin: 30px 0 30px 0;
+	text-align: center;
+	font-size: 25px;
+	font-weight: 700;
+	letter-spacing: -1px;
+	color: #333;
+	width: 1200px;
+	margin: 30px 0 30px 0;
 }
 
 .top_wrap {
-  width: 100%;
-  height: 30px;
-  background: #FAFAD2;
+	width: 100%;
+	height: 30px;
+	background: #FAFAD2;
 }
 
 .top_wrap_inner {
-  width: 1200px;
-  margin: 0 auto;
+	width: 1200px;
+	margin: 0 auto;
 }
 
 .top {
-  width: 1200px;
-  display: inline-block;
-  margin: 10px 0 30px 0;
+	width: 1200px;
+	display: inline-block;
+	margin: 10px 0 30px 0;
 }
 
 .top ul {
-  list-style: none;
-  display: inline-block;
+	list-style: none;
+	display: inline-block;
 }
 
 .top ul li {
-  display: block;
-  float: left;
-  padding-left: 10px;
-  height: 22px;
-  line-height: 15px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #333;
-  letter-spacing: -1px;
+	display: block;
+	float: left;
+	padding-left: 10px;
+	height: 22px;
+	line-height: 15px;
+	font-size: 13px;
+	font-weight: 700;
+	color: #333;
+	letter-spacing: -1px;
 }
 
 .top ul li a {
-  text-decoration: none;
-  color: #333;
+	text-decoration: none;
+	color: #333;
 }
 
 .top ul li span {
-  font-weight: 800;
-  line-height: 15px;
+	font-weight: 800;
+	line-height: 15px;
 }
 
 .top img {
-  width: 15px;
+	width: 15px;
 }
 
 .top .lift {
-  float: left;
-  width: 240px;
+	float: left;
+	width: 240px;
 }
 
 .top .right {
-  float: right;
-  width: 190px;
+	float: right;
+	width: 190px;
 }
 
 .write_form {
-  margin: 0 auto;
-  width: 600px;
-  text-align: center;
+	margin: 0 auto;
+	width: 600px;
+	text-align: center;
 }
 
 .write_form table {
-  width: 100%;
-  text-align: left;
-  font-size: 12px;
-  font-weight: 670;
-  color: #111;
-  letter-spacing: -1px;
-  position: relative;
+	border-collapse: collapse; width : 100%;
+	text-align: left;
+	font-size: 12px;
+	font-weight: 670;
+	color: #111;
+	letter-spacing: -1px;
+	position: relative;
+	width: 100%;
 }
 
 .write_form table tr td {
-  line-height: 18px;
+	border: 1px solid #ddd;
+	line-height: 18px;
 }
 
 /* answer_page_title */
 .con {
-  background-color: #eee;
-  padding-left: 10px;
-  color: #333;
-  text-align: center;
-  width: 130px;
-  font-weight: 600;
+	background-color: #eee;
+	padding-left: 10px;
+	color: #333;
+	text-align: center;
+	width: 130px;
+	font-weight: 600;
 }
 
 /* question_page_title */
 .question_con {
-  background-color: #eee;
-  width: 130px;
-  font-weight: 600;
+	background-color: #eee;
+	width: 130px;
+	font-weight: 600;
 }
 
 /* question_page_select */
 .top_select {
-  width: 100%;
+	width: 100%;
 }
 
 .top_select span {
-  font-size: 13px;
-  font-weight: 600;
-  padding-right: 13px;
-  color: #333;
+	font-size: 13px;
+	font-weight: 600;
+	padding-right: 13px;
+	color: #333;
 }
 
 .top_select select {
-  width: 597px;
-  height: 40px;
-  font-weight: 600;
-  color: #333;
+	width: 597px;
+	height: 40px;
+	font-weight: 600;
+	color: #333;
 }
 
 /* question_ok_page */
 .question_detail {
-  background-color: #eee;
-  color: #333;
-  text-align: center;
-  width: 130px;
-  height: 40px;
-  font-weight: 600;
+	background-color: #eee;
+	color: #333;
+	text-align: center;
+	width: 130px;
+	height: 40px;
+	font-weight: 600;
 }
 
 .detail_body {
-  width: 500px;
-  background-color: #eee;
-  font-weight: 400;
-  text-align: left;
-  padding-left: 10px;
+	width: 500px;
+	background-color: #eee;
+	font-weight: 400;
+	text-align: left;
+	padding-left: 10px;
 }
 
 .write_form  table textarea {
-  width: 100%;
-  height: 355px;
-  overflow-y: scroll;
+	width: 100%;
+	height: 355px;
+	overflow-y: scroll;
 }
 
 .title input[type="text"] {
-  width: 100%;
-  height: 35px;
-  line-height: 35px;
-  padding-left: 5px;
+	width: 100%;
+	height: 35px;
+	line-height: 35px;
+	padding-left: 5px;
 }
 
 .writer input[type="text"] {
-  width: 100%;
-  height: 35px;
-  float: left;
+	width: 100%;
+	height: 35px;
+	float: left;
 }
 
 .button input {
-  background-color: #111;
-  color: #fff;
-  border: 0;
-  width: 297px;
-  height: 34px;
-  float: left;
+	background-color: #111;
+	color: #fff;
+	border: 0;
+	width: 297px;
+	height: 34px;
+	float: left;
 }

@@ -4,7 +4,7 @@
 <c:if test="${sessionScope.id==null}">
   <script>
 			alert("로그인해야됩니다.");
-			location.href = "./";
+			location.href = "./login.do";
 		</script>
 </c:if>
 <!DOCTYPE html>

@@ -13,8 +13,8 @@
 	<select id="selectMovieNo" parameterType="String" resultType="int">
 		select no from movie where name=#{movie} order by no desc limit 1
 	</select>
-	<select id="selectAllreadyDate" parameterType="int" resultType="int">
-		select count(*) from date where movie_no=#{movie_no} order by no desc limit 1
+	<select id="selectAllreadyDate" parameterType="com.movie.dto.MovieInsertDTO" resultType="int">
+		select count(*) from date where movie_no=#{no} and mdate=#{date} order by no desc limit 1
 	</select>
 	<insert id="insertAvailTheater" parameterType="com.movie.dto.MovieInsertDTO">
 		insert into avail_theater(movie_no,theater) values(#{no},#{theater})
