@@ -5,6 +5,7 @@
   margin: 0;
   padding: 0;
   font-family: 'Nanum Gothic', serif;
+  border: none;
 }
 
 a {
@@ -253,12 +254,8 @@ footer {
   border: 1px solid #777;
 }
 
-.footer_inner {
-  width: 100%;
-  margin: 0 auto;
-}
 
-.button {
+footer .button {
   font-size: 12px;
   line-height: 18px;
   color: #777;
@@ -266,39 +263,39 @@ footer {
   float: left;
 }
 
-.home {
+footer .home {
   padding: 5px 10px 5px 10px;
   line-height: 30px;
   border: 1px solid #aaa;
   margin-left: 105px;
 }
 
-.home a {
+footer .home a {
   color: #555;
 }
 
-.home a:HOVER {
+footer .home a:HOVER {
   color: #a93d3d;
   font-weight: bold;
 }
 
-.aboutus {
+footer .aboutus {
   padding: 5px 10px 5px 10px;
   line-height: 30px;
   border: 1px solid #aaa;
   margin-left: 10px;
 }
 
-.aboutus a {
+footer .aboutus a {
   color: #555;
 }
 
-.aboutus a:HOVER {
+footer .aboutus a:HOVER {
   color: #a93d3d;
   font-weight: bold;
 }
 
-.footer_notice {
+footer .footer_notice {
   font-size: 12px;
   line-height: 18px;
   color: #777;
@@ -307,7 +304,7 @@ footer {
   margin-left: 80px;
 }
 
-.footer_team {
+footer .footer_team {
   width: 370px;
   font-size: 12px;
   line-height: 18px;

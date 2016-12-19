@@ -77,7 +77,6 @@
              
       <tr class="button_2">
           <td>
-          <input type="button" onclick="window.location='answer.do?no=${param.no}'" value="답글">
           <input type="button" value="게시판" onclick="window.location='helpcenter.do'">
           <input type="button" value="삭제" onclick="location.href='delete.do?no=${param.no}'">
           </td>

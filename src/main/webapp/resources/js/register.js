@@ -2,14 +2,6 @@
  * 
  */
 $(document).ready(function(){
-	$( "#datepicker" ).click(function(){
-	$( "#datepicker" ).datepicker({
-	      changeMonth: true,
-	      changeYear: true
-	    });
-	
-	})//click
-	
 $("#idcheck").click(function(){
 		$.ajax({
 			url : "idcheck.do",
@@ -28,6 +20,8 @@ $("#idcheck").click(function(){
 	});//idcheck	
 
 });//ready
+
+//주소검색
  function addressSearch(){
         new daum.Postcode({
             oncomplete: function(data) {

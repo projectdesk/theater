@@ -94,6 +94,13 @@ table tr td {
 	text-align: center;
 }
 
+.idcheck {
+	display: block;
+	position: absolute;
+	top: 50px;
+	left: 300px;
+}
+
 .idcheck_form label {
 	display:inline-block;
 	width: 70px;
@@ -109,6 +116,12 @@ table tr td {
 	border: 2px solid #ddd;
 	float: right;
 }
+.pwd_check {
+	display: inline-block;
+	position: absolute;
+	top: 230px;
+	left: 300px;
+}
 
 .pwdcheck input {
 	width: 180px;
@@ -122,20 +135,6 @@ table tr td {
 	width: 350px;
 	height: 40px;
 	margin-top: 1px;
-}
-
-.idcheck {
-	display: block;
-	clear:both;
-	width:300px;
-	margin: 140px auto;
-}
-
-.pwd_check {
-	display: inline-block;
-	position: absolute;
-	top: 250px;
-	left: 300px;
 }
 
 .button_left input {

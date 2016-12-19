@@ -43,13 +43,9 @@ public class UserService {
 		return sqlSession.selectList("UserMapper.selecReservations",id);
 	}
 
-	public int selectUserPass(String id,String password) {
+	public String selectUserPass(String id) {
 		// TODO Auto-generated method stub
-		String db_pass=sqlSession.selectOne("UserMapper.selectUserPass",id);
-		if(password.equals(db_pass))
-			return 1;
-		else
-			return 0;
+		return sqlSession.selectOne("UserMapper.selectUserPass",id);
 	}
 
 	public int updateUserPass(Map<String, String> map) {

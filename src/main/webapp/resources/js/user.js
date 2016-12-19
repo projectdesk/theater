@@ -21,6 +21,20 @@ function inputCheck() {
 		document.regForm.mem_name.focus();
 		return;
 	}
+
+	// phone number,birthday match to form
+	if ($("#phone1").val() != '' && $("#phone2").val() != ''
+			&& $("#phone3").val() != '') {
+		alert($("#phone1").val() + $("#phone2").val() + $("#phone3").val());
+		$("#phone").val(
+				$("#phone1").val() + $("#phone2").val() + $("#phone3").val());
+	}
+	if ($("#year").val() != '' && $("#month").val() != ''
+			&& $("#date").val() != '') {
+		alert($("#year").val() + $("#month").val() + $("#date").val());
+		$("#birthday").val(
+				$("#year").val() + $("#month").val() + $("#date").val());
+	}
 	if (document.regForm.birthday.value == "") {
 		alert("생년월일을 적어주세요");
 		document.regForm.mem_phone.focus();
@@ -71,7 +85,7 @@ function passwerdCheck() {
 		alert("비밀번호를 입력해 주세요");
 		document.passForm.password.focus();
 		return;
-    }
+	}
 	document.passForm.submit();
 }
 
@@ -80,7 +94,7 @@ function passwerdCheck2() {
 		alert("현재 비밀번호를 입력해 주세요");
 		document.passForm.nowPassword.focus();
 		return;
-    }
+	}
 	if (document.passForm.newPassword.value == "") {
 		alert("새로운 비밀번호를 입력해 주세요");
 		document.passForm.newPassword.focus();
@@ -104,4 +118,3 @@ function passwerdCheck2() {
 
 	document.passForm.submit();
 }
-

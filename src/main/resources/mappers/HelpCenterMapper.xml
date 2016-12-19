@@ -18,13 +18,12 @@
 		parameterType="String">
 		select * from question where kinds =
 		#{kinds} order by no
-		DESC
+		DESC limit 5 offset #{no}
 	</select>
 	
 		<!-- 총 검색된페이지 -->
 	<select id="countQuestionSerch" resultType="int" parameterType="String">
-		select count(*)from
-		frequency_question where kinds = #{kinds}
+		select count(*) from frequency_question where kinds = #{kind}
 	</select>
 	
 

@@ -29,32 +29,20 @@ public class HelpCenterController {
 	// =====================================질문=====================================
 	// 리스트
 	@RequestMapping(value = "/helpcenter.do", method = RequestMethod.GET)
-	public String List(Model model, HttpServletRequest request,HttpSession session,
-		@RequestParam(value = "kinds", defaultValue = "null") String kind) {
+	public String List(Model model, HttpServletRequest request, HttpSession session) {
 		int page = 1;
-		int allCount = 0;
-		Paging paging = Paging.getInstance();
-		PagingDTO dto = null;
-		List flist = null;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
-		if (kind.equals("null")) {
-			System.out.println("Test");
-			String id=(String)session.getAttribute("id");
-			System.out.println("test1");
-			flist = BoardService.selectQuestion(page,id);
-			System.out.println("test2");
-			allCount = BoardService.countQuestion(id);
-			System.out.println("tset3");
-			dto = paging.getPaging(allCount, page);
-			model.addAttribute("flist", flist);
-		} else {
-			List klist = BoardService.selectQuestionSerch(kind);
-			allCount = BoardService.countQuestionSerch(kind);
-			dto = paging.getPaging(allCount, page);
-			model.addAttribute("klist", klist);
-		}
+		int allCount = 0;
+		Paging paging = Paging.getInstance();
+		PagingDTO dto = null;
+		List list = null;
+		String id = (String) session.getAttribute("id");
+		list = BoardService.selectQuestion(page, id);
+		allCount = BoardService.countQuestion(id);
+		dto = paging.getPaging(allCount, page);
+		model.addAttribute("list",list);
 		model.addAttribute("paging", dto);
 		model.addAttribute("page", page);
 		return "helpCenter/List";
@@ -64,8 +52,8 @@ public class HelpCenterController {
 	// 입력
 	@RequestMapping(value = "/question.do", method = RequestMethod.GET)
 	public String insertgo(HttpSession session) {
-		if(session.getAttribute("id")!=null)
-		return "helpCenter/question";
+		if (session.getAttribute("id") != null)
+			return "helpCenter/question";
 		else
 			return "redirect:helpcenter.do";
 	}// end insertgo
@@ -190,8 +178,7 @@ public class HelpCenterController {
 				int allCount = BoardService.selectFrequencyCount(keyword);
 				dto = paging.getPaging(allCount, page);
 				model.addAttribute("klist", klist);
-			}
-			else{
+			} else {
 				flist = BoardService.selectFrequencyQuestion(page);
 				int allCount = BoardService.countFrequencyQuestion();
 				dto = paging.getPaging(allCount, page);

@@ -89,8 +89,8 @@ public class UserDTO {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
-		this.phone = phone;
+	public void setPhone(String phone) {
+		this.phone = Integer.parseInt(phone);
 	}
 	
 }

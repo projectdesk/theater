@@ -14,11 +14,6 @@ function inputCheck() {
 		document.reviewForm.title.focus();
 		return;
 	}
-	if (document.reviewForm.writer.value == "") {
-		alert("글쓴이를 입력해주세요");
-		document.reviewForm.writer.focus();
-		return;
-	}
 	if (document.reviewForm.content.value == "") {
 		alert("내용을 입력해주세요");
 		document.reviewForm.content.focus();

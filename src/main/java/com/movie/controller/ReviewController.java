@@ -63,7 +63,7 @@ public class ReviewController {
 	@RequestMapping(value = "/ReviewList.do", method = RequestMethod.GET)
 	public String List(HttpServletRequest request, Model model,
 	@RequestParam(value = "sort", defaultValue = "null") String sort) {
-		int page = 1;
+		int page=1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 			}

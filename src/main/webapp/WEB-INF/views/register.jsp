@@ -19,10 +19,9 @@
 	<%@include file="header.jsp"%>
 	<section>
 		<div class="top_inner">
-		<h1>회원가입</h1>
+			<h1>회원가입</h1>
 			<form method="post" action="register.do" name="regForm">
-				<table  cellspacing="0" cellpadding="3"
-					align="center">
+				<table cellspacing="0" cellpadding="3" align="center">
 					<tr>
 						<td>사용자 ID</td>
 						<td><input type="text" name="id" size="10" maxlength="12">
@@ -32,13 +31,13 @@
 					</tr>
 					<tr>
 						<td>비밀번호</td>
-						<td><input type="password" name="password"
-							size="15" maxlength="12"></td>
+						<td><input type="password" name="password" size="15"
+							maxlength="12"></td>
 					</tr>
 					<tr>
 						<td>비밀번호 확인</td>
-						<td><input type="password" name="passwordCheck"
-							size="15" maxlength="12"></td>
+						<td><input type="password" name="passwordCheck" size="15"
+							maxlength="12"></td>
 					</tr>
 					<tr>
 						<td>사용자 이름</td>
@@ -46,8 +45,10 @@
 					</tr>
 					<tr>
 						<td>생년월일</td>
-						<td><input type="text" name="birthday" size="20"
-							id="datepicker"></td>
+						<td><input type="text" id="year" size="4" maxlength="4">-<input
+							type="text" id="month" size="2" maxlength="2">-<input
+							type="text" id="date" size="2" maxlength="2"> <input
+							type="hidden" id="birthday" name="birthday" /></td>
 					</tr>
 					<tr>
 						<td>E-Mail</td>
@@ -61,22 +62,25 @@
 					</tr>
 					<tr>
 						<td>주소</td>
-						<td><input type="text" name="address1" id="address1" size="70"
-							placeholder=" 주소를 검색해주세요." readonly="readonly"></td>
+						<td><input type="text" name="address1" id="address1"
+							size="70" placeholder=" 주소를 검색해주세요." readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td>상세 주소</td>
-						<td><input type="text" name="address2" id="address2" size="70"
-							placeholder=" 상세주소를 적어 주세요."></td>
+						<td><input type="text" name="address2" id="address2"
+							size="70" placeholder=" 상세주소를 적어 주세요."></td>
 					</tr>
 					<tr>
 						<td>핸드폰 번호</td>
-						<td><input type="text" name="phone" size="20"
-							placeholder=" 핸드폰번호를 적어 주세요."></td>
+						<td><input type="text" id="phone1" size="3" maxlength="3">-<input
+							type="text" id="phone2" size="4" maxlength="4">-<input
+							type="text" id="phone3" size="4" maxlength="4">
+							<input type="hidden" id="phone" name="phone"/>
+							</td>
 					</tr>
 					<tr>
 						<td colspan="2" align="center"><input type="button"
-								value="등 록" onclick="inputCheck()"> <input type="reset"
+							value="등 록" onclick="inputCheck()"> <input type="reset"
 							name="reset" value="다시입력"> <input type="button"
 							value="가입안함" onclick="inputForm.jsp"></td>
 					</tr>
@@ -86,6 +90,6 @@
 	</section>
 	<!-- footer -->
 	<%@include file="footer.jsp"%>
-	
+
 </body>
 </html>

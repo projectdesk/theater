@@ -122,9 +122,9 @@ public class ReservationController {
 		String id=(String)session.getAttribute("id");
 		System.out.println("num: "+num);
 		int no=Integer.parseInt(num);
-		System.out.println(no);
-		int result=userService.selectUserPass(id,password);
-		if(result>0){
+		int result;
+		String db_pass=userService.selectUserPass(id);
+		if(db_pass.equals(password)){
 			result=reservationService.deleteReservation(no);
 			if(result>0){
 				System.out.println("예약취소");

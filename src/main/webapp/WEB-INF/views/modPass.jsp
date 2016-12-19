@@ -9,11 +9,15 @@
 <link rel="stylesheet" type="text/css" href="resources/css/myPage.css">
 </head>
 <body>
+	<c:if test="${passCheck=='false'}">
+	<script>alert("현재 비밀번호가 틀리거나 새로운비밀번호가 이전 비밀번호와 같습니다.");</script>
+	</c:if>
+	<c:if test="${passCheck=='true'&&passCheck!=null}">
+	<script>location.href="mypage.do";</script>
+	</c:if>
   <!-- header -->
   <%@include file="header.jsp"%>
   <section>
-
-
     <div class="top_wrap">
       <div class="top_wrap_inner">
         <div class="top">

@@ -13,8 +13,6 @@
 	<!-- header -->
 	<%@include file="../header.jsp"%>
 	<section>
-
-
 	<div class="top_wrap">
 		<div class="top_wrap_inner">
 			<div class="top">
@@ -76,12 +74,12 @@
 		</div>
 
 		<div class="link">
-			<a name="all" href="ListBest.do#all">[전체글]</a> <a name="member"
-				href="ListBest.do?kinds=멤버쉽포인트안내#member">[멤버쉽포인트안내]</a> <a
-				name="id_pw" href="ListBest.do?kinds=아이디/비밀번호찾기#id_pw">[아이디/비밀번호]</a>
-			<a name="pass" href="ListBest.do?kinds=패스워드변경#pass">[패스워드변경]</a> <a
-				name="reserv" href="ListBest.do?kinds=예매/관람#reserv">[예매관련]</a> <a
-				name="etc" href="ListBest.do?kinds=기타#etc">[기타]</a>
+<!-- 			<a name="all" href="ListBest.do#all">[전체글]</a> <a name="member" -->
+<!-- 				href="ListBest.do?kinds=멤버쉽포인트안내#member">[멤버쉽포인트안내]</a> <a -->
+<!-- 				name="id_pw" href="ListBest.do?kinds=아이디/비밀번호찾기#id_pw">[아이디/비밀번호]</a> -->
+<!-- 			<a name="pass" href="ListBest.do?kinds=패스워드변경#pass">[패스워드변경]</a> <a -->
+<!-- 				name="reserv" href="ListBest.do?kinds=예매/관람#reserv">[예매관련]</a> <a -->
+<!-- 				name="etc" href="ListBest.do?kinds=기타#etc">[기타]</a> -->
 		</div>
 
 
@@ -94,7 +92,7 @@
 				<th width="55px">답변</th>
 				<th width="110px">질문유형</th>
 			</tr>
-			<c:forEach var="item" items="${flist}">
+			<c:forEach var="item" items="${list}">
 				<tr>
 					<td width="60px">${item.no}</td>
 					<td width="150px">${item.wdate}</td>
@@ -105,20 +103,7 @@
 					<td>${item.kinds}</td>
 				</tr>
 			</c:forEach>
-
-			<c:forEach var="item" items="${klist}">
-				<c:if test="${item!=null}">
-					<tr>
-						<td width="60px">${item.no}</td>
-						<td width="100px">${item.kinds}</td>
-						<td width="700px" class="open_nav_link" no="${item.no}"><a
-						href="questionok.do?no=${item.no}&question_no=${item.no}">${item.title}</a></td>
-						<td width="20px" colspan="2">운영자</td>
-					</tr>
-				</c:if>
-			</c:forEach>
 		</table>
-
 		<div class="paging">
 			<c:if test="${paging.leftOn==true}">
 				<a class="left_on"

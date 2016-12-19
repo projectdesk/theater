@@ -16,7 +16,7 @@
 	 select distinct movie.name,movie.no from movie,date where movie.no=date.movie_no and theater=#{theater} and mdate>=#{today};
 </select>
 <select id="selectTheater" parameterType="String" resultType="String">
-	select theater from avail_theater where movie_no=(select no from movie where name=#{movie} order by no desc limit 1)
+	select distinct theater from avail_theater where movie_no=(select no from movie where name=#{movie} order by no desc limit 1)
 </select>
 <select id="selectDate" parameterType="com.movie.dto.DateDTO" resultType="com.movie.dto.DateDTO">
 	select no,mdate from date where theater=#{theater} and movie_no=(select distinct no from movie where name=#{movie} order by no desc limit 1) and mdate>=#{today}

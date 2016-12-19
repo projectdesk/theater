@@ -23,9 +23,10 @@ $(document)
 						location.href="login.do";
 						return;
 					}						
-//					 결제
+// 결제
 						var IMP = window.IMP; // 생략가능
-						IMP.init('imp96111342'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+						IMP.init('imp96111342'); // 'iamport' 대신 부여받은 "가맹점
+													// 식별코드"를 사용
 						IMP.request_pay({
 						    pg : 'inicis', // version 1.1.0부터 지원.
 						    pay_method : 'card',
@@ -75,10 +76,10 @@ $(document)
 							});
 							});
 						}
-					});//ajax
+					});// ajax
 				}
 				
-				//�쁺�솕愿� �꽑�깮
+				// �쁺�솕愿� �꽑�깮
 					$(".theater").on('click','a',
 							function() {
 								var val=this;// �씠踰ㅽ듃 媛앹껜 �쑀吏�v
@@ -110,12 +111,13 @@ $(document)
 														}
 													});// bean
 												});// list
-											}//if(!$('.movie a').hasClass('selected'))
+											}// if(!$('.movie
+												// a').hasClass('selected'))
 											else{
 												$('.theater a').removeClass("selected");
 												$(val).addClass("selected");
 												getDate($('.theater a[class="selected"]'),$('.movie a[class="selected"]'));
-											}//both selected
+											}// both selected
 										}// if(date)
 									
 													
@@ -149,7 +151,7 @@ $(document)
 							    	$('.movie a').removeClass("selected");
 									$(val).addClass("selected");
 									getDate($('.theater a[class="selected"]'),$('.movie a[class="selected"]'));
-							    }//both selected
+							    }// both selected
 							}// success
 							});// ajax
 
@@ -244,14 +246,15 @@ $(document)
 					
 					
 					
-//					$(".seat_gap").each(function() {
-//						$(this).css("width", $(this).attr("gap_data"));
-//						console.log($(this).attr("gap_data"));
-//					});
+// $(".seat_gap").each(function() {
+// $(this).css("width", $(this).attr("gap_data"));
+// console.log($(this).attr("gap_data"));
+// });
 
 					// 醫뚯꽍�꽑�깮
 					$('.watching_number a').click(
 							function() {
+								if($(".movie_time a").hasClass("selected")){
 								$(".watching_number>a").removeAttr("style");
 								$("span").removeClass("no_active");
 								$("input[name='seat']").val("");
@@ -260,6 +263,10 @@ $(document)
 								$("input[name='howmany']").val(
 										$(this).attr("value"));
 								false;
+								}
+								else{
+									alert("영화 상영시간을 선택하세요");
+								}
 							});
 					
 					var a=['A','B','C','D','E','F','G','H','I','J'];

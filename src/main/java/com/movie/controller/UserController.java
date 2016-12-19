@@ -138,20 +138,27 @@ public class UserController {
 			Model model) {
 		map.put("id", (String) session.getAttribute("id"));
 		map.put("newPassword", newPassword);
-		int result = userService.selectUserPass((String) session.getAttribute("id"), nowPassword);
-		if (result > 0 && newPassword.equals(confirmPassword))
+		String db_pass = userService.selectUserPass((String) session.getAttribute("id"));
+		if (db_pass.equals(nowPassword)&&!nowPassword.equals(newPassword)){
 			userService.updateUserPass(map);
-		return "modUser";
+			model.addAttribute("passCheck","true");
+		}
+		else
+			model.addAttribute("passCheck","false");
+		return "modPass";
 	}
 
 	@RequestMapping(value = "/mod_user.do", method = RequestMethod.POST)
 	public String modUserPass(@Param("password") String password, UserDTO dto, HttpSession session, Model model) {
 		String id = (String) session.getAttribute("id");
-		int result = userService.selectUserPass(id, password);
-		if (result > 0) {
+		String db_pass = userService.selectUserPass(id);
+		if (db_pass.equals(password)) {
 			model.addAttribute("passwordCheck", true);
 			dto = userService.selectUserInfo(id);
 			model.addAttribute("user", dto);
+			model.addAttribute("passCheck","true");
+		}else{
+			model.addAttribute("passCheck","false");
 		}
 		return "modUser";
 	}

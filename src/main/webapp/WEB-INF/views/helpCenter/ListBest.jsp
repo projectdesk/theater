@@ -157,9 +157,10 @@
 			<c:if test="${paging.rightOn==false}">
 				<a class="right_off">▶</a>
 			</c:if>
-
+			<c:if test="${sessionScope.id=='aaaa'}">
 			<input type="button" value="글쓰기"
 				onclick="window.location='ListBest_insert.do'"></input>
+			</c:if>
 		</div>
 	</div>
 	</section>

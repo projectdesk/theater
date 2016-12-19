@@ -47,8 +47,12 @@ public class HelpCenterService {
 	}// end of selectAllCount
 		// 유형별 검색 리스트
 
-	public List<QuestionDTO> selectQuestionSerch(String kinds) {
-		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.selectQuestionSerch", kinds);
+	public List<QuestionDTO> selectQuestionSerch(String kinds,int page) {
+		page = (page - 1) * 5;
+		QuestionDTO dto=new QuestionDTO();
+		dto.setNo(page);
+		dto.setKinds(kinds);
+		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.selectQuestionSerch", dto);
 		return list;
 	}// end of QuestionSearch
 		// 유형별 검색 리스트

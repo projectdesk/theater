@@ -9,7 +9,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="resources/css/ReviewWrite.css" />
 <link rel="stylesheet" type="text/css" href="resources/css/main.css">
-<script src="resources/js/review.js"></script>
+<script src="resources/js/review.js?ver=1"></script>
 </head>
 <body>
 <%@include file="../header.jsp"%>
@@ -36,7 +36,12 @@
   </div>
   
 <div class="inner">
-    <h1>전문가 리뷰쓰기</h1>
+	<c:if test="${param.sort=='audience'}">
+	<h1>관객 리뷰쓰기</h1>
+	</c:if>
+	<c:if test="${param.sort!='audience'}">
+	<h1>전문가 리뷰쓰기</h1>
+	</c:if>
     <div class=write_form>
       <form action="ReviewWrite.do" method="post" name="ReviewWrite"></form>
       
@@ -86,7 +91,7 @@
             <td><textarea name="content"></textarea></td>
           </tr>
           <tr class="button">
-          <td>	<input type="button" value="등록하기" onclick="inputCheck()">
+          <td>	<input type="button" value="등록하기" style="float: left;" onclick="inputCheck()">
 				<c:if test="${param.sort=='audience'}">
 				<input  type="button" onclick="window.location.href='ReviewList.do?sort=audience'" value="취소">
 				</c:if>

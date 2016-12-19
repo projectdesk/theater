@@ -186,17 +186,19 @@
 					<a class="right_off">▶</a>
 				</c:if>
 				<!--       버튼                    -->
-
 				<table>
 					<tr>
-						<td><c:if test="${param.sort=='audience'}">
+						<td><c:if test="${param.sort=='audience'&&sessionScope.id!=null}">
 								<input type="button"
 									onclick="window.location.href='./ReviewWrite.do?sort=audience'"
 									value="글쓰기">
-							</c:if> <c:if test="${param.sort!='audience'}">
+							</c:if> <c:if test="${param.sort!='audience'&&sessionScope.id!=null}">
 								<input type="button"
 									onclick="window.location.href='./ReviewWrite.do'" value="글쓰기">
 							</c:if></td>
+							<c:if test="${sessionScope.id==null}">
+								<input type="button" onclick="alert('로그인하세요');">
+							</c:if>
 					</tr>
 				</table>
 			</div>
