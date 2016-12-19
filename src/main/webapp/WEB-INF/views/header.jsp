@@ -28,7 +28,7 @@
 					</div>
 				</div>
 				<div class="nav_top_r">
-					<a href=""><img src="resources/image/star_icon.png"/></a>
+					<img src="resources/image/star_icon.png" />
 				</div>
 
 

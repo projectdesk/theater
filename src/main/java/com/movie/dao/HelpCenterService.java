@@ -71,9 +71,9 @@ public class HelpCenterService {
 	}// end of selectAllCount
 
 	// 삭제
-	public int deleteQuestion(QuestionDTO qdto) {
+	public int deleteQuestion(int no) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("helpCenterMapper.deleteQuestion", qdto);
+		return sqlSession.delete("helpCenterMapper.deleteQuestion", no);
 	}
 
 	// 답변여부 변경

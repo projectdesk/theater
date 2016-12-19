@@ -5,3 +5,9 @@ table{
 td input[type=submit]{
 	float:right;
 }
+
+.mod_user .button {
+    position: absolute;
+    right: 60px;
+    bottom: 30px;
+}

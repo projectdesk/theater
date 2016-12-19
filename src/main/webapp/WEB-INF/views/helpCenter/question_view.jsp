@@ -79,7 +79,7 @@
           <td>
           <input type="button" onclick="window.location='answer.do?no=${param.no}'" value="답글">
           <input type="button" value="게시판" onclick="window.location='helpcenter.do'">
-          <input type="button" value="삭제" onclick="location.href='delete.do?no=${param.no}'">
+          <input type="button" value="삭제" onclick="var confirm_ok=confirm('삭제할까요?');if(confirm_ok==true)location.href='question_delete.do?no=${param.no}'">
           </td>
       </tr>
       </table>

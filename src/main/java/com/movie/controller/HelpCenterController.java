@@ -76,21 +76,15 @@ public class HelpCenterController {
 	}// end Listok
 
 	// 삭제
-	@RequestMapping(value = "/delete.do", method = RequestMethod.GET)
-	public String deleteForm(QuestionDTO dto, Model model) throws IOException {
-		model.addAttribute("no", dto.getNo());
-		return "helpCenter/deleteQuestion";
+	@RequestMapping(value = "/question_delete.do", method = RequestMethod.GET)
+	public String deleteForm(@RequestParam("no")String s_no, Model model) throws IOException {
+		int no=Integer.parseInt(s_no);
+		int result = BoardService.deleteQuestion(no);
+		if(result>0)
+			System.out.println("삭제완료");
+		return "redirect:helpcenter.do";
 	}
 
-	@RequestMapping(value = "/delete.do", method = RequestMethod.POST)
-	public void delete(QuestionDTO dto, HttpServletResponse response) throws IOException {
-		int result = BoardService.deleteQuestion(dto);
-		if (result > 0)
-			System.out.println("delete success");
-		else
-			System.out.println("delete failed");
-		response.sendRedirect("helpcenter.do");
-	}// end of delete
 
 	// =====================================답변=====================================
 

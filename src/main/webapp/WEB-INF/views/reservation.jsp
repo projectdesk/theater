@@ -32,7 +32,7 @@
 					<ul class="left">
 						<li><a href="./"><img src="resources/css/home.png"></a></li>
 						<li><span>></span></li>
-						<li><a href="helpcenter.do">영화예매</a></li>
+						<li>영화예매</li>
 					</ul>
 					<ul class="right">
 						<li>고객센터 연락처</li>

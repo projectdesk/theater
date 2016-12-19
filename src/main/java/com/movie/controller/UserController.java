@@ -66,18 +66,24 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login1(@Param("id") String id, @Param("password") String password, HttpSession session,
+	public String login1(@RequestParam("id") String id, @RequestParam("password") String password, HttpSession session,
 			HttpServletRequest request,Model model) {
 		HashMap<String, String> map = new HashMap<String, String>();
+		String prePage=null;
 		map.put("id", id);
 		map.put("password", password);
 		int result = userService.selectLoginInfo(map);
-		String prePage=session.getAttribute("prevPage").toString();
+		if(session.getAttribute("prevPage")!=null)
+		prePage=session.getAttribute("prevPage").toString();
+		else
+			prePage="/movie/";
 		if (result > 0) {
 			System.out.println("로그인성공");
 			session.setAttribute("id", id);
 		} else {
 			System.out.println("로그인실패");
+			model.addAttribute("loginCheck","false");
+			prePage="login.do";
 		}
 		return "redirect:"+prePage;
 	}

@@ -61,7 +61,7 @@
 
 
 	<!-- 삭제 -->
-	<delete id="deleteQuestion" parameterType="com.movie.dto.QuestionDTO">
+	<delete id="deleteQuestion" parameterType="int">
 		delete from question
 		where no = #{no}
 	</delete>

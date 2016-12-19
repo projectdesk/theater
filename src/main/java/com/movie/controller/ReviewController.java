@@ -42,9 +42,9 @@ public class ReviewController {
 		}
 	}
 
-	// 
+	//
 	@RequestMapping(value = "/ReviewWrite.do", method = RequestMethod.POST)
-	public String Insert(HttpSession session,HttpServletRequest request, ReviewDTO dto, Model model,
+	public String Insert(HttpSession session, HttpServletRequest request, ReviewDTO dto, Model model,
 			@RequestParam(value = "sort", defaultValue = "null") String sort,
 			@RequestParam(value = "movie_no") int movie_no) {
 		dto.setMovie_no(movie_no);
@@ -62,12 +62,12 @@ public class ReviewController {
 
 	@RequestMapping(value = "/ReviewList.do", method = RequestMethod.GET)
 	public String List(HttpServletRequest request, Model model,
-	@RequestParam(value = "sort", defaultValue = "null") String sort) {
-		int page=1;
+			@RequestParam(value = "sort", defaultValue = "null") String sort) {
+		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
-			}
-		List<ReviewDTO> list=null;
+		}
+		List<ReviewDTO> list = null;
 		Paging paging = Paging.getInstance();
 		PagingDTO dto = null;
 		if (sort.equals("audience")) {
@@ -89,7 +89,7 @@ public class ReviewController {
 		}
 	}
 
-	// 
+	//
 	@RequestMapping(value = "/review_MovieSelect.do", method = RequestMethod.POST)
 	public String aSearchListgo(HttpServletRequest request, MoviePageDTO moviepagedto,
 			@RequestParam("title") String title, Model model,
@@ -137,33 +137,33 @@ public class ReviewController {
 		}
 	}
 
-	// 
-/*	@RequestMapping(value = "/ReviewSearch.do", method = RequestMethod.POST)
-	public String SearchListgo(HttpServletRequest request, ReviewDTO reviewdto, @RequestParam("title") String title,
-			Model model, @RequestParam(value = "sort", defaultValue = "null") String sort,
-			@RequestParam("movie_no") int movie_no) 
-	{
-		if (sort.equals("audience")) {
-			return SearchList(request, reviewdto, title, model, sort,movie_no);
-		} else {
-			return SearchList(request, reviewdto, title, model, sort,movie_no);
-		}
-	}*/
+	//
+	/*
+	 * @RequestMapping(value = "/ReviewSearch.do", method = RequestMethod.POST)
+	 * public String SearchListgo(HttpServletRequest request, ReviewDTO
+	 * reviewdto, @RequestParam("title") String title, Model
+	 * model, @RequestParam(value = "sort", defaultValue = "null") String sort,
+	 * 
+	 * @RequestParam("movie_no") int movie_no) { if (sort.equals("audience")) {
+	 * return SearchList(request, reviewdto, title, model, sort,movie_no); }
+	 * else { return SearchList(request, reviewdto, title, model,
+	 * sort,movie_no); } }
+	 */
 
 	@RequestMapping(value = "/ReviewSearch.do", method = RequestMethod.GET)
-	public String SearchList(HttpServletRequest request, ReviewDTO reviewdto, @RequestParam(value="title") String title,
-			Model model, @RequestParam(value = "sort", defaultValue = "null") String sort) 
-	{	
+	public String SearchList(HttpServletRequest request, ReviewDTO reviewdto,
+			@RequestParam(value = "title") String title, Model model,
+			@RequestParam(value = "sort", defaultValue = "null") String sort) {
 		int page = 1;
 		if (request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
-			}
-		List<ReviewDTO> list=null;
-		List<ReviewDTO> plist=null;
+		}
+		List<ReviewDTO> list = null;
+		List<ReviewDTO> plist = null;
 		Paging paging = Paging.getInstance();
 		PagingDTO dto = null;
 		if (sort.equals("audience")) {
-			list = reviewService.audienceReviewSearch(title,page);
+			list = reviewService.audienceReviewSearch(title, page);
 			int SCount = reviewService.audienceReviewCountSearch(title);
 			paging = Paging.getInstance();
 			dto = paging.getPaging(SCount, page);
@@ -173,7 +173,7 @@ public class ReviewController {
 			model.addAttribute(sort);
 			return "review/ReviewList";
 		} else {
-			list = reviewService.expertReviewSearch(title,page);
+			list = reviewService.expertReviewSearch(title, page);
 			int SCount = reviewService.expertReviewCountSearch(title);
 			paging = Paging.getInstance();
 			dto = paging.getPaging(SCount, page);
@@ -184,22 +184,29 @@ public class ReviewController {
 			return "review/ReviewList";
 		}
 	}
-	// 
-	@RequestMapping(value="ReviewList.do",method =RequestMethod.POST)
-	public String Delete(int review_no,Model model,
-	@RequestParam(value = "review_no") int reveiw_no,
-	@RequestParam(value = "sort", defaultValue = "null") String sort)
-	{	
-		if(sort.equals("audience")){
-			System.out.println(review_no);
-			int result = reviewService.audienceReviewDelete(review_no);
-			model.addAttribute(sort);
-			return "redirect:ReviewList.do?sort=audience";
+
+	//
+	@RequestMapping(value = "review_delete.do", method = RequestMethod.GET)
+	public String Delete(HttpSession session,Model model,
+			@RequestParam("no")String no,
+			@RequestParam(value = "sort", defaultValue = "null") String sort) {
+		String id = session.getAttribute("id").toString();
+		int review_no=Integer.parseInt(no);
+		System.out.println(id);
+		if (id != null) {
+			System.out.println(1111);
+			if (sort.equals("audience")) {
+				System.out.println(review_no);
+				int result = reviewService.audienceReviewDelete(review_no);
+				model.addAttribute(sort);
+				return "redirect:ReviewList.do?sort=audience";
+			} else {
+				System.out.println(review_no);
+				int result = reviewService.expertReviewDelete(review_no);
+				return "redirect:ReviewList.do";
+			}
 		}
-		else{
-			System.out.println(review_no);
-			int result = reviewService.expertReviewDelete(review_no);
-			return "redirect:ReviewList.do";
-		}
+		System.out.println(2222);
+		return "redirect:ReviewList.do";
 	}
 }

@@ -18,15 +18,10 @@
 			alert("현재 비밀번호가 틀립니다.");
 		</script>
 	</c:if>
-	<c:if test="${passCheck=='true'&&passCheck!=null}">
-		<script>
-			location.href = "mypage.do";
-		</script>
-	</c:if>
 
 	<!-- header -->
 	<%@include file="header.jsp"%>
-	<section>
+	<section class="mod_user">
 
 		<div class="top_wrap">
 			<div class="top_wrap_inner">

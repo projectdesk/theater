@@ -20,8 +20,10 @@
 .reservation_title {
   text-align: center;
   margin: 10px 0;
-  font-size: 38px;
+  font-size: 32px;
   color: #333;
+  height: 60px;
+  line-height: 60px;
 }
 
 a {
@@ -74,16 +76,15 @@ a {
 
 .theater a {
   display: block;
-  height: 43px;
+  height: 53px;
   text-align: center;
-  line-height: 35px;
+  line-height: 53px;
   font-size: 15px;
-  border-top: 3px dashed #fff;
+  border-bottom: 3px dashed #fff;
 }
 
 .theater a:LAST-CHILD {
   font-size: 15px;
-  border-bottom: 3px dashed #fff;
 }
 
 .movie {
@@ -94,14 +95,10 @@ a {
 
 .movie>a {
   display: block;
-  height: 50px;
+  height: 53px;
   font-size: 15px;
   text-align: center;
-  line-height: 45px;
-  border-top: 3px dashed #fff;
-}
-
-.movie>a:LAST-CHILD {
+  line-height: 53px;
   border-bottom: 3px dashed #fff;
 }
 
@@ -111,12 +108,13 @@ a {
   height: 600px;
 }
 
-.movie_date a {
-  font-size: 15px;
-  border-top: 3px dashed #fff;
-}
 
-.movie_date a:LAST-CHILD {
+.movie_date a {
+  display: block;
+  height: 53px;
+  text-align: center;
+  line-height: 53px;
+  font-size: 14px;
   border-bottom: 3px dashed #fff;
 }
 
@@ -129,28 +127,13 @@ a {
 .movie_time a {
   display: block;
   font-size: 15px;
-  border-top: 3px dashed #fff;
-  height: 55px;
-  text-align: center;
-  line-height: 25px;
-}
-
-.movie_time a:LAST-CHILD {
   border-bottom: 3px dashed #fff;
-}
-
-.movie_date a {
-  display: block;
-  height: 30px;
+  height: 53px;
   text-align: center;
-  line-height: 25px;
-  font-size: 15px;
-  border-top: 3px dashed #fff;
+  line-height: 23px;
+  padding-top: 3px;
 }
 
-.movie_date a:LAST-CHILD {
-  border-bottom: 3px dashed #fff;
-}
 
 .select_bar {
   overflow: hidden;
@@ -162,7 +145,6 @@ a {
 .watching_number {
   width: 500px;
   margin: 10px 0 0 10px;
-  font-weight: bolder;
   font-size: 15px;
   position: relative;
 }
@@ -175,6 +157,11 @@ a {
   line-height: 18px;
   font-size: 15px;
 }
+
+.watching_number a:HOVER {
+  border-bottom: 2px solid #fff;
+}
+
 
 .seat_container {
   clear: both;
@@ -286,6 +273,7 @@ input[type=submit] {
   font-size: 16px;
   font-weight: 600;
   border-radius: 10px 10px 10px 10px;
+  cursor: pointer;
 }
 
 .price_bottom {
@@ -315,7 +303,7 @@ input[type=submit] {
 .icon_span {
   position: absolute;
   left: 65px;
-  top:23px;
+  top: 23px;
   opacity: 0.66;
 }
 
@@ -323,12 +311,11 @@ input[type=submit] {
   width: 20px;
 }
 
-
 .price_right {
   position: absolute;
   right: 10px;
-  top:20px;
-  }
+  top: 20px;
+}
 
 .price_right span {
   color: #fff;

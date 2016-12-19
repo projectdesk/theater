@@ -37,8 +37,8 @@
 
 	<div class="search">
 		<form action="ListBest.do" method="get">
-			<input type="text" placeholder="FAQ검색" name="keyword">
-			<input class="icon" type="submit" value="">
+			<input type="text" placeholder="FAQ검색" name="keyword"> <input
+				class="icon" type="submit" value="">
 		</form>
 	</div>
 
@@ -58,12 +58,10 @@
 		</ul>
 
 		<ul class="right">
-			<li><a href="#">멤버쉽 포인트 사용안내</a><span>></span></li>
-			<li><a href="#">예매/취소내역조회</a><span>></span></li>
-			<li><a href="#">아이디/비밀번호 찾기</a><span>></span></li>
-			<li><a href="#">패스워드변경</a><span>></span></li>
-			<li><a href="#">회원정보조회</a><span>></span></li>
-			<li><a href="#">회원탈퇴</a><span>></span></li>
+			<li>예매내역조회<span>></span></li>
+			<li>아이디/비밀번호 찾기<span>></span></li>
+			<li>패스워드변경<span>></span></li>
+			<li>회원정보조회<span>></span></li>
 		</ul>
 	</div>
 	<div class="help_bottom">
@@ -74,12 +72,12 @@
 		</div>
 
 		<div class="link">
-<!-- 			<a name="all" href="ListBest.do#all">[전체글]</a> <a name="member" -->
-<!-- 				href="ListBest.do?kinds=멤버쉽포인트안내#member">[멤버쉽포인트안내]</a> <a -->
-<!-- 				name="id_pw" href="ListBest.do?kinds=아이디/비밀번호찾기#id_pw">[아이디/비밀번호]</a> -->
-<!-- 			<a name="pass" href="ListBest.do?kinds=패스워드변경#pass">[패스워드변경]</a> <a -->
-<!-- 				name="reserv" href="ListBest.do?kinds=예매/관람#reserv">[예매관련]</a> <a -->
-<!-- 				name="etc" href="ListBest.do?kinds=기타#etc">[기타]</a> -->
+			<!-- 			<a name="all" href="ListBest.do#all">[전체글]</a> <a name="member" -->
+			<!-- 				href="ListBest.do?kinds=멤버쉽포인트안내#member">[멤버쉽포인트안내]</a> <a -->
+			<!-- 				name="id_pw" href="ListBest.do?kinds=아이디/비밀번호찾기#id_pw">[아이디/비밀번호]</a> -->
+			<!-- 			<a name="pass" href="ListBest.do?kinds=패스워드변경#pass">[패스워드변경]</a> <a -->
+			<!-- 				name="reserv" href="ListBest.do?kinds=예매/관람#reserv">[예매관련]</a> <a -->
+			<!-- 				name="etc" href="ListBest.do?kinds=기타#etc">[기타]</a> -->
 		</div>
 
 
@@ -130,8 +128,9 @@
 			<c:if test="${paging.rightOn==false}">
 				<a class="right_off">▶</a>
 			</c:if>
-			<input type="hidden" id="user" value="${sessionScope.id}">
-			<input type="button" value="글쓰기" onclick='if(document.getElementById("user").value!=""){location.href="question.do";}else{alert("로그인하세요");}'>
+			<input type="hidden" id="user" value="${sessionScope.id}"> <input
+				type="button" value="글쓰기"
+				onclick='if(document.getElementById("user").value!=""){location.href="question.do";}else{alert("로그인하세요");}'>
 		</div>
 	</div>
 

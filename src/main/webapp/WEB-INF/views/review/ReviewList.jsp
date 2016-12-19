@@ -22,9 +22,6 @@
 	<!-- header -->
 	<%@include file="../header.jsp"%>
 	<section>
-
-
-
 		<!-- 상단 바       -->
 		<c:if test="${param.sort=='audience'}">
 			<c:set var="address" value="ReviewList.do?sort=audience&" />
@@ -197,7 +194,7 @@
 									onclick="window.location.href='./ReviewWrite.do'" value="글쓰기">
 							</c:if></td>
 							<c:if test="${sessionScope.id==null}">
-								<input type="button" onclick="alert('로그인하세요');">
+								<input type="button" value="글쓰기" onclick="alert('로그인하세요');">
 							</c:if>
 					</tr>
 				</table>

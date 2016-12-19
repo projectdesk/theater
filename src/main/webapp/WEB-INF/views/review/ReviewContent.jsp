@@ -20,11 +20,9 @@
         <ul class="left">
           <li><a href="./"><img src="resources/css/home.png"></a></li>
           <li><span>></span></li>
-          <li><a href="helpcenter.do">고객센터</a></li>
+          <li><a href="ReviewList.do">리뷰</a></li>
           <li><span>></span></li>
-          <li><a href="helpcenter.do#helpdesk">1:1 문의</a></li>
-          <li><span>></span></li>
-          <li><a href="ListBest.do#listBest">자주 묻는 질문</a></li>
+          <li><a>리뷰 내용</a></li>
         </ul>
         <ul class="right">
           <li>고객센터 연락처</li>
@@ -77,8 +75,8 @@
              
       <tr class="button_2">
           <td>
-          <input type="button" value="게시판" onclick="window.location='helpcenter.do'">
-          <input type="button" value="삭제" onclick="location.href='delete.do?no=${param.no}'">
+          <input type="button" value="게시판" onclick="window.location='ReviewList.do'">
+          <input type="button" value="삭제" onclick="var confirm_ok=confirm('삭제할까요?');if(confirm_ok==true)location.href='review_delete.do?no=${dto.review_no}'">
           </td>
       </tr>
       </table>
