@@ -35,7 +35,7 @@
 
 
 
-			<div class="idcheck">
+			<div class="login_check">
 				<form method="post" action="login.do">
 					<table>
 						<tr>

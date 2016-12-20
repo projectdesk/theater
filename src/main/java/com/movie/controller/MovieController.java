@@ -5,15 +5,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -83,20 +79,20 @@ public class MovieController {
 	}
 
 	@RequestMapping(value = "/movieWrite.do", method = RequestMethod.POST)
-	public String movieUpload(@RequestParam("file") MultipartFile multipartFile, MoviePageDTO dto)
+	public String movieUpload(@RequestParam("file") MultipartFile multipartFile, MoviePageDTO dto,HttpServletRequest request)
 			throws Exception {
 
 		System.out.println(dto.toString());
 		movieservice.insertMovieInfo(dto);
 
-		System.out.println("���ϸ�" + multipartFile.getOriginalFilename());
-		System.out.println("���ϻ�����" + multipartFile.getSize());
+		System.out.println("getOriginalFilename:" + multipartFile.getOriginalFilename());
+		System.out.println("getSize: " + multipartFile.getSize());
 
 		MultipartFile f = dto.getFile();
 		if (!f.isEmpty()) {
 			String poster = f.getOriginalFilename();
 //			String path = "C:\\Users\\HANKYUNGAE\\Desktop\\mywork_web\\theater\\src\\main\\webapp\\resources\\image\\";
-			String path = ".\\resources\\image\\";
+			String path = request.getRealPath(".")+"/resources/image/";
 			System.out.println("path :" + path);
 			File file = new File(path + File.separator + poster);
 			dto.setPoster(poster);

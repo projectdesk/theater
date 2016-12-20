@@ -66,12 +66,10 @@
 		</ul>
 
 		<ul class="right">
-			<li><a href="#">멤버쉽 포인트 사용안내</a><span>></span></li>
 			<li><a href="#">예매/취소내역조회</a><span>></span></li>
 			<li><a href="#">아이디/비밀번호 찾기</a><span>></span></li>
 			<li><a href="#">패스워드변경</a><span>></span></li>
 			<li><a href="#">회원정보조회</a><span>></span></li>
-			<li><a href="#">회원탈퇴</a><span>></span></li>
 		</ul>
 	</div>
 

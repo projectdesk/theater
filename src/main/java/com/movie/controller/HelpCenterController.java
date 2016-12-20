@@ -161,9 +161,10 @@ public class HelpCenterController {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		if (!kinds.equals("null")) {// 분류있을때
-			klist = BoardService.selectFrequencyQuestionSerch(kinds);
-			flist = BoardService.pageFrequencyQuestionSerch(page);
-			int allCount = BoardService.countFrequencyQuestionSerch();
+			klist = BoardService.selectFrequencyQuestionSerch(kinds,page);
+			flist = BoardService.pageFrequencyQuestionSerch(kinds,page);
+			int allCount = BoardService.countFrequencyQuestionSerch(kinds);
+			System.out.println(allCount);
 			dto = paging.getPaging(allCount, page);
 			model.addAttribute("klist", klist);
 		} else {// 분류없을때

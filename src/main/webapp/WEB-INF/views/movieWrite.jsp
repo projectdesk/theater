@@ -40,7 +40,7 @@
           </select></li>
 
 
-          <li>상영등급<select name="limit_play">
+          <li>상영등급<select name="limit">
               <option value="상영 등급을 선택해 주세요.">상영 등급을 선택해주세요.</option>
               <option value="전체관람등급">전체관람등급</option>
               <option value="12세관람등급">12세관람등급</option>

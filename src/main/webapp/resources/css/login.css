@@ -93,12 +93,18 @@ table tr td {
 .log_form td {
 	text-align: center;
 }
+.login_check{
+	display: block;
+	position: absolute;
+	top: 50px;
+	left: 390px;
+}
 
 .idcheck {
 	display: block;
 	position: absolute;
-	top: 50px;
-	left: 410px;
+	top: 40px;
+	left: 300px;
 }
 
 .idcheck_form label {

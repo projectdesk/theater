@@ -56,7 +56,7 @@
 	<insert id="movieWrite" parameterType="com.movie.dto.MoviePageDTO"
 		useGeneratedKeys="true">
 		INSERT INTO movie_info VALUES
-		(default,#{title},#{content},#{play_date},#{genre},#{director},#{limit},#{actor});
+		(default,#{title},#{content},#{play_date},#{genre},#{director},#{limit},#{actor},default,default);
 	</insert>
 
 	<insert id="moviePosterInsert" parameterType="com.movie.dto.MoviePageDTO">

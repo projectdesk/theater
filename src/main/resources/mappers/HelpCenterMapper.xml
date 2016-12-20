@@ -120,9 +120,9 @@
 	</select>
 	<!-- 자주찾는글 검색 -->
 	<select id="serchFrequencyQuestion" resultType="com.movie.dto.QuestionDTO"
-		parameterType="String">
+		parameterType="com.movie.dto.QuestionDTO">
 		select * from frequency_question where kinds = #{kinds}
-		order by no desc
+		order by no desc limit 5 offset #{no}
 	</select>
 
 	<!-- 자주찾는글 갯수 -->
@@ -134,9 +134,9 @@
 
 	<!-- 자주찾는글 리스트 -->
 	<select resultType="com.movie.dto.QuestionDTO" id="serchPagFrequencyQuestion"
-		parameterType="int"> select * from frequency_question order by no desc limit
+		parameterType="com.movie.dto.QuestionDTO"> select * from frequency_question where kinds=#{kinds} order by no desc limit
 		5 offset
-		#{page}
+		#{no}
 	</select>
 	
 	<select id="selectFrequencyList" parameterType="String" resultType="com.movie.dto.QuestionDTO">

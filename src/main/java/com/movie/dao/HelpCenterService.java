@@ -125,23 +125,30 @@ public class HelpCenterService {
 
 	// 자주찾는글 검색 리스트
 
-	public List<QuestionDTO> selectFrequencyQuestionSerch(String kinds) {
-		List<QuestionDTO> listserch = sqlSession.selectList("helpCenterMapper.serchFrequencyQuestion", kinds);
+	public List<QuestionDTO> selectFrequencyQuestionSerch(String kinds,int page) {
+		QuestionDTO dto=new QuestionDTO();
+		page=(page-1)*5;
+		dto.setNo(page);
+		dto.setKinds(kinds);
+		List<QuestionDTO> listserch = sqlSession.selectList("helpCenterMapper.serchFrequencyQuestion", dto);
 		return listserch;
 	}// end of QuestionSearch
 
 	// 검색 페이지 총 수
 
-	public int countFrequencyQuestionSerch() {
+	public int countFrequencyQuestionSerch(String kinds) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("helpCenterMapper.serchCountFrequencyQuestion");
+		return sqlSession.selectOne("helpCenterMapper.serchCountFrequencyQuestion",kinds);
 	}// end of selectAllCount
 
 	// 자주찾는글 페이징  
-	public List<QuestionDTO> pageFrequencyQuestionSerch(int page) {
+	public List<QuestionDTO> pageFrequencyQuestionSerch(String kinds,int page) {
 		page = (page - 1) * 5;
 		System.out.println(page);
-		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.serchPagFrequencyQuestion", page);
+		QuestionDTO dto=new QuestionDTO();
+		dto.setNo(page);
+		dto.setKinds(kinds);
+		List<QuestionDTO> list = sqlSession.selectList("helpCenterMapper.serchPagFrequencyQuestion", dto);
 		return list;
 	}// end of QuestionSearch
 
